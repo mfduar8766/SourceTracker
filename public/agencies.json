@@ -1,0 +1,703 @@
+[
+  {
+    "agencyName": "Sample Agency I",
+    "agencyId": 200,
+    "location": {
+      "city": "Marietta",
+      "state": "GA",
+      "address": "Kennesaw Ave NW",
+      "zipCode": "30062"
+    },
+    "agents": [
+      {
+        "agentId": 301,
+        "photo": "/avatar.png",
+        "firstName": "John",
+        "lastName": "Doe",
+        "members": 2300,
+        "startDate": "09/12/2019",
+        "endDate": "09/23/2020",
+        "reps": [
+          {
+            "id": "301-011",
+            "firstName": "Andrew",
+            "lastName": "Kelly",
+            "startDate": "09/12/2019",
+            "endDate": "09/22/2020"
+          },
+          {
+            "id": "301-012",
+            "firstName": "Mike",
+            "lastName": "Patel",
+            "startDate": "09/12/2019",
+            "endDate": "09/22/2020"
+          }
+        ],
+        "membersList": [
+          {
+            "name": "Group A",
+            "Ancillary": 575,
+            "Group": 575,
+            "Under65": 575,
+            "Over65": 575
+          },
+          {
+            "name": "Group B",
+            "Ancillary": 500,
+            "Group": 475,
+            "Under65": 375,
+            "Over65": 275
+          }
+        ]
+      },
+      {
+        "agentId": 302,
+        "photo": "/avatar.png",
+        "firstName": "Bobby",
+        "lastName": "Gardner",
+        "members": 2100,
+        "startDate": "08/02/2019",
+        "endDate": "08/02/2020",
+        "membersList": [
+          {
+            "name": "Group A",
+            "Ancillary": 525,
+            "Group": 525,
+            "Under65": 525,
+            "Over65": 525
+          },
+          {
+            "name": "Group B",
+            "Ancillary": 525,
+            "Group": 425,
+            "Under65": 325,
+            "Over65": 225
+          }
+        ]
+      },
+      {
+        "agentId": 303,
+        "photo": "/avatar.png",
+        "firstName": "Ally",
+        "lastName": "Farmen",
+        "members": 2000,
+        "startDate": "07/12/2019",
+        "endDate": "07/12/2020",
+        "membersList": [
+          {
+            "name": "Group A",
+            "Ancillary": 500,
+            "Group": 500,
+            "Under65": 500,
+            "Over65": 500
+          },
+          {
+            "name": "Group B",
+            "Ancillary": 500,
+            "Group": 400,
+            "Under65": 300,
+            "Over65": 200
+          }
+        ]
+      },
+      {
+        "agentId": 304,
+        "photo": "/avatar.png",
+        "firstName": "Jessica",
+        "lastName": "Stevens",
+        "members": 2212,
+        "startDate": "03/08/2019",
+        "endDate": "03/08/2020",
+        "membersList": [
+          {
+            "name": "Group A",
+            "Ancillary": 553,
+            "Group": 553,
+            "Under65": 553,
+            "Over65": 553
+          },
+          {
+            "name": "Group B",
+            "Ancillary": 553,
+            "Group": 453,
+            "Under65": 353,
+            "Over65": 253
+          }
+        ]
+      },
+      {
+        "agentId": 305,
+        "photo": "/avatar.png",
+        "firstName": "Andy",
+        "lastName": "Pike",
+        "members": 2400,
+        "startDate": "02/15/2019",
+        "endDate": "02/15/2020",
+        "membersList": [
+          {
+            "name": "Group A",
+            "Ancillary": 600,
+            "Group": 600,
+            "Under65": 600,
+            "Over65": 600
+          },
+          {
+            "name": "Group B",
+            "Ancillary": 500,
+            "Group": 400,
+            "Under65": 300,
+            "Over65": 200
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "agencyName": "Sample Agency II",
+    "agencyId": 300,
+    "location": {
+      "city": "Alpharetta",
+      "state": "GA",
+      "address": "Old Milton Pkwy",
+      "zipCode": "30022"
+    },
+    "agents": [
+      {
+        "agentId": 301,
+        "photo": "/avatar.png",
+        "firstName": "John",
+        "lastName": "Doe",
+        "members": 2300,
+        "startDate": "09/12/2019",
+        "endDate": "09/23/2020",
+        "membersList": [
+          {
+            "name": "Group A",
+            "Ancillary": 575,
+            "Group": 575,
+            "Under65": 575,
+            "Over65": 575
+          },
+          {
+            "name": "Group B",
+            "Ancillary": 500,
+            "Group": 475,
+            "Under65": 375,
+            "Over65": 275
+          }
+        ]
+      },
+      {
+        "agentId": 302,
+        "photo": "/avatar.png",
+        "firstName": "Bobby",
+        "lastName": "Gardner",
+        "members": 2100,
+        "startDate": "08/02/2019",
+        "endDate": "08/02/2020",
+        "membersList": [
+          {
+            "name": "Group A",
+            "Ancillary": 525,
+            "Group": 525,
+            "Under65": 525,
+            "Over65": 525
+          },
+          {
+            "name": "Group B",
+            "Ancillary": 525,
+            "Group": 425,
+            "Under65": 325,
+            "Over65": 225
+          }
+        ]
+      },
+      {
+        "agentId": 303,
+        "photo": "/avatar.png",
+        "firstName": "Ally",
+        "lastName": "Farmen",
+        "members": 2000,
+        "startDate": "07/12/2019",
+        "endDate": "07/12/2020",
+        "membersList": [
+          {
+            "name": "Group A",
+            "Ancillary": 500,
+            "Group": 500,
+            "Under65": 500,
+            "Over65": 500
+          },
+          {
+            "name": "Group B",
+            "Ancillary": 500,
+            "Group": 400,
+            "Under65": 300,
+            "Over65": 200
+          }
+        ]
+      },
+      {
+        "agentId": 304,
+        "photo": "/avatar.png",
+        "firstName": "Jessica",
+        "lastName": "Stevens",
+        "members": 2212,
+        "startDate": "03/08/2019",
+        "endDate": "03/08/2020",
+        "membersList": [
+          {
+            "name": "Group A",
+            "Ancillary": 553,
+            "Group": 553,
+            "Under65": 553,
+            "Over65": 553
+          },
+          {
+            "name": "Group B",
+            "Ancillary": 553,
+            "Group": 453,
+            "Under65": 353,
+            "Over65": 253
+          }
+        ]
+      },
+      {
+        "agentId": 305,
+        "photo": "/avatar.png",
+        "firstName": "Andy",
+        "lastName": "Pike",
+        "members": 2400,
+        "startDate": "02/15/2019",
+        "endDate": "02/15/2020",
+        "membersList": [
+          {
+            "name": "Group A",
+            "Ancillary": 600,
+            "Group": 600,
+            "Under65": 600,
+            "Over65": 600
+          },
+          {
+            "name": "Group B",
+            "Ancillary": 500,
+            "Group": 400,
+            "Under65": 300,
+            "Over65": 200
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "agencyName": "Sample Agency III",
+    "agencyId": 400,
+    "location": {
+      "city": "Atlanta",
+      "state": "GA",
+      "address": "521 East Cobb Pkw",
+      "zipCode": "30305"
+    },
+    "agents": [
+      {
+        "agentId": 401,
+        "photo": "/avatar.png",
+        "firstName": "John",
+        "lastName": "Doe",
+        "members": 2300,
+        "startDate": "09/12/2019",
+        "endDate": "09/23/2020",
+        "membersList": [
+          {
+            "name": "Group A",
+            "Ancillary": 575,
+            "Group": 575,
+            "Under65": 575,
+            "Over65": 575
+          },
+          {
+            "name": "Group B",
+            "Ancillary": 500,
+            "Group": 475,
+            "Under65": 375,
+            "Over65": 275
+          }
+        ]
+      },
+      {
+        "agentId": 402,
+        "photo": "/avatar.png",
+        "firstName": "Bobby",
+        "lastName": "Gardner",
+        "members": 2100,
+        "startDate": "08/02/2019",
+        "endDate": "08/02/2020",
+        "membersList": [
+          {
+            "name": "Group A",
+            "Ancillary": 525,
+            "Group": 525,
+            "Under65": 525,
+            "Over65": 525
+          },
+          {
+            "name": "Group B",
+            "Ancillary": 525,
+            "Group": 425,
+            "Under65": 325,
+            "Over65": 225
+          }
+        ]
+      },
+      {
+        "agentId": 403,
+        "photo": "/avatar.png",
+        "firstName": "Ally",
+        "lastName": "Farmen",
+        "members": 2000,
+        "startDate": "07/12/2019",
+        "endDate": "07/12/2020",
+        "membersList": [
+          {
+            "name": "Group A",
+            "Ancillary": 500,
+            "Group": 500,
+            "Under65": 500,
+            "Over65": 500
+          },
+          {
+            "name": "Group B",
+            "Ancillary": 500,
+            "Group": 400,
+            "Under65": 300,
+            "Over65": 200
+          }
+        ]
+      },
+      {
+        "agentId": 404,
+        "photo": "/avatar.png",
+        "firstName": "Jessica",
+        "lastName": "Stevens",
+        "members": 2212,
+        "startDate": "03/08/2019",
+        "endDate": "03/08/2020",
+        "membersList": [
+          {
+            "name": "Group A",
+            "Ancillary": 553,
+            "Group": 553,
+            "Under65": 553,
+            "Over65": 553
+          },
+          {
+            "name": "Group B",
+            "Ancillary": 553,
+            "Group": 453,
+            "Under65": 353,
+            "Over65": 253
+          }
+        ]
+      },
+      {
+        "agentId": 405,
+        "photo": "/avatar.png",
+        "firstName": "Andy",
+        "lastName": "Pike",
+        "members": 2400,
+        "startDate": "02/15/2019",
+        "endDate": "02/15/2020",
+        "membersList": [
+          {
+            "name": "Group A",
+            "Ancillary": 600,
+            "Group": 600,
+            "Under65": 600,
+            "Over65": 600
+          },
+          {
+            "name": "Group B",
+            "Ancillary": 500,
+            "Group": 400,
+            "Under65": 300,
+            "Over65": 200
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "agencyName": "Sample Agency IV",
+    "agencyId": 500,
+    "location": {
+      "city": "Roswell",
+      "state": "GA",
+      "address": "122 NE Roswell St",
+      "zipCode": "30009"
+    },
+    "agents": [
+      {
+        "agentId": 501,
+        "photo": "/avatar.png",
+        "firstName": "John",
+        "lastName": "Doe",
+        "members": 2300,
+        "startDate": "09/21/2019",
+        "endDate": "09/21/2020",
+        "membersList": [
+          {
+            "name": "Group A",
+            "Ancillary": 575,
+            "Group": 575,
+            "Under65": 575,
+            "Over65": 575
+          },
+          {
+            "name": "Group B",
+            "Ancillary": 500,
+            "Group": 475,
+            "Under65": 375,
+            "Over65": 275
+          }
+        ]
+      },
+      {
+        "agentId": 502,
+        "photo": "/avatar.png",
+        "firstName": "Bobby",
+        "lastName": "Gardner",
+        "members": 2100,
+        "startDate": "08/02/2019",
+        "endDate": "08/02/2020",
+        "membersList": [
+          {
+            "name": "Group A",
+            "Ancillary": 525,
+            "Group": 525,
+            "Under65": 525,
+            "Over65": 525
+          },
+          {
+            "name": "Group B",
+            "Ancillary": 525,
+            "Group": 425,
+            "Under65": 325,
+            "Over65": 225
+          }
+        ]
+      },
+      {
+        "agentId": 503,
+        "photo": "/avatar.png",
+        "firstName": "Ally",
+        "lastName": "Farmen",
+        "members": 2000,
+        "startDate": "07/12/2019",
+        "endDate": "07/12/2020",
+        "membersList": [
+          {
+            "name": "Group A",
+            "Ancillary": 500,
+            "Group": 500,
+            "Under65": 500,
+            "Over65": 500
+          },
+          {
+            "name": "Group B",
+            "Ancillary": 500,
+            "Group": 400,
+            "Under65": 300,
+            "Over65": 200
+          }
+        ]
+      },
+      {
+        "agentId": 504,
+        "photo": "/avatar.png",
+        "firstName": "Jessica",
+        "lastName": "Stevens",
+        "members": 2212,
+        "startDate": "03/08/2019",
+        "endDate": "03/08/2020",
+        "membersList": [
+          {
+            "name": "Group A",
+            "Ancillary": 553,
+            "Group": 553,
+            "Under65": 553,
+            "Over65": 553
+          },
+          {
+            "name": "Group B",
+            "Ancillary": 553,
+            "Group": 453,
+            "Under65": 353,
+            "Over65": 253
+          }
+        ]
+      },
+      {
+        "agentId": 505,
+        "photo": "/avatar.png",
+        "firstName": "Andy",
+        "lastName": "Pike",
+        "members": 2400,
+        "startDate": "02/15/2019",
+        "endDate": "02/15/2020",
+        "membersList": [
+          {
+            "name": "Group A",
+            "Ancillary": 600,
+            "Group": 600,
+            "Under65": 600,
+            "Over65": 600
+          },
+          {
+            "name": "Group B",
+            "Ancillary": 500,
+            "Group": 400,
+            "Under65": 300,
+            "Over65": 200
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "agencyName": "Sample Agency V",
+    "agencyId": 600,
+    "location": {
+      "city": "Alpharetta",
+      "state": "GA",
+      "address": "123 NE Rd",
+      "zipCode": "30005"
+    },
+    "agents": [
+      {
+        "agentId": 601,
+        "photo": "/avatar.png",
+        "firstName": "Billy",
+        "lastName": "Crank",
+        "members": 1300,
+        "startDate": "02/15/2019",
+        "endDate": "02/15/2020",
+        "membersList": [
+          {
+            "name": "Group A",
+            "Ancillary": 325,
+            "Group": 325,
+            "Under65": 325,
+            "Over65": 325
+          },
+          {
+            "name": "Group B",
+            "Ancillary": 325,
+            "Group": 225,
+            "Under65": 125,
+            "Over65": 25
+          }
+        ]
+      },
+      {
+        "agentId": 602,
+        "photo": "/avatar.png",
+        "firstName": "Ashley",
+        "lastName": "Babykin",
+        "members": 1100,
+        "startDate": "03/12/2019",
+        "endDate": "03/12/2020",
+        "membersList": [
+          {
+            "name": "Group A",
+            "Ancillary": 275,
+            "Group": 275,
+            "Under65": 275,
+            "Over65": 275
+          },
+          {
+            "name": "Group B",
+            "Ancillary": 275,
+            "Group": 175,
+            "Under65": 75,
+            "Over65": 25
+          }
+        ]
+      },
+      {
+        "agentId": 603,
+        "photo": "/avatar.png",
+        "firstName": "Suzy",
+        "lastName": "Lu",
+        "members": 2000,
+        "startDate": "01/01/2019",
+        "endDate": "01/01/2020",
+        "membersList": [
+          {
+            "name": "Group A",
+            "Ancillary": 500,
+            "Group": 500,
+            "Under65": 500,
+            "Over65": 500
+          },
+          {
+            "name": "Group B",
+            "Ancillary": 500,
+            "Group": 400,
+            "Under65": 300,
+            "Over65": 200
+          }
+        ]
+      },
+      {
+        "agentId": 604,
+        "photo": "/avatar.png",
+        "firstName": "Mary",
+        "lastName": "White",
+        "members": 1212,
+        "startDate": "11/11/2019",
+        "endDate": "11/11/2020",
+        "membersList": [
+          {
+            "name": "Group A",
+            "Ancillary": 303,
+            "Group": 303,
+            "Under65": 303,
+            "Over65": 303
+          },
+          {
+            "name": "Group B",
+            "Ancillary": 303,
+            "Group": 203,
+            "Under65": 103,
+            "Over65": 30
+          }
+        ]
+      },
+      {
+        "agentId": 605,
+        "photo": "/avatar.png",
+        "firstName": "Chris",
+        "lastName": "Stevens",
+        "members": 2450,
+        "startDate": "03/22/2019",
+        "endDate": "03/23/2020",
+        "membersList": [
+          {
+            "name": "Group A",
+            "Ancillary": 612,
+            "Group": 612,
+            "Under65": 612,
+            "Over65": 612
+          },
+          {
+            "name": "Group B",
+            "Ancillary": 612,
+            "Group": 512,
+            "Under65": 412,
+            "Over65": 312
+          }
+        ]
+      }
+    ]
+  }
+]
