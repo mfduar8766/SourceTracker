@@ -10,17 +10,17 @@ import TableRow from '@material-ui/core/TableRow';
 const RenderTableRows = ({
   classes,
   data,
-  key,
+  index,
   tableHeaders,
   handleEdit,
   handleDelete,
   handleRowClick
 }) => (
-  <TableRow className={classes.tableRow} key={key}>
+  <TableRow className={classes.tableRow} key={index}>
     {tableHeaders.map(header => (
       <TableCell
         onClick={event => handleRowClick(event, data)}
-        key={data[header.prop]}
+        key={header.id}
       >
         {data[header.prop]}
       </TableCell>
@@ -50,15 +50,17 @@ export const RenderTableBody = ({
 }) => (
   <>
     {tableDataArray.map((data, index) => (
+      <React.Fragment key={index}>
       <RenderTableRows
         classes={classes}
         data={data}
-        key={index}
+        index={index}
         tableHeaders={tableHeaders}
         handleDelete={handleDelete}
         handleEdit={handleEdit}
         handleRowClick={handleRowClick}
       />
+      </React.Fragment>
     ))}
   </>
 );

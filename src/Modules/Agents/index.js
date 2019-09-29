@@ -13,13 +13,14 @@ import {
   tableHeaders,
   agencySelectionValues
 } from './Utils/index';
-import AgentSearch from './Components/AgentSearch/index';
-import EditAgentsModal from './Components/Modals/EditAgents/index';
 import orderBy from 'lodash/orderBy';
 import { agentsTableStyles } from './Utils/Styles';
 
+import AgentSearch from './Components/AgentSearch/index';
+import EditAgentsModal from './Components/Modals/EditAgents/index';
 import BreadCrumbComponent from '../../Components/BreadCrumbs/index';
 import TableComponent from '../../Components/Tables/index';
+import WarningModal from '../../Components/Modals/WarningModal';
 
 const AgentsTable = ({ classes, history }) => {
   const [agentsArray, setAgentsArray] = useState(null);
@@ -28,12 +29,16 @@ const AgentsTable = ({ classes, history }) => {
   const [isEditOn, setIsEditOn] = useState(false);
   const [agentToEdit, setAgentToEdit] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
+  const [isDeleteModalOn, setIsDeleteModalOn] = useState(false);
+  const [agentToDelete, setAgentToDelete] = useState(null);
+  const [allAgencies, setAllAgencies] = useState(null);
 
   const fetchAgencies = async () => {
     try {
       const agenciesArray = axios.get('agencies.json');
       const response = await agenciesArray;
       const agentsArray = response.data;
+      setAllAgencies(agentsArray);
       return setAgentsArray(getAgencyAndAgents({ agentsArray }));
     } catch (error) {
       return error;
@@ -73,21 +78,35 @@ const AgentsTable = ({ classes, history }) => {
   const handleAgencySelection = event => {
     const agencyId = parseInt(event.target.value);
     setSelectedAgency(agencyId);
+    const agentsArray = allAgencies;
     setAgentsArray(getAgencyAndAgents({ agentsArray, agencyId }));
   };
 
   const handleEdit = (event, agent) => {
     event.preventDefault();
-    setIsEditOn(isEditOn => !isEditOn);
+    setIsEditOn(true);
     setAgentToEdit(agent);
+  };
+
+  const closeModal = () => setIsEditOn(false);
+
+  const toggleDeleteModal = () => {
+    setIsDeleteModalOn(isDeleteModalOn => !isDeleteModalOn);
+    setAgentToDelete(null);
   };
 
   const handleDelete = (event, agent) => {
     event.preventDefault();
-    const { agentId } = agent;
+    setAgentToDelete(agent);
+    setIsDeleteModalOn(true);
+  };
+
+  const deleteAgent = () => {
+    const { agentId } = agentToDelete;
     const filteredAgents = agentsArray.filter(
       agent => agent.agentId !== agentId
     );
+    setIsDeleteModalOn(false);
     setAgentsArray(filteredAgents);
   };
 
@@ -96,7 +115,8 @@ const AgentsTable = ({ classes, history }) => {
     history.push(`/agent/${agent.agentId}`, agent);
   };
 
-  const submitForm = values => {
+  const getEditAgentFormValues = values => {
+    // TODO: Create service for editing agents.
   };
 
   if (!agentsArray) {
@@ -119,12 +139,19 @@ const AgentsTable = ({ classes, history }) => {
       </div>
       <Grid container spacing={3} justify="center" alignItems="center">
         <Grid item xs={11}>
+          {isDeleteModalOn && (
+            <WarningModal
+              isDeleteModalOn={isDeleteModalOn}
+              toggleDeleteModal={toggleDeleteModal}
+              deleteAgent={deleteAgent}
+            />
+          )}
           {isEditOn && agentToEdit && (
             <EditAgentsModal
               agentToEdit={agentToEdit}
               isEditOn={isEditOn}
-              handleEdit={handleEdit}
-              submitForm={submitForm}
+              getEditAgentFormValues={getEditAgentFormValues}
+              closeModal={closeModal}
             />
           )}
           <Paper className={classes.root}>
