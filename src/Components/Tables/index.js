@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import orderBy from 'lodash/orderBy';
 
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import { withStyles } from '@material-ui/core/styles';
 
+import { handleAscSort, handleDescSort } from './Utils/index';
 import { RenderHeader } from './TableHeader';
 import { RenderTableBody } from './TableBody';
 
@@ -25,44 +27,19 @@ const tableStyles = () => ({
     cursor: 'pointer',
     width: '100%',
     height: '100%'
+  },
+  cursorStyle: {
+    cursor: 'pointer'
   }
 });
-
-const handleAscSort = ({
-  tableDataArray,
-  selectedHeader,
-  setTableDataArray
-}) => {};
-
-const handleDescSort = ({
-  tableDataArray,
-  selectedHeader,
-  setTableDataArray
-}) => {
-  const sortDesc = tableDataArray.sort((a, b) => {
-    console.log(selectedHeader);
-    if (
-      typeof a[selectedHeader] === 'number' ||
-      typeof b[selectedHeader] === 'number'
-    ) {
-      return b[selectedHeader] - a[selectedHeader];
-    } else if (
-      typeof a[selectedHeader] === 'string' ||
-      typeof b[selectedHeader] === 'string'
-    ) {
-      return b[selectedHeader].localeCompare(a[selectedHeader]);
-    }
-  });
-  console.log(sortDesc);
-  return setTableDataArray(sortDesc);
-};
 
 const TableComponent = ({
   classes,
   tableHeaders,
   tableData,
   handleDelete,
-  handleEdit
+  handleEdit,
+  handleRowClick
 }) => {
   const [sortDirection, setSortDirection] = useState('asc');
   const [tableDataArray, setTableDataArray] = useState(null);
@@ -70,7 +47,7 @@ const TableComponent = ({
 
   useEffect(() => {
     setTableDataArray(tableData);
-  }, []);
+  }, [tableData]);
 
   const toggleSortDirection = (event, header) => {
     event.preventDefault();
@@ -78,28 +55,24 @@ const TableComponent = ({
       sortDirection === 'asc' ? 'desc' : 'asc'
     );
     setSelectedHeader(header);
-    handleSort({ selectedHeader, sortDirection });
   };
 
-  const handleSort = ({ selectedHeader, sortDirection }) => {
+  const handleSort = () => {
     switch (sortDirection) {
       case 'asc':
         return handleAscSort({
           tableDataArray,
-          selectedHeader,
-          setTableDataArray
+          selectedHeader
         });
       case 'desc':
         return handleDescSort({
           tableDataArray,
-          selectedHeader,
-          setTableDataArray
+          selectedHeader
         });
       default:
-        return setTableDataArray(tableData);
+        return tableData;
     }
   };
-  console.log(sortDirection);
   return (
     <Table className={classes.table}>
       <RenderHeader
@@ -107,20 +80,19 @@ const TableComponent = ({
         sortDirection={sortDirection}
         tableHeaders={tableHeaders}
         selectedHeader={selectedHeader}
+        classes={classes}
       />
       <TableBody>
-        {tableDataArray &&
-          tableDataArray.length &&
-          tableDataArray.map((data, index) => (
-            <RenderTableBody
-              classes={classes}
-              key={index}
-              tableHeaders={tableHeaders}
-              data={data}
-              handleEdit={handleEdit}
-              handleDelete={handleDelete}
-            />
-          ))}
+        {tableDataArray && tableDataArray.length && (
+          <RenderTableBody
+            classes={classes}
+            tableHeaders={tableHeaders}
+            handleEdit={handleEdit}
+            handleDelete={handleDelete}
+            tableDataArray={orderBy(handleSort())}
+            handleRowClick={handleRowClick}
+          />
+        )}
       </TableBody>
     </Table>
   );

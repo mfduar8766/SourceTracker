@@ -7,17 +7,23 @@ import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 
-export const RenderTableBody = ({
+const RenderTableRows = ({
   classes,
+  data,
   key,
   tableHeaders,
-  data,
+  handleEdit,
   handleDelete,
-  handleEdit
+  handleRowClick
 }) => (
   <TableRow className={classes.tableRow} key={key}>
     {tableHeaders.map(header => (
-      <TableCell key={data[header.prop]}>{data[header.prop]}</TableCell>
+      <TableCell
+        onClick={event => handleRowClick(event, data)}
+        key={data[header.prop]}
+      >
+        {data[header.prop]}
+      </TableCell>
     ))}
     <TableCell>
       <FontAwesomeIcon
@@ -32,4 +38,27 @@ export const RenderTableBody = ({
       />
     </TableCell>
   </TableRow>
+);
+
+export const RenderTableBody = ({
+  classes,
+  tableHeaders,
+  tableDataArray,
+  handleDelete,
+  handleEdit,
+  handleRowClick
+}) => (
+  <>
+    {tableDataArray.map((data, index) => (
+      <RenderTableRows
+        classes={classes}
+        data={data}
+        key={index}
+        tableHeaders={tableHeaders}
+        handleDelete={handleDelete}
+        handleEdit={handleEdit}
+        handleRowClick={handleRowClick}
+      />
+    ))}
+  </>
 );
