@@ -10,23 +10,23 @@
     },
     "agents": [
       {
-        "agentId": 301,
+        "agentId": 201,
         "photo": "/avatar.png",
-        "firstName": "John",
-        "lastName": "Doe",
+        "firstName": "Conner",
+        "lastName": "Mccormick",
         "members": 2300,
         "startDate": "09/12/2019",
         "endDate": "09/23/2020",
         "reps": [
           {
-            "id": "301-011",
+            "id": "201-011",
             "firstName": "Andrew",
             "lastName": "Kelly",
             "startDate": "09/12/2019",
             "endDate": "09/22/2020"
           },
           {
-            "id": "301-012",
+            "id": "202-012",
             "firstName": "Mike",
             "lastName": "Patel",
             "startDate": "09/12/2019",
@@ -51,13 +51,29 @@
         ]
       },
       {
-        "agentId": 302,
+        "agentId": 202,
         "photo": "/avatar.png",
         "firstName": "Bobby",
         "lastName": "Gardner",
         "members": 2100,
         "startDate": "08/02/2019",
         "endDate": "08/02/2020",
+        "reps": [
+          {
+            "id": "202-022",
+            "firstName": "Kelly",
+            "lastName": "Ferguson",
+            "startDate": "09/12/2019",
+            "endDate": "09/22/2020"
+          },
+          {
+            "id": "202-023",
+            "firstName": "Lizzy",
+            "lastName": "Cook",
+            "startDate": "09/12/2019",
+            "endDate": "09/22/2020"
+          }
+        ],
         "membersList": [
           {
             "name": "Group A",
@@ -76,13 +92,29 @@
         ]
       },
       {
-        "agentId": 303,
+        "agentId": 203,
         "photo": "/avatar.png",
         "firstName": "Ally",
         "lastName": "Farmen",
         "members": 2000,
         "startDate": "07/12/2019",
         "endDate": "07/12/2020",
+        "reps": [
+          {
+            "id": "203-033",
+            "firstName": "Ash",
+            "lastName": "Ketchem",
+            "startDate": "09/12/2019",
+            "endDate": "09/22/2020"
+          },
+          {
+            "id": "203-034",
+            "firstName": "Nathan",
+            "lastName": "Tarongoy",
+            "startDate": "09/12/2019",
+            "endDate": "09/22/2020"
+          }
+        ],
         "membersList": [
           {
             "name": "Group A",
@@ -101,13 +133,29 @@
         ]
       },
       {
-        "agentId": 304,
+        "agentId": 204,
         "photo": "/avatar.png",
         "firstName": "Jessica",
         "lastName": "Stevens",
         "members": 2212,
         "startDate": "03/08/2019",
         "endDate": "03/08/2020",
+        "reps": [
+          {
+            "id": "204-044",
+            "firstName": "Will",
+            "lastName": "Frady",
+            "startDate": "09/12/2019",
+            "endDate": "09/22/2020"
+          },
+          {
+            "id": "204-045",
+            "firstName": "Diana",
+            "lastName": "Jachman",
+            "startDate": "09/12/2019",
+            "endDate": "09/22/2020"
+          }
+        ],
         "membersList": [
           {
             "name": "Group A",
@@ -126,13 +174,29 @@
         ]
       },
       {
-        "agentId": 305,
+        "agentId": 205,
         "photo": "/avatar.png",
         "firstName": "Andy",
         "lastName": "Pike",
         "members": 2400,
         "startDate": "02/15/2019",
         "endDate": "02/15/2020",
+        "reps": [
+          {
+            "id": "205-055",
+            "firstName": "Marry",
+            "lastName": "Dupont",
+            "startDate": "09/12/2019",
+            "endDate": "09/22/2020"
+          },
+          {
+            "id": "205-056",
+            "firstName": "Prasad",
+            "lastName": "Kuri",
+            "startDate": "09/12/2019",
+            "endDate": "09/22/2020"
+          }
+        ],
         "membersList": [
           {
             "name": "Group A",
@@ -170,6 +234,15 @@
         "members": 2300,
         "startDate": "09/12/2019",
         "endDate": "09/23/2020",
+        "reps": [
+          {
+            "id": "301-033",
+            "firstName": "Tanya",
+            "lastName": "Harding",
+            "startDate": "09/12/2019",
+            "endDate": "09/22/2020"
+          }
+        ],
         "membersList": [
           {
             "name": "Group A",
@@ -195,6 +268,7 @@
         "members": 2100,
         "startDate": "08/02/2019",
         "endDate": "08/02/2020",
+        "reps": [],
         "membersList": [
           {
             "name": "Group A",
@@ -220,6 +294,15 @@
         "members": 2000,
         "startDate": "07/12/2019",
         "endDate": "07/12/2020",
+        "reps": [
+          {
+            "id": "303-031",
+            "firstName": "Katelyn",
+            "lastName": "Bower",
+            "startDate": "09/12/2019",
+            "endDate": "09/22/2020"
+          }
+        ],
         "membersList": [
           {
             "name": "Group A",
@@ -245,6 +328,15 @@
         "members": 2212,
         "startDate": "03/08/2019",
         "endDate": "03/08/2020",
+        "reps": [
+          {
+            "id": "304-034",
+            "firstName": "Tony",
+            "lastName": "Hawk",
+            "startDate": "09/12/2019",
+            "endDate": "09/22/2020"
+          }
+        ],
         "membersList": [
           {
             "name": "Group A",
@@ -270,6 +362,7 @@
         "members": 2400,
         "startDate": "02/15/2019",
         "endDate": "02/15/2020",
+        "reps": [],
         "membersList": [
           {
             "name": "Group A",

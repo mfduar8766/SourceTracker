@@ -12,7 +12,6 @@ import { editAgentsModalStyles, setModalStyle } from './Styles';
 const EditAgentsModal = ({
   isEditOn,
   classes,
-  handleEdit,
   agentToEdit,
   touched,
   errors,
@@ -20,17 +19,17 @@ const EditAgentsModal = ({
   handleChange,
   handleSubmit,
   isSubmitting,
-  submitForm
+  closeModal
 }) => (
   <Modal
     aria-labelledby="Edit Agent"
     aria-describedby="Edit Agent Modal"
     open={isEditOn}
-    onClose={handleEdit}
+    onClose={closeModal}
   >
     <div style={setModalStyle()} className={classes.paper}>
       <Grid container justify="center" alignItems="center">
-        <h2>Edit Agent</h2>
+        <h3>Edit Agent {agentToEdit.agentId}</h3>
         <Grid item xs={12}>
           <form onSubmit={handleSubmit}>
             <Grid container alignItems="flex-start">
@@ -139,13 +138,17 @@ const EditAgentsModal = ({
             <div className={classes.buttonContainer}>
               <div>
                 <button
-                  onClick={handleEdit}
+                  onClick={closeModal}
                   type="button"
                   className={classes.cancelButton}
                 >
                   Cancel
                 </button>
-                <button type="submit" className={classes.submitButton}>
+                <button
+                  disabled={isSubmitting}
+                  type="submit"
+                  className={classes.submitButton}
+                >
                   Submit
                 </button>
               </div>
@@ -185,9 +188,9 @@ export default withFormik({
     }
     return errors;
   },
-  handleSubmit: (values, props) => {
-    if (values) {
-      props.setSubmitting(false);
-    }
+  handleSubmit: (values, formikBag) => {
+    formikBag.setSubmitting(true);
+    formikBag.props.closeModal();
+    formikBag.props.getEditAgentFormValues(values);
   }
 })(withStyles(editAgentsModalStyles)(EditAgentsModal));
