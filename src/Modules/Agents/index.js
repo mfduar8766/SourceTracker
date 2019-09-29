@@ -4,27 +4,21 @@ import axios from 'axios';
 
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Grid from '@material-ui/core/Grid';
-import Table from '@material-ui/core/Table';
-import TableCell from '@material-ui/core/TableCell';
-import TableRow from '@material-ui/core/TableRow';
-import TableHead from '@material-ui/core/TableHead';
 import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core/styles';
 
 import {
   getAgencyAndAgents,
   filterAgentSearch,
-  sortAgents,
-  agentsTableHeaders
+  tableHeaders,
+  agencySelectionValues
 } from './Utils/index';
-import { agencySelectionValues, sortingOptions } from './Utils/mockData';
 import AgentSearch from './Components/AgentSearch/index';
 import EditAgentsModal from './Components/Modals/EditAgents/index';
 import orderBy from 'lodash/orderBy';
 import { agentsTableStyles } from './Utils/Styles';
 
 import BreadCrumbComponent from '../../Components/BreadCrumbs/index';
-import DisplayAgentsTable from './Components/DisplayAgentsTable';
 import TableComponent from '../../Components/Tables/index';
 
 const AgentsTable = ({ classes, history }) => {
@@ -34,7 +28,6 @@ const AgentsTable = ({ classes, history }) => {
   const [isEditOn, setIsEditOn] = useState(false);
   const [agentToEdit, setAgentToEdit] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
-  const [sortedAgent, setSortedAgent] = useState('');
 
   const fetchAgencies = async () => {
     try {
@@ -50,16 +43,6 @@ const AgentsTable = ({ classes, history }) => {
   useEffect(() => {
     fetchAgencies();
   }, []);
-
-  const tableHeaders = [
-    { id: 0, name: 'Agent ID', prop: 'agentId' },
-    { id: 1, name: 'First Name', prop: 'firstName' },
-    { id: 2, name: 'Last Name', prop: 'lastName' },
-    { id: 3, name: 'Members', prop: 'members' },
-    { id: 4, name: 'Start Date', prop: 'startDate' },
-    { id: 5, name: 'End Date', prop: 'endDate' },
-    { id: 6, name: '', prop: '' }
-  ];
 
   const getQueryString = event => {
     const lowerCaseQuery = event.target.value.toLowerCase().trim();
@@ -108,14 +91,6 @@ const AgentsTable = ({ classes, history }) => {
     setAgentsArray(filteredAgents);
   };
 
-  const handleSort = event => {
-    if (event.target.value !== '') {
-      setAgentsArray(sortAgents(agentsArray, event.target.value));
-      setSortedAgent(event.target.value);
-    }
-    return agentsArray;
-  };
-
   const showAgentDetails = (event, agent) => {
     event.preventDefault();
     history.push(`/agent/${agent.agentId}`, agent);
@@ -134,7 +109,7 @@ const AgentsTable = ({ classes, history }) => {
   }
   return (
     <>
-      {/* <div
+      <div
         style={{
           display: 'flex',
           justifyContent: 'flex-start',
@@ -142,7 +117,7 @@ const AgentsTable = ({ classes, history }) => {
         }}
       >
         <BreadCrumbComponent location={history.location.pathname} />
-      </div> */}
+      </div>
       <Grid container spacing={3} justify="center" alignItems="center">
         <Grid item xs={11}>
           {isEditOn && agentToEdit && (
@@ -159,9 +134,6 @@ const AgentsTable = ({ classes, history }) => {
               agencyDropDownValues={agencySelectionValues}
               handleAgencySelection={handleAgencySelection}
               selectedAgency={selectedAgency}
-              sortingOptions={sortingOptions}
-              handleSort={handleSort}
-              sortedAgent={sortedAgent}
             />
             {errorMessage ? (
               <div className={classes.errorMessage}>{errorMessage}</div>
@@ -173,32 +145,9 @@ const AgentsTable = ({ classes, history }) => {
                 )}
                 handleDelete={handleDelete}
                 handleEdit={handleEdit}
+                handleRowClick={showAgentDetails}
               />
             )}
-            {/* <Table className={classes.table}>
-              <TableHead>
-                <TableRow>
-                  {agentsTableHeaders.map(header => (
-                    <TableCell key={header.name} align="left">
-                      {header.name}
-                    </TableCell>
-                  ))}
-                  <TableCell />
-                </TableRow>
-              </TableHead>
-              {errorMessage ? (
-                <div className={classes.errorMessage}>{errorMessage}</div>
-              ) : (
-                <DisplayAgentsTable
-                  agentsArray=orderBy(
-                    returnSearchResults({ agentsArray, queryString })
-                  )}
-                  handleEdit={handleEdit}
-                  handleDelete={handleDelete}
-                  showAgentDetails={showAgentDetails}
-                />
-              )}
-            </Table> */}
           </Paper>
         </Grid>
       </Grid>

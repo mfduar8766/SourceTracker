@@ -12,14 +12,11 @@ import { withStyles } from '@material-ui/core/styles';
 import { agentSearch } from './Utils/Styles';
 
 const AgentSearch = ({
-  agencyDropDownValues,
   classes,
   getQueryString,
+  agencyDropDownValues,
   handleAgencySelection,
   selectedAgency,
-  sortingOptions,
-  handleSort,
-  sortedAgent
 }) => (
   <div className={classes.root}>
     <div className={classes.appBar}>
@@ -50,18 +47,6 @@ const AgentSearch = ({
             ))}
           </Select>
         </FormControl>{' '}
-        <FormControl className={classes.formControl}>
-          <InputLabel className={classes.placeHolder} htmlFor="select-multiple">
-            Sort Agents
-          </InputLabel>
-          <Select value={sortedAgent} onChange={handleSort}>
-            {sortingOptions.map(agency => (
-              <MenuItem key={agency.value} value={agency.value}>
-                {agency.label}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
       </Toolbar>
     </div>
   </div>

@@ -1,17 +1,20 @@
-const sortingOptions = {
-  LOW_TO_HIGH: 'Low to High',
-  HIGHT_TO_LOW: 'High to Low',
-  A_TO_Z: 'Last Name A-Z',
-  Z_TO_A: 'Last Name Z-A'
-};
+export const tableHeaders = [
+  { id: 0, name: 'Agent ID', prop: 'agentId' },
+  { id: 1, name: 'First Name', prop: 'firstName' },
+  { id: 2, name: 'Last Name', prop: 'lastName' },
+  { id: 3, name: 'Members', prop: 'members' },
+  { id: 4, name: 'Start Date', prop: 'startDate' },
+  { id: 5, name: 'End Date', prop: 'endDate' },
+  { id: 6, name: '', prop: '' }
+];
 
-export const agentsTableHeaders = [
-  { name: 'Agent ID' },
-  { name: 'First Name' },
-  { name: 'Last Name' },
-  { name: 'Members' },
-  { name: 'Start Date' },
-  { name: 'End Date' }
+export const agencySelectionValues = [
+  { value: '', label: '' },
+  { value: '200', label: 'Sample Agency I' },
+  { value: '300', label: 'Sample Agency II' },
+  { value: '400', label: 'Sample Agency III' },
+  { value: '500', label: 'Sample Agency IV' },
+  { value: '600', label: 'Sample Agency V' },
 ];
 
 export const getAgencyAndAgents = ({ agentsArray, agencyId }) => {
@@ -55,30 +58,4 @@ export const filterAgentSearch = ({ agentsArray, queryString }) => {
   return filteredAgents && filteredAgents.length
     ? filteredAgents
     : 'No members found.';
-};
-
-const sortAtoZ = agents =>
-  agents.sort((a, b) => a.lastName.localeCompare(b.lastName));
-
-const sortZtoA = agents =>
-  agents.sort((a, b) => b.lastName.localeCompare(a.lastName));
-
-const sortHighToLow = agents => agents.sort((a, b) => b.members - a.members);
-
-const sortLowToHigh = agents => agents.sort((a, b) => a.members - b.members);
-
-export const sortAgents = (agents, valueToSort) => {
-  const { LOW_TO_HIGH, HIGHT_TO_LOW, A_TO_Z, Z_TO_A } = sortingOptions;
-  switch (valueToSort) {
-    case HIGHT_TO_LOW:
-      return sortHighToLow(agents);
-    case LOW_TO_HIGH:
-      return sortLowToHigh(agents);
-    case A_TO_Z:
-      return sortAtoZ(agents);
-    case Z_TO_A:
-      return sortZtoA(agents);
-    default:
-      return agents;
-  }
 };

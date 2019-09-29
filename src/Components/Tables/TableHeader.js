@@ -9,6 +9,7 @@ import TableRow from '@material-ui/core/TableRow';
 import TableHead from '@material-ui/core/TableHead';
 
 export const RenderHeader = ({
+  classes,
   tableHeaders,
   sortDirection,
   toggleSortDirection,
@@ -17,13 +18,24 @@ export const RenderHeader = ({
   <TableHead>
     <TableRow>
       {tableHeaders.map(header => (
-        <TableCell key={header.id}>
+        <TableCell
+          className={classes.cursorStyle}
+          key={header.id}
+          onClick={event => toggleSortDirection(event, header.prop)}
+        >
           {header.name}
-          <FontAwesomeIcon
-            style={{ cursor: 'pointer' }}
-            onClick={event => toggleSortDirection(event, header.prop)}
-            icon={sortDirection === 'asc' ? faArrowUp : faArrowDown}
-          />
+          {selectedHeader === header.prop && (
+            <FontAwesomeIcon
+              className={classes.cursorStyle}
+              icon={
+                sortDirection === 'asc'
+                  ? faArrowUp
+                  : sortDirection === 'desc'
+                  ? faArrowDown
+                  : null
+              }
+            />
+          )}
         </TableCell>
       ))}
       <TableCell />
