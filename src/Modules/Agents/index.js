@@ -97,7 +97,6 @@ const AgentsTable = ({ classes, history }) => {
   };
 
   const submitForm = values => {
-    console.log(values);
   };
 
   if (!agentsArray) {
