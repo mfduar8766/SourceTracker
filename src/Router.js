@@ -13,6 +13,11 @@ const AppRouter = () => (
     <Switch>
       <Route exact path="/" component={App} />
       <Route exact path="/agencies" component={AgenciesView} />
+      <Route
+        exact
+        path="/agencies/agency/:id/agents"
+        component={PageNotFound}
+      />
       <Route exact path="/agents" component={AgentsTable} />
       <Route exact path="/agent/:id" component={AgentDetails} />
       <Route exact path="*" component={PageNotFound} />

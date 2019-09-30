@@ -2,12 +2,11 @@
   {
     "agencyName": "Sample Agency I",
     "agencyId": 200,
-    "location": {
-      "city": "Marietta",
-      "state": "GA",
-      "address": "Kennesaw Ave NW",
-      "zipCode": "30062"
-    },
+    "city": "Marietta",
+    "state": "GA",
+    "address": "Kennesaw Ave NW",
+    "zipCode": "30062",
+    "totalAgents": 5,
     "agents": [
       {
         "agentId": 201,
@@ -219,12 +218,11 @@
   {
     "agencyName": "Sample Agency II",
     "agencyId": 300,
-    "location": {
-      "city": "Alpharetta",
-      "state": "GA",
-      "address": "Old Milton Pkwy",
-      "zipCode": "30022"
-    },
+    "city": "Alpharetta",
+    "state": "GA",
+    "address": "Old Milton Pkwy",
+    "zipCode": "30022",
+    "totalAgents": 5,
     "agents": [
       {
         "agentId": 301,
@@ -385,12 +383,11 @@
   {
     "agencyName": "Sample Agency III",
     "agencyId": 400,
-    "location": {
-      "city": "Atlanta",
-      "state": "GA",
-      "address": "521 East Cobb Pkw",
-      "zipCode": "30305"
-    },
+    "city": "Atlanta",
+    "state": "GA",
+    "address": "521 East Cobb Pkw",
+    "zipCode": "30305",
+    "totalAgents": 5,
     "agents": [
       {
         "agentId": 401,
@@ -522,12 +519,11 @@
   {
     "agencyName": "Sample Agency IV",
     "agencyId": 500,
-    "location": {
-      "city": "Roswell",
-      "state": "GA",
-      "address": "122 NE Roswell St",
-      "zipCode": "30009"
-    },
+    "city": "Roswell",
+    "state": "GA",
+    "address": "122 NE Roswell St",
+    "zipCode": "30009",
+    "totalAgents": 5,
     "agents": [
       {
         "agentId": 501,
@@ -659,12 +655,11 @@
   {
     "agencyName": "Sample Agency V",
     "agencyId": 600,
-    "location": {
-      "city": "Alpharetta",
-      "state": "GA",
-      "address": "123 NE Rd",
-      "zipCode": "30005"
-    },
+    "city": "Alpharetta",
+    "state": "GA",
+    "address": "123 NE Rd",
+    "zipCode": "30005",
+    "totalAgents": 5,
     "agents": [
       {
         "agentId": 601,

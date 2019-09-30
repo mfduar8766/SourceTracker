@@ -22,6 +22,9 @@ import BreadCrumbComponent from '../../Components/BreadCrumbs/index';
 import TableComponent from '../../Components/Tables/index';
 import WarningModal from '../../Components/Modals/WarningModal';
 
+const modalWidth = 600;
+const modalHeight = 100;
+
 const AgentsTable = ({ classes, history }) => {
   const [agentsArray, setAgentsArray] = useState(null);
   const [queryString, setQueryString] = useState('');
@@ -112,7 +115,7 @@ const AgentsTable = ({ classes, history }) => {
 
   const showAgentDetails = (event, agent) => {
     event.preventDefault();
-    history.push(`/agent/${agent.agentId}`, agent);
+    history.push(`/agent/:${agent.agentId}`, agent);
   };
 
   const getEditAgentFormValues = values => {
@@ -126,6 +129,7 @@ const AgentsTable = ({ classes, history }) => {
       </div>
     );
   }
+  console.log(history);
   return (
     <>
       <div
@@ -141,6 +145,8 @@ const AgentsTable = ({ classes, history }) => {
         <Grid item xs={11}>
           {isDeleteModalOn && (
             <WarningModal
+              modalWidth={modalWidth}
+              modalHeight={modalHeight}
               isDeleteModalOn={isDeleteModalOn}
               toggleDeleteModal={toggleDeleteModal}
               deleteAgent={deleteAgent}

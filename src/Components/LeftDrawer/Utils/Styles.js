@@ -11,7 +11,7 @@ export const drawerStyles = makeStyles(theme => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen
     }),
-    backgroundColor: '#323232',
+    backgroundColor: '#4C4C4C'
   },
   appBarShift: {
     marginLeft: drawerWidth,
@@ -39,7 +39,7 @@ export const drawerStyles = makeStyles(theme => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen
     }),
-    backgroundColor: '#323232',
+    backgroundColor: '#4C4C4C',
     color: 'white'
   },
   drawerClose: {
@@ -50,9 +50,9 @@ export const drawerStyles = makeStyles(theme => ({
     overflowX: 'hidden',
     width: theme.spacing(7) + 1,
     [theme.breakpoints.up('sm')]: {
-      width: theme.spacing(6) + 1
+      width: theme.spacing(7) + 1
     },
-    backgroundColor: '#323232',
+    backgroundColor: '#4C4C4C',
     color: 'white'
   },
   toolbar: {
@@ -67,14 +67,17 @@ export const drawerStyles = makeStyles(theme => ({
     padding: theme.spacing(3)
   },
   iconColor: {
-    color: 'black',
+    color: 'black'
   },
   listItem: {
     display: 'flex',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
     '&:hover': {
       backgroundColor: 'white',
       color: 'black'
     }
+  },
+  chevronLeft: {
+    color: 'white'
   }
 }));

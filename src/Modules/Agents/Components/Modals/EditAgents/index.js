@@ -7,7 +7,7 @@ import Modal from '@material-ui/core/Modal';
 import TextField from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/core/styles';
 
-import { editAgentsModalStyles, setModalStyle } from './Styles';
+import { GlobalModalStyles, setModalStyle } from '../../../../../Components/GlobalStyles/index';
 
 const EditAgentsModal = ({
   isEditOn,
@@ -193,4 +193,4 @@ export default withFormik({
     formikBag.props.closeModal();
     formikBag.props.getEditAgentFormValues(values);
   }
-})(withStyles(editAgentsModalStyles)(EditAgentsModal));
+})(withStyles(GlobalModalStyles)(EditAgentsModal));
