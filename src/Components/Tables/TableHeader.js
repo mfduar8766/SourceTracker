@@ -24,7 +24,7 @@ export const RenderHeader = ({
           onClick={event => toggleSortDirection(event, header.prop)}
         >
           {header.name}
-          {selectedHeader === header.prop && (
+          {selectedHeader === header.prop ? (
             <FontAwesomeIcon
               className={classes.cursorStyle}
               icon={
@@ -35,6 +35,20 @@ export const RenderHeader = ({
                   : null
               }
             />
+          ) : (
+            header.prop === tableHeaders[0].prop &&
+            sortDirection === 'asc' && (
+              <FontAwesomeIcon
+                className={classes.cursorStyle}
+                icon={
+                  sortDirection === 'asc'
+                    ? faArrowUp
+                    : sortDirection === 'desc'
+                    ? faArrowDown
+                    : null
+                }
+              />
+            )
           )}
         </TableCell>
       ))}

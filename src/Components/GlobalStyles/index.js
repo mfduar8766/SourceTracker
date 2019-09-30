@@ -1,8 +1,8 @@
-export const editAgentsModalStyles = theme => ({
+export const GlobalModalStyles = theme => ({
   paper: {
     position: 'absolute',
-    width: 600,
-    height: 500,
+    width: ({ modalWidth }) => modalWidth || 600,
+    height: ({ modalHeight }) => modalHeight || 500,
     backgroundColor: theme.palette.background.paper,
     padding: theme.spacing(2, 4, 3)
   },

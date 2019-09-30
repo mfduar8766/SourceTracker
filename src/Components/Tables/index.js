@@ -5,7 +5,7 @@ import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import { withStyles } from '@material-ui/core/styles';
 
-import { handleAscSort, handleDescSort } from './Utils/index';
+import { handleAscSort, handleDescSort, ASC, DESC } from './Utils/index';
 import { RenderHeader } from './TableHeader';
 import { RenderTableBody } from './TableBody';
 
@@ -29,7 +29,8 @@ const tableStyles = () => ({
     height: '100%'
   },
   cursorStyle: {
-    cursor: 'pointer'
+    cursor: 'pointer',
+    marginLeft: '0.5rem'
   }
 });
 
@@ -59,12 +60,12 @@ const TableComponent = ({
 
   const handleSort = () => {
     switch (sortDirection) {
-      case 'asc':
+      case ASC:
         return handleAscSort({
           tableDataArray,
           selectedHeader
         });
-      case 'desc':
+      case DESC:
         return handleDescSort({
           tableDataArray,
           selectedHeader

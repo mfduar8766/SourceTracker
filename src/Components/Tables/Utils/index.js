@@ -1,3 +1,6 @@
+export const ASC = 'asc';
+export const DESC = 'desc';
+
 export const handleAscSort = ({
   tableDataArray,
   selectedHeader,

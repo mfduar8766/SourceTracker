@@ -23,6 +23,7 @@ import { drawerStyles } from './Utils/Styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import { faHome } from '@fortawesome/free-solid-svg-icons';
+import { faBuilding } from '@fortawesome/free-solid-svg-icons';
 
 const LeftDrawer = ({ history }) => {
   const classes = drawerStyles();
@@ -32,14 +33,20 @@ const LeftDrawer = ({ history }) => {
     {
       id: 0,
       name: 'Home',
-      icon: <FontAwesomeIcon className={classes.iconColor} icon={faHome} />,
+      icon: <FontAwesomeIcon size="2x" className={classes.iconColor} icon={faHome} />,
       link: '/'
     },
     {
       id: 1,
+      name: 'Agencies',
+      icon: <FontAwesomeIcon size="2x" className={classes.iconColor} icon={faBuilding} />,
+      link: '/agencies'
+    },
+    {
+      id: 2,
       name: 'Agents',
       icon: (
-        <FontAwesomeIcon className={classes.iconColor} icon={faUserCircle} />
+        <FontAwesomeIcon size="2x" className={classes.iconColor} icon={faUserCircle} />
       ),
       link: '/agents'
     }
@@ -105,7 +112,7 @@ const LeftDrawer = ({ history }) => {
             {theme.direction === 'rtl' ? (
               <ChevronRightIcon />
             ) : (
-              <ChevronLeftIcon />
+              <ChevronLeftIcon className={classes.chevronLeft} />
             )}
           </IconButton>
         </div>
