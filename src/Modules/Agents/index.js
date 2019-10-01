@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 
-import CircularProgress from '@material-ui/core/CircularProgress';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core/styles';
@@ -21,6 +20,7 @@ import EditAgentsModal from './Components/Modals/EditAgents/index';
 import BreadCrumbComponent from '../../Components/BreadCrumbs/index';
 import TableComponent from '../../Components/Tables/index';
 import WarningModal from '../../Components/Modals/WarningModal';
+import LoadingIcon from '../../Components/LoadingIcon/index';
 
 const modalWidth = 600;
 const modalHeight = 100;
@@ -123,13 +123,8 @@ const AgentsTable = ({ classes, history }) => {
   };
 
   if (!agentsArray) {
-    return (
-      <div className={classes.loadingIcon}>
-        <CircularProgress color="primary" />
-      </div>
-    );
+    return <LoadingIcon color="primary" />
   }
-  console.log(history);
   return (
     <>
       <div
@@ -178,6 +173,8 @@ const AgentsTable = ({ classes, history }) => {
                 handleDelete={handleDelete}
                 handleEdit={handleEdit}
                 handleRowClick={showAgentDetails}
+                tableRowsPerPage={5}
+                rowsPerPageOptions={[5, 10, 15]}
               />
             )}
           </Paper>

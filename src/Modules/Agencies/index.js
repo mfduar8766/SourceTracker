@@ -2,14 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 
-import CircularProgress from '@material-ui/core/CircularProgress';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core/styles';
 
 import TableComponent from '../../Components/Tables/index';
 import { agencyHeaders } from './Utils/index';
-import { setModalStyle } from '../../Components/GlobalStyles/index';
+import LoadingIcon from '../../Components/LoadingIcon';
 
 const agenciesTableStyles = theme => ({
   root: {
@@ -43,11 +42,7 @@ const AgenciesView = ({ classes, history }) => {
   };
 
   if (!agenciesArray) {
-    return (
-      <div style={setModalStyle()}>
-        <CircularProgress color="primary" />
-      </div>
-    );
+    return <LoadingIcon color="primary" />
   }
   return (
     <Grid container spacing={3} justify="center" alignItems="center">
@@ -57,6 +52,8 @@ const AgenciesView = ({ classes, history }) => {
             tableHeaders={agencyHeaders}
             tableData={agenciesArray}
             handleRowClick={handleRowClick}
+            tableRowsPerPage={5}
+            rowsPerPageOptions={[5, 10, 15]}
           />
         </Paper>
       </Grid>

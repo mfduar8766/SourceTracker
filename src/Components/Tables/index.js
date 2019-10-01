@@ -5,9 +5,18 @@ import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import { withStyles } from '@material-ui/core/styles';
 
-import { handleAscSort, handleDescSort, ASC, DESC } from './Utils/index';
+import {
+  handleAscSort,
+  handleDescSort,
+  ASC,
+  DESC,
+  TableRow,
+  TableCell
+} from './Utils/index';
 import { RenderHeader } from './TableHeader';
 import { RenderTableBody } from './TableBody';
+import { TableFooterComponent } from './TableFooter';
+import LoadingIcon from '../LoadingIcon/index';
 
 const tableStyles = () => ({
   table: {
@@ -31,6 +40,11 @@ const tableStyles = () => ({
   cursorStyle: {
     cursor: 'pointer',
     marginLeft: '0.5rem'
+  },
+  addButton: {
+    color: 'green',
+    cursor: 'pointer',
+    marginLeft: '1rem'
   }
 });
 
@@ -40,15 +54,23 @@ const TableComponent = ({
   tableData,
   handleDelete,
   handleEdit,
-  handleRowClick
+  handleRowClick,
+  tableRowsPerPage,
+  rowsPerPageOptions
 }) => {
   const [sortDirection, setSortDirection] = useState('asc');
-  const [tableDataArray, setTableDataArray] = useState(null);
   const [selectedHeader, setSelectedHeader] = useState(null);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(tableRowsPerPage);
 
-  useEffect(() => {
-    setTableDataArray(tableData);
-  }, [tableData]);
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = event => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
 
   const toggleSortDirection = (event, header) => {
     event.preventDefault();
@@ -62,18 +84,30 @@ const TableComponent = ({
     switch (sortDirection) {
       case ASC:
         return handleAscSort({
-          tableDataArray,
+          tableData,
           selectedHeader
         });
       case DESC:
         return handleDescSort({
-          tableDataArray,
+          tableData,
           selectedHeader
         });
       default:
         return tableData;
     }
   };
+
+  if (!tableData) {
+    return <LoadingIcon color="primary" />;
+  }
+
+  if (tableData.length === 0) {
+    return <div />;
+  }
+
+  const emptyRows =
+    rowsPerPage - Math.min(rowsPerPage, tableData.length - page * rowsPerPage);
+
   return (
     <Table className={classes.table}>
       <RenderHeader
@@ -84,7 +118,7 @@ const TableComponent = ({
         classes={classes}
       />
       <TableBody>
-        {tableDataArray && tableDataArray.length && (
+        {tableData && tableData.length && (
           <RenderTableBody
             classes={classes}
             tableHeaders={tableHeaders}
@@ -94,7 +128,20 @@ const TableComponent = ({
             handleRowClick={handleRowClick}
           />
         )}
+        {emptyRows > 0 && (
+          <TableRow style={{ height: 48 * emptyRows }}>
+            <TableCell colSpan={6} />
+          </TableRow>
+        )}
       </TableBody>
+      <TableFooterComponent
+        rowsPerPageOptions={rowsPerPageOptions}
+        tableDataArray={tableData}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        handleChangePage={handleChangePage}
+        handleChangeRowsPerPage={handleChangeRowsPerPage}
+      />
     </Table>
   );
 };
