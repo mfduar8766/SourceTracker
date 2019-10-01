@@ -1,11 +1,13 @@
+import { TableRow as Row } from '@material-ui/core';
+import { TableCell as Cells } from '@material-ui/core';
+
+export const TableRow = Row;
+export const TableCell = Cells;
 export const ASC = 'asc';
 export const DESC = 'desc';
 
-export const handleAscSort = ({
-  tableDataArray,
-  selectedHeader,
-}) => {
-  return tableDataArray.sort((a, b) => {
+export const handleAscSort = ({ tableData, selectedHeader }) => {
+  return tableData.sort((a, b) => {
     if (
       typeof a[selectedHeader] === 'number' ||
       typeof b[selectedHeader] === 'number'
@@ -20,11 +22,8 @@ export const handleAscSort = ({
   });
 };
 
-export const handleDescSort = ({
-  tableDataArray,
-  selectedHeader,
-}) => {
-  return tableDataArray.sort((a, b) => {
+export const handleDescSort = ({ tableData, selectedHeader }) => {
+  return tableData.sort((a, b) => {
     if (
       typeof a[selectedHeader] === 'number' ||
       typeof b[selectedHeader] === 'number'
