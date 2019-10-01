@@ -9,12 +9,19 @@ import { withStyles } from '@material-ui/core/styles';
 import TableComponent from '../../Components/Tables/index';
 import { agencyHeaders } from './Utils/index';
 import LoadingIcon from '../../Components/LoadingIcon';
+import Button from '../../Components/Buttons/index';
 
 const agenciesTableStyles = theme => ({
   root: {
     width: '100%',
     height: '100%',
     marginTop: theme.spacing(3)
+  },
+  buttonContainer: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    alignItems: 'flex-end',
+    marginTop: '1rem'
   }
 });
 
@@ -36,17 +43,22 @@ const AgenciesView = ({ classes, history }) => {
     fetchAgencies();
   }, []);
 
+  const addAgency = () => {};
+
   const handleRowClick = (event, data) => {
     event.preventDefault();
     history.push(`/agencies/agency/:${data.agencyId}/agents`, data.agents);
   };
 
   if (!agenciesArray) {
-    return <LoadingIcon color="primary" />
+    return <LoadingIcon color="primary" />;
   }
   return (
     <Grid container spacing={3} justify="center" alignItems="center">
       <Grid item xs={11}>
+        <div className={classes.buttonContainer}>
+          <Button handleClick={addAgency} text="Add Agencies" />
+        </div>
         <Paper className={classes.root}>
           <TableComponent
             tableHeaders={agencyHeaders}
