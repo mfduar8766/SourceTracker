@@ -29,14 +29,17 @@ const Button = ({
   buttonIcon,
   showIcon,
   iconSize,
-  handleClick
+  handleClick,
+  showText,
+  buttonType
 }) => (
   <button
+    type={buttonType || 'button'}
     onClick={handleClick}
     className={classes.button}
   >
     <div className={classes.buttonText}>
-      <Typography>{text}</Typography>
+      {showText && <Typography>{text}</Typography>}
       {showIcon && (
         <FontAwesomeIcon
           className={classes.iconStyles}

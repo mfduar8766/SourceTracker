@@ -8,7 +8,6 @@ import { withStyles } from '@material-ui/core/styles';
 
 import {
   getAgencyAndAgents,
-  filterAgentSearch,
   tableHeaders,
   agencySelectionValues
 } from './Utils/index';
@@ -21,6 +20,7 @@ import BreadCrumbComponent from '../../Components/BreadCrumbs/index';
 import TableComponent from '../../Components/Tables/index';
 import WarningModal from '../../Components/Modals/WarningModal';
 import LoadingIcon from '../../Components/LoadingIcon/index';
+import { commonSearch } from '../../Utils/index';
 
 const modalWidth = 600;
 const modalHeight = 100;
@@ -52,31 +52,9 @@ const AgentsTable = ({ classes, history }) => {
     fetchAgencies();
   }, []);
 
-  const getQueryString = event => {
-    const lowerCaseQuery = event.target.value.toLowerCase().trim();
-    if (lowerCaseQuery.length === 0) {
-      setQueryString('');
-      setErrorMessage(null);
-    } else if (lowerCaseQuery.length >= 1) {
-      setQueryString(lowerCaseQuery);
-    }
-  };
-
-  const getFilteredAgents = ({ agentsArray, queryString }) => {
-    const searchResults = filterAgentSearch({ agentsArray, queryString });
-    if (Array.isArray(searchResults)) {
-      return searchResults;
-    }
-    return setErrorMessage(searchResults);
-  };
-
-  const returnSearchResults = ({ agentsArray, queryString }) => {
-    if (queryString.length === 0) {
-      return agentsArray;
-    }
-    const searchResults = getFilteredAgents({ agentsArray, queryString });
-    return searchResults;
-  };
+  if (!agentsArray) {
+    return <LoadingIcon color="primary" />;
+  }
 
   const handleAgencySelection = event => {
     const agencyId = parseInt(event.target.value);
@@ -122,9 +100,29 @@ const AgentsTable = ({ classes, history }) => {
     // TODO: Create service for editing agents.
   };
 
-  if (!agentsArray) {
-    return <LoadingIcon color="primary" />
-  }
+  const handleSearch = event => {
+    if (event.target.value !== '') {
+      setQueryString(event.target.value);
+    }
+    setQueryString(event.target.value);
+    setErrorMessage(null);
+  };
+
+  const getFilteredAgents = ({ agentsArray, queryString }) => {
+    const searchResults = commonSearch(agentsArray, queryString);
+    if (Array.isArray(searchResults)) {
+      return searchResults;
+    }
+    return setErrorMessage(searchResults);
+  };
+
+  const getSearchedAgent = () => {
+    if (queryString.length === 0) {
+      return agentsArray;
+    }
+    const searchResults = getFilteredAgents({ agentsArray, queryString });
+    return searchResults;
+  };
   return (
     <>
       <div
@@ -157,7 +155,7 @@ const AgentsTable = ({ classes, history }) => {
           )}
           <Paper className={classes.root}>
             <AgentSearch
-              getQueryString={getQueryString}
+              handleSearch={handleSearch}
               agencyDropDownValues={agencySelectionValues}
               handleAgencySelection={handleAgencySelection}
               selectedAgency={selectedAgency}
@@ -167,9 +165,7 @@ const AgentsTable = ({ classes, history }) => {
             ) : (
               <TableComponent
                 tableHeaders={tableHeaders}
-                tableData={orderBy(
-                  returnSearchResults({ agentsArray, queryString })
-                )}
+                tableData={orderBy(getSearchedAgent())}
                 handleDelete={handleDelete}
                 handleEdit={handleEdit}
                 handleRowClick={showAgentDetails}

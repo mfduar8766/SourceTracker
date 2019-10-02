@@ -1,15 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
+import orderBy from 'lodash/orderBy';
 
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 
 import TableComponent from '../../Components/Tables/index';
-import { agencyHeaders } from './Utils/index';
+import { agencyHeaders, searchAgencies } from './Utils/index';
 import LoadingIcon from '../../Components/LoadingIcon';
 import Button from '../../Components/Buttons/index';
+import SearchComponent from '../../Components/Search/index';
+import { setModalStyle } from '../../Components/GlobalStyles';
+import { commonSearch } from '../../Utils/index';
 
 const agenciesTableStyles = theme => ({
   root: {
@@ -27,6 +32,8 @@ const agenciesTableStyles = theme => ({
 
 const AgenciesView = ({ classes, history }) => {
   const [agenciesArray, setAgenciesArray] = useState(null);
+  const [queryString, setQueryString] = useState('');
+  const [errorMessage, setErrorMessage] = useState(null);
 
   const fetchAgencies = async () => {
     try {
@@ -43,16 +50,41 @@ const AgenciesView = ({ classes, history }) => {
     fetchAgencies();
   }, []);
 
-  const addAgency = () => {};
+  if (!agenciesArray) {
+    return <LoadingIcon color="primary" />;
+  }
+
+  const addAgency = () => {
+    // TODO: CREATE SERVICE FOR ADDING AGENCIES.
+  };
 
   const handleRowClick = (event, data) => {
     event.preventDefault();
     history.push(`/agencies/agency/:${data.agencyId}/agents`, data.agents);
   };
 
-  if (!agenciesArray) {
-    return <LoadingIcon color="primary" />;
-  }
+  const handleSearch = event => {
+    if (event.target.value !== '') {
+      setQueryString(event.target.value);
+    }
+    setErrorMessage(null);
+  };
+
+  const getFilteredAgents = ({ agenciesArray, queryString }) => {
+    const searchResults = commonSearch(agenciesArray, queryString);
+    if (Array.isArray(searchResults)) {
+      return searchResults;
+    }
+    return setErrorMessage(searchResults);
+  };
+
+  const getSearchedAgency = () => {
+    if (queryString.length === 0) {
+      return agenciesArray;
+    }
+    const searchResults = getFilteredAgents({ agenciesArray, queryString });
+    return searchResults;
+  };
   return (
     <Grid container spacing={3} justify="center" alignItems="center">
       <Grid item xs={11}>
@@ -60,13 +92,20 @@ const AgenciesView = ({ classes, history }) => {
           <Button handleClick={addAgency} text="Add Agencies" />
         </div>
         <Paper className={classes.root}>
-          <TableComponent
-            tableHeaders={agencyHeaders}
-            tableData={agenciesArray}
-            handleRowClick={handleRowClick}
-            tableRowsPerPage={5}
-            rowsPerPageOptions={[5, 10, 15]}
-          />
+          <SearchComponent handleSearch={handleSearch} />
+          {errorMessage ? (
+            <div style={setModalStyle()}>
+              <Typography style={{ color: 'black' }}>{errorMessage}</Typography>
+            </div>
+          ) : (
+            <TableComponent
+              tableHeaders={agencyHeaders}
+              tableData={orderBy(getSearchedAgency())}
+              handleRowClick={handleRowClick}
+              tableRowsPerPage={5}
+              rowsPerPageOptions={[5, 10, 15]}
+            />
+          )}
         </Paper>
       </Grid>
     </Grid>
