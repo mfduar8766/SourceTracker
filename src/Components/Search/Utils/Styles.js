@@ -2,10 +2,10 @@ import { fade } from '@material-ui/core/styles';
 
 export const searchStyles = theme => ({
   appBar: {
-    borderBottom: '1px solid lightgray',
-    backgroundColor: 'white',
-    width: '100%',
-    height: '100%'
+    borderBottom: ({ borderBottom }) => borderBottom || '1px solid lightgray',
+    backgroundColor: ({ backgroundColor }) => backgroundColor || 'white',
+    width: ({ width }) => width || '100%',
+    height: ({ height }) => height || '100%'
   },
   toolBar: {
     display: 'flex',
@@ -19,11 +19,11 @@ export const searchStyles = theme => ({
   },
   search: {
     position: 'relative',
-    border: '1px solid lightgray',
+    border: ({ isDisabled }) => isDisabled ? 'gray' : '1px solid lightgray',
     borderRadius: theme.shape.borderRadius,
-    backgroundColor: fade(theme.palette.common.white, 0.15),
+    backgroundColor: ({ isDisabled }) => isDisabled ? 'gray' : fade(theme.palette.common.white, 0.15),
     '&:hover': {
-      backgroundColor: fade(theme.palette.common.white, 0.25)
+      backgroundColor: ({ isDisabled }) => isDisabled ? 'gray' : fade(theme.palette.common.white, 0.25)
     },
     marginRight: theme.spacing(2),
     marginLeft: 0,
@@ -52,5 +52,8 @@ export const searchStyles = theme => ({
     [theme.breakpoints.up('md')]: {
       width: 200
     }
+  },
+  iconColor: {
+    color: ({ isDisabled }) => (isDisabled ? 'white' : 'lightgray')
   }
 });

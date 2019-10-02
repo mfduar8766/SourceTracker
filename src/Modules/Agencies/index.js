@@ -89,7 +89,7 @@ const AgenciesView = ({ classes, history }) => {
     <Grid container spacing={3} justify="center" alignItems="center">
       <Grid item xs={11}>
         <div className={classes.buttonContainer}>
-          <Button handleClick={addAgency} text="Add Agencies" />
+          <Button handleClick={addAgency} showText={true} showIcon={true} text="Add Agencies" />
         </div>
         <Paper className={classes.root}>
           <SearchComponent handleSearch={handleSearch} />

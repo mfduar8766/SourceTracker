@@ -24,6 +24,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import { faHome } from '@fortawesome/free-solid-svg-icons';
 import { faUsers } from '@fortawesome/free-solid-svg-icons';
+import { faChartBar } from '@fortawesome/free-solid-svg-icons';
+
+import SearchComponent from '../Search/index';
+import { commonSearch } from '../../Utils/index';
 
 const LeftDrawer = ({ history }) => {
   const classes = drawerStyles();
@@ -33,22 +37,50 @@ const LeftDrawer = ({ history }) => {
     {
       id: 0,
       name: 'Home',
-      icon: <FontAwesomeIcon size="2x" className={classes.iconColor} icon={faHome} />,
+      icon: (
+        <FontAwesomeIcon
+          size="2x"
+          className={classes.iconColor}
+          icon={faHome}
+        />
+      ),
       link: '/'
     },
     {
       id: 1,
       name: 'Agencies',
-      icon: <FontAwesomeIcon size="2x" className={classes.iconColor} icon={faUsers} />,
+      icon: (
+        <FontAwesomeIcon
+          size="2x"
+          className={classes.iconColor}
+          icon={faUsers}
+        />
+      ),
       link: '/agencies'
     },
     {
       id: 2,
       name: 'Agents',
       icon: (
-        <FontAwesomeIcon size="2x" className={classes.iconColor} icon={faUserCircle} />
+        <FontAwesomeIcon
+          size="2x"
+          className={classes.iconColor}
+          icon={faUserCircle}
+        />
       ),
       link: '/agents'
+    },
+    {
+      id: 3,
+      name: 'Reports',
+      icon: (
+        <FontAwesomeIcon
+          size="2x"
+          className={classes.iconColor}
+          icon={faChartBar}
+        />
+      ),
+      link: '/reports'
     }
   ];
   useEffect(() => {}, [history]);
@@ -90,6 +122,13 @@ const LeftDrawer = ({ history }) => {
           >
             Source Tracker
           </Typography>
+          <SearchComponent
+            borderBottom="none"
+            height="50%"
+            width="50%"
+            backgroundColor="#4C4C4C"
+            isDisabled={true}
+          />
         </Toolbar>
       </AppBar>
       <Drawer
