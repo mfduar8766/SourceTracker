@@ -6,19 +6,6 @@ export const GlobalModalStyles = theme => ({
     backgroundColor: theme.palette.background.paper,
     padding: theme.spacing(2, 4, 3)
   },
-  submitButton: {
-    border: '1px solid #ADD8E6',
-    padding: '0.5rem',
-    color: 'blue',
-    marginLeft: '1rem',
-    cursor: 'pointer'
-  },
-  cancelButton: {
-    border: '1px solid #ffcccb',
-    padding: '0.5rem',
-    color: 'red',
-    cursor: 'pointer'
-  },
   textField: {
     textField: {
       marginLeft: theme.spacing(1),

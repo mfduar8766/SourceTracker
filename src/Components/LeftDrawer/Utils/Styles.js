@@ -53,7 +53,16 @@ export const drawerStyles = makeStyles(theme => ({
       width: theme.spacing(7) + 1
     },
     backgroundColor: '#4C4C4C',
-    color: 'white'
+    color: 'white',
+    '&:hover': {
+      width: drawerWidth,
+      transition: theme.transitions.create('width', {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.enteringScreen
+      }),
+      backgroundColor: '#4C4C4C',
+      color: 'white'
+    }
   },
   toolbar: {
     display: 'flex',
