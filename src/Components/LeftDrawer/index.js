@@ -23,7 +23,7 @@ import { drawerStyles } from './Utils/Styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import { faHome } from '@fortawesome/free-solid-svg-icons';
-import { faBuilding } from '@fortawesome/free-solid-svg-icons';
+import { faUsers } from '@fortawesome/free-solid-svg-icons';
 
 const LeftDrawer = ({ history }) => {
   const classes = drawerStyles();
@@ -39,7 +39,7 @@ const LeftDrawer = ({ history }) => {
     {
       id: 1,
       name: 'Agencies',
-      icon: <FontAwesomeIcon size="2x" className={classes.iconColor} icon={faBuilding} />,
+      icon: <FontAwesomeIcon size="2x" className={classes.iconColor} icon={faUsers} />,
       link: '/agencies'
     },
     {

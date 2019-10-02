@@ -13,10 +13,10 @@ import { agentSearch } from './Utils/Styles';
 
 const AgentSearch = ({
   classes,
-  getQueryString,
+  handleSearch,
   agencyDropDownValues,
   handleAgencySelection,
-  selectedAgency,
+  selectedAgency
 }) => (
   <div className={classes.root}>
     <div className={classes.appBar}>
@@ -26,7 +26,7 @@ const AgentSearch = ({
             <SearchIcon />
           </div>
           <InputBase
-            onChange={event => getQueryString(event)}
+            onChange={event => handleSearch(event)}
             placeholder="Search…"
             classes={{
               root: classes.inputRoot,

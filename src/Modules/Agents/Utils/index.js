@@ -14,7 +14,7 @@ export const agencySelectionValues = [
   { value: '300', label: 'Sample Agency II' },
   { value: '400', label: 'Sample Agency III' },
   { value: '500', label: 'Sample Agency IV' },
-  { value: '600', label: 'Sample Agency V' },
+  { value: '600', label: 'Sample Agency V' }
 ];
 
 export const getAgencyAndAgents = ({ agentsArray, agencyId }) => {
@@ -29,33 +29,4 @@ export const getAgencyAndAgents = ({ agentsArray, agencyId }) => {
       .flatMap(agent => agent.agents);
   }
   return [];
-};
-
-export const filterAgentSearch = ({ agentsArray, queryString }) => {
-  const filteredAgents = [];
-  agentsArray.forEach(agent => {
-    const lowerCaseFirstName = agent.firstName.toLowerCase().trim();
-    const lowerCaseLastName = agent.lastName.toLowerCase().trim();
-    const agentId = agent.agentId
-      .toString()
-      .toLowerCase()
-      .trim();
-    const agentMembers = agent.members
-      .toString()
-      .toLowerCase()
-      .trim();
-    if (agentId.startsWith(queryString)) {
-      filteredAgents.push(agent);
-    } else if (lowerCaseFirstName.startsWith(queryString)) {
-      filteredAgents.push(agent);
-    } else if (lowerCaseLastName.startsWith(queryString)) {
-      filteredAgents.push(agent);
-    } else if (agentMembers.startsWith(queryString)) {
-      filteredAgents.push(agent);
-    }
-    return [];
-  });
-  return filteredAgents && filteredAgents.length
-    ? filteredAgents
-    : 'No members found.';
 };
