@@ -51,13 +51,15 @@ const AgenciesView = ({ classes, history }) => {
   };
 
   const handleSearch = event => {
-    if (event.target.value !== '') {
+    if (event.target.value.length >= 1) {
+      commonSearch(agenciesArray, event.target.value);
       setQueryString(event.target.value);
     }
+    setQueryString(event.target.value);
     setErrorMessage(null);
   };
 
-  const getFilteredAgents = ({ agenciesArray, queryString }) => {
+  const getFilteredAgents = () => {
     const searchResults = commonSearch(agenciesArray, queryString);
     if (Array.isArray(searchResults)) {
       return searchResults;
@@ -69,7 +71,7 @@ const AgenciesView = ({ classes, history }) => {
     if (queryString.length === 0) {
       return agenciesArray;
     }
-    const searchResults = getFilteredAgents({ agenciesArray, queryString });
+    const searchResults = getFilteredAgents();
     return searchResults;
   };
   return (

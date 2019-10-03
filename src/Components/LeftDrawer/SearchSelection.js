@@ -18,6 +18,9 @@ const searchSelectionStyles = () => ({
   },
   placeHolder: {
     color: 'white'
+  },
+  selectionColor: {
+    color: 'white'
   }
 });
 
@@ -31,7 +34,7 @@ const SearchSelection = ({
     <InputLabel className={classes.placeHolder} htmlFor="select-multiple">
       Select Values
     </InputLabel>
-    <Select value={selectedValue} onChange={handleChange}>
+    <Select className={classes.selectionColor} value={selectedValue} onChange={handleChange}>
       {dropDownValues.map(data => (
         <MenuItem key={data} value={data}>
           {data}

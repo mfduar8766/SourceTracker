@@ -1,3 +1,5 @@
+import { commonSearch } from '../../../Utils/index';
+
 export const dropDownValues = ['', 'Agencies', 'Members', 'Agents'];
 const selectionValues = {
   EMPTY: '',
@@ -6,17 +8,19 @@ const selectionValues = {
   MEMBERS: 'Members'
 };
 
-const filterByAgencies = globalState => {};
+const filterByAgencies = (globalState, queryString) => {
+  return commonSearch(globalState, queryString);
+};
 
 const filterByAgents = globalState => {};
 
 const filterByMembers = globalState => {};
 
-export const handleGlobalSearch = (queryString, globalState) => {
+export const handleGlobalSearch = (selectedValue, globalState, queryString) => {
   const { EMPTY, AGENCIES, AGENTS, MEMBERS } = selectionValues;
-  switch (queryString) {
+  switch (selectedValue) {
     case AGENCIES:
-      return filterByAgencies(globalState);
+      return filterByAgencies(globalState, queryString);
     case AGENTS:
       return filterByAgents(globalState);
     case MEMBERS:

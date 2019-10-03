@@ -4,11 +4,12 @@ import openOffice from './assets/openOffice.jpg';
 const App = () => (
   <div
     style={{
-      display: 'grid',
-      gridTemplateRows: 'repeat(1, 1fr)'
+      height: '100%',
+      width: '100%',
+      zIndex: '-1'
     }}
   >
-    <div>
+    <div style={{ height: '100%', width: '100%', zIndex: '-1' }}>
       <img src={openOffice} style={{ width: '100%' }} />
     </div>
   </div>

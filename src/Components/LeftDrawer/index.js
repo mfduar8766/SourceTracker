@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { withRouter } from 'react-router-dom';
 
 import clsx from 'clsx';
@@ -28,17 +28,19 @@ import {
 
 import SearchComponent from '../Search/index';
 import { drawerStyles } from './Utils/Styles';
-import { dropDownValues } from './Utils/index';
+import { dropDownValues, handleGlobalSearch } from './Utils/index';
 import SearchSelection from './SearchSelection';
 import { GlobalStateContext } from '../GlobalStateContext/index';
 
 const LeftDrawer = ({ history }) => {
-  const { agenciesArray } = GlobalStateContext;
+  const { agenciesArray } = useContext(GlobalStateContext);
   const classes = drawerStyles();
   const theme = useTheme();
   const [isSideDrawerOpen, setIsSideDrawerOpen] = useState(false);
   const [selectedValue, setSelectedValues] = useState('');
   const [globalSearchResults, setGlobalSearchResults] = useState(null);
+  const [queryString, setQueryString] = useState('');
+  const [errorMessage, setErrorMessage] = useState(null);
   const sideDrawerIcons = [
     {
       id: 0,
@@ -101,14 +103,18 @@ const LeftDrawer = ({ history }) => {
     history.push(link);
   };
 
-  const handleChange = event => {
-    setSelectedValues(event.target.value);
-    if (selectedValue !== '') {
-      handleGlobalSearch(selectedValue, agenciesArray);
-    }
-    return setSelectedValues('');
-  };
+  const navigateToSelectedResult = (event, result) => {};
 
+  const handleChange = event => setSelectedValues(event.target.value);
+
+  const getSearchValue = event => {
+    const searchResults = handleGlobalSearch(
+      selectedValue,
+      agenciesArray,
+      event.target.value
+    );
+    setGlobalSearchResults(searchResults);
+  };
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -118,7 +124,14 @@ const LeftDrawer = ({ history }) => {
           [classes.appBarShift]: isSideDrawerOpen
         })}
       >
-        <Toolbar>
+        <Toolbar
+          style={{
+            display: 'flex',
+            justifyContent: 'space-evenly',
+            alignItems: 'center',
+            width: '100%'
+          }}
+        >
           <IconButton
             onClick={toggleDrawer}
             color="inherit"
@@ -130,28 +143,39 @@ const LeftDrawer = ({ history }) => {
           >
             <MenuIcon />
           </IconButton>
-
-          <Typography
-            style={{ cursor: 'pointer' }}
-            onClick={() => history.push('/')}
-            variant="h6"
-            noWrap
+          <div style={{ width: '10%' }}>
+            <Typography
+              style={{ cursor: 'pointer' }}
+              onClick={() => history.push('/')}
+              variant="h6"
+              noWrap
+            >
+              Source Tracker
+            </Typography>
+          </div>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              width: '100%',
+              height: '100%'
+            }}
           >
-            Source Tracker
-          </Typography>
-          <div style={{ marginLeft: '1rem' }} />
-          <SearchSelection
-            dropDownValues={dropDownValues}
-            selectedValue={selectedValue}
-            handleChange={handleChange}
-          />
-          <SearchComponent
-            isDisabled={selectedValue === '' ? true : false}
-            borderBottom="none"
-            height="50%"
-            width="50%"
-            backgroundColor="#4C4C4C"
-          />
+            <SearchSelection
+              dropDownValues={dropDownValues}
+              selectedValue={selectedValue}
+              handleChange={handleChange}
+            />
+
+            <SearchComponent
+              isDisabled={selectedValue === '' ? true : false}
+              borderBottom="none"
+              height="50%"
+              width="50%"
+              backgroundColor="#4C4C4C"
+              handleSearch={getSearchValue}
+            />
+          </div>
         </Toolbar>
       </AppBar>
       <Drawer
