@@ -18,21 +18,27 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 
-import { drawerStyles } from './Utils/Styles';
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
-import { faHome } from '@fortawesome/free-solid-svg-icons';
-import { faUsers } from '@fortawesome/free-solid-svg-icons';
-import { faChartBar } from '@fortawesome/free-solid-svg-icons';
+import {
+  faUserCircle,
+  faHome,
+  faUsers,
+  faChartBar
+} from '@fortawesome/free-solid-svg-icons';
 
 import SearchComponent from '../Search/index';
-import { commonSearch } from '../../Utils/index';
+import { drawerStyles } from './Utils/Styles';
+import { dropDownValues } from './Utils/index';
+import SearchSelection from './SearchSelection';
+import { GlobalStateContext } from '../GlobalStateContext/index';
 
 const LeftDrawer = ({ history }) => {
+  const { agenciesArray } = GlobalStateContext;
   const classes = drawerStyles();
   const theme = useTheme();
   const [isSideDrawerOpen, setIsSideDrawerOpen] = useState(false);
+  const [selectedValue, setSelectedValues] = useState('');
+  const [globalSearchResults, setGlobalSearchResults] = useState(null);
   const sideDrawerIcons = [
     {
       id: 0,
@@ -83,6 +89,7 @@ const LeftDrawer = ({ history }) => {
       link: '/reports'
     }
   ];
+
   useEffect(() => {}, [history]);
 
   const toggleDrawer = () => {
@@ -93,6 +100,15 @@ const LeftDrawer = ({ history }) => {
     event.preventDefault();
     history.push(link);
   };
+
+  const handleChange = event => {
+    setSelectedValues(event.target.value);
+    if (selectedValue !== '') {
+      handleGlobalSearch(selectedValue, agenciesArray);
+    }
+    return setSelectedValues('');
+  };
+
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -114,6 +130,7 @@ const LeftDrawer = ({ history }) => {
           >
             <MenuIcon />
           </IconButton>
+
           <Typography
             style={{ cursor: 'pointer' }}
             onClick={() => history.push('/')}
@@ -122,17 +139,22 @@ const LeftDrawer = ({ history }) => {
           >
             Source Tracker
           </Typography>
+          <div style={{ marginLeft: '1rem' }} />
+          <SearchSelection
+            dropDownValues={dropDownValues}
+            selectedValue={selectedValue}
+            handleChange={handleChange}
+          />
           <SearchComponent
+            isDisabled={selectedValue === '' ? true : false}
             borderBottom="none"
             height="50%"
             width="50%"
             backgroundColor="#4C4C4C"
-            isDisabled={true}
           />
         </Toolbar>
       </AppBar>
       <Drawer
-        onClick={toggleDrawer}
         variant="permanent"
         className={clsx(classes.drawer, {
           [classes.drawerOpen]: isSideDrawerOpen,
@@ -147,7 +169,7 @@ const LeftDrawer = ({ history }) => {
         open={isSideDrawerOpen}
       >
         <div className={classes.toolbar}>
-          <IconButton>
+          <IconButton onClick={() => setIsSideDrawerOpen(false)}>
             {theme.direction === 'rtl' ? (
               <ChevronRightIcon />
             ) : (
