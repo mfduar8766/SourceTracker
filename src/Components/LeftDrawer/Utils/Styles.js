@@ -13,6 +13,18 @@ export const drawerStyles = makeStyles(theme => ({
     }),
     backgroundColor: '#4C4C4C'
   },
+  toolBar: {
+    display: 'flex',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    height: '100%'
+  },
+  titleWidth: {
+    width: '10%'
+  },
+  title: {
+    cursor: 'pointer'
+  },
   appBarShift: {
     marginLeft: drawerWidth,
     width: `calc(100% - ${drawerWidth}px)`,

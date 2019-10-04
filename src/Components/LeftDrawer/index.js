@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { withRouter } from 'react-router-dom';
 
 import clsx from 'clsx';
@@ -18,21 +18,27 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 
-import { drawerStyles } from './Utils/Styles';
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
-import { faHome } from '@fortawesome/free-solid-svg-icons';
-import { faUsers } from '@fortawesome/free-solid-svg-icons';
-import { faChartBar } from '@fortawesome/free-solid-svg-icons';
+import {
+  faUserCircle,
+  faHome,
+  faUsers,
+  faChartBar
+} from '@fortawesome/free-solid-svg-icons';
 
 import SearchComponent from '../Search/index';
-import { commonSearch } from '../../Utils/index';
+import { drawerStyles } from './Utils/Styles';
+import { dropDownValues, handleGlobalSearch } from './Utils/index';
+import SearchSelection from './SearchSelection';
+import { GlobalStateContext } from '../GlobalStateContext/index';
 
 const LeftDrawer = ({ history }) => {
+  const { agenciesArray } = useContext(GlobalStateContext);
   const classes = drawerStyles();
   const theme = useTheme();
   const [isSideDrawerOpen, setIsSideDrawerOpen] = useState(false);
+  const [selectedValue, setSelectedValues] = useState('');
+  const [globalSearchResults, setGlobalSearchResults] = useState(null);
   const sideDrawerIcons = [
     {
       id: 0,
@@ -83,6 +89,7 @@ const LeftDrawer = ({ history }) => {
       link: '/reports'
     }
   ];
+
   useEffect(() => {}, [history]);
 
   const toggleDrawer = () => {
@@ -93,6 +100,25 @@ const LeftDrawer = ({ history }) => {
     event.preventDefault();
     history.push(link);
   };
+
+  const navigateToSelectedResult = (event, result) => {
+    event.preventDefault();
+    console.log(result);
+  };
+
+  const handleChange = event => setSelectedValues(event.target.value);
+
+  const getSearchValue = event => {
+    if (event.target.value === '') {
+      return setGlobalSearchResults(null);
+    }
+    const searchResults = handleGlobalSearch(
+      selectedValue,
+      agenciesArray,
+      event.target.value
+    );
+    return setGlobalSearchResults(searchResults);
+  };
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -102,7 +128,7 @@ const LeftDrawer = ({ history }) => {
           [classes.appBarShift]: isSideDrawerOpen
         })}
       >
-        <Toolbar>
+        <Toolbar className={classes.toolBar}>
           <IconButton
             onClick={toggleDrawer}
             color="inherit"
@@ -114,25 +140,35 @@ const LeftDrawer = ({ history }) => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography
-            style={{ cursor: 'pointer' }}
-            onClick={() => history.push('/')}
-            variant="h6"
-            noWrap
-          >
-            Source Tracker
-          </Typography>
+          <div className={classes.titleWidth}>
+            <Typography
+              className={classes.title}
+              onClick={() => history.push('/')}
+              variant="h6"
+              noWrap
+            >
+              Source Tracker
+            </Typography>
+          </div>
+          <SearchSelection
+            dropDownValues={dropDownValues}
+            selectedValue={selectedValue}
+            handleChange={handleChange}
+          />
           <SearchComponent
+            isDisabled={selectedValue === '' ? true : false}
             borderBottom="none"
-            height="50%"
-            width="50%"
+            maxHeight="50%"
+            width="20%"
             backgroundColor="#4C4C4C"
-            isDisabled={true}
+            handleSearch={getSearchValue}
+            listValues={globalSearchResults}
+            showResultsList={true}
+            navigateToSelectedResult={navigateToSelectedResult}
           />
         </Toolbar>
       </AppBar>
       <Drawer
-        onClick={toggleDrawer}
         variant="permanent"
         className={clsx(classes.drawer, {
           [classes.drawerOpen]: isSideDrawerOpen,
@@ -147,7 +183,7 @@ const LeftDrawer = ({ history }) => {
         open={isSideDrawerOpen}
       >
         <div className={classes.toolbar}>
-          <IconButton>
+          <IconButton onClick={() => setIsSideDrawerOpen(false)}>
             {theme.direction === 'rtl' ? (
               <ChevronRightIcon />
             ) : (

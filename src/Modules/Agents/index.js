@@ -101,7 +101,7 @@ const AgentsTable = ({ classes, history }) => {
   };
 
   const handleSearch = event => {
-    if (event.target.value !== '') {
+    if (event.target.value.length >= 1) {
       setQueryString(event.target.value);
     }
     setQueryString(event.target.value);

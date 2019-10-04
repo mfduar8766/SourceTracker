@@ -1,0 +1,11 @@
+{
+  "globalSearchOptions": ["", "Agencies", "Members", "Agents"],
+  "agencyDropDownValues": [
+    { "value": "", "label": "" },
+    { "value": "200", "label": "Sample Agency I" },
+    { "value": "300", "label": "Sample Agency II" },
+    { "value": "400", "label": "Sample Agency III" },
+    { "value": "500", "label": "Sample Agency IV" },
+    { "value": "600", "label": "Sample Agency V" }
+  ]
+}
