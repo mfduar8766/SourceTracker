@@ -11,11 +11,13 @@ export const commonSearch = (dataArray, queryString) => {
           .trim()
       )
       .some(string => {
-        if (string.includes(lowerCaseQueryString)) {
+        if (!string.includes(lowerCaseQueryString)) {
+          errorMessage = 'No records found.';
+          return false;
+        } else if (string.includes(lowerCaseQueryString)) {
           filteredAgents.push(data);
           return true;
         }
-        return false;
       });
   });
   return filteredAgents && filteredAgents.length

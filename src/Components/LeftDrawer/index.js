@@ -170,10 +170,12 @@ const LeftDrawer = ({ history }) => {
             <SearchComponent
               isDisabled={selectedValue === '' ? true : false}
               borderBottom="none"
-              height="50%"
+              height="100%"
               width="50%"
               backgroundColor="#4C4C4C"
               handleSearch={getSearchValue}
+              listValues={globalSearchResults}
+              showResultsList={true}
             />
           </div>
         </Toolbar>

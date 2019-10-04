@@ -3,7 +3,8 @@ const drawerWidth = 240;
 export const drawerStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
-    marginBottom: '4rem'
+    marginBottom: '4rem',
+    zIndex: -1
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,

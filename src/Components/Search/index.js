@@ -7,8 +7,9 @@ import { searchStyles } from './Utils/Styles';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBan, faSearch } from '@fortawesome/free-solid-svg-icons';
+import GlobalSearchResults from './GlobalSearchResults';
 
-const SearchComponent = ({ classes, handleSearch, isDisabled }) => (
+const SearchComponent = ({ classes, handleSearch, isDisabled, showResultsList, listValues }) => (
   <div className={classes.root}>
     <div className={classes.appBar}>
       <Toolbar className={classes.toolBar}>
@@ -33,6 +34,7 @@ const SearchComponent = ({ classes, handleSearch, isDisabled }) => (
         </div>
       </Toolbar>
     </div>
+   {showResultsList &&  <GlobalSearchResults listValues={listValues}  />}
   </div>
 );
 

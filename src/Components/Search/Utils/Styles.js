@@ -5,7 +5,7 @@ export const searchStyles = theme => ({
     borderBottom: ({ borderBottom }) => borderBottom || '1px solid lightgray',
     backgroundColor: ({ backgroundColor }) => backgroundColor || 'white',
     width: ({ width }) => width || '100%',
-    height: ({ height }) => height || '100%'
+    height: ({ height }) => height || '100%',
   },
   toolBar: {
     display: 'flex',
@@ -15,7 +15,7 @@ export const searchStyles = theme => ({
     height: '100%'
   },
   root: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   search: {
     position: 'relative',

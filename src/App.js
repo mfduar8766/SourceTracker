@@ -6,12 +6,12 @@ const App = () => (
     style={{
       height: '100%',
       width: '100%',
-      zIndex: '-1'
+      zIndex: -1
     }}
   >
-    <div style={{ height: '100%', width: '100%', zIndex: '-1' }}>
+    {/* <div style={{ height: '100%', width: '100%', zIndex: '-1' }}>
       <img src={openOffice} style={{ width: '100%' }} />
-    </div>
+    </div> */}
   </div>
 );
 
