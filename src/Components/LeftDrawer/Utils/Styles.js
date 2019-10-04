@@ -13,7 +13,7 @@ export const drawerStyles = makeStyles(theme => ({
     }),
     backgroundColor: '#4C4C4C'
   },
-  toolbar: {
+  toolBar: {
     display: 'flex',
     justifyContent: 'flex-start',
     alignItems: 'center',

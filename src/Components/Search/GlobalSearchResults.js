@@ -20,9 +20,11 @@ const GlobalSearchResults = ({
           <ListItem
             onClick={event => navigateToSelectedResult(event, value)}
             className={classes.listItem}
-            key={value.agencyId}
+            key={value.agencyId || value.agentId || value.id}
           >
-            <ListItemText>{value.agencyName}</ListItemText>
+            <ListItemText>
+              {`${value.firstName} ${value.lastName}` || value.agencyName}
+            </ListItemText>
           </ListItem>
         ))}
     </>

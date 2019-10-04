@@ -155,7 +155,6 @@ const LeftDrawer = ({ history }) => {
             selectedValue={selectedValue}
             handleChange={handleChange}
           />
-
           <SearchComponent
             isDisabled={selectedValue === '' ? true : false}
             borderBottom="none"

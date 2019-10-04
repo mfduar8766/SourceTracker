@@ -12,9 +12,17 @@ const filterByAgencies = (globalState, queryString) => {
   return commonSearch(globalState, queryString);
 };
 
-const filterByAgents = globalState => {};
+const filterByAgents = (globalState, queryString) => {
+  const agents = globalState.flatMap(agent => agent.agents);
+  return commonSearch(agents, queryString);
+};
 
-const filterByMembers = globalState => {};
+const filterByMembers = (globalState, queryString) => {
+  const members = globalState
+    .flatMap(agent => agent.agents)
+    .flatMap(member => member.reps);
+  return commonSearch(members, queryString);
+};
 
 export const handleGlobalSearch = (selectedValue, globalState, queryString) => {
   const { EMPTY, AGENCIES, AGENTS, MEMBERS } = selectionValues;
@@ -22,9 +30,9 @@ export const handleGlobalSearch = (selectedValue, globalState, queryString) => {
     case AGENCIES:
       return filterByAgencies(globalState, queryString);
     case AGENTS:
-      return filterByAgents(globalState);
+      return filterByAgents(globalState, queryString);
     case MEMBERS:
-      return filterByMembers(globalState);
+      return filterByMembers(globalState, queryString);
     default:
       return EMPTY;
   }
