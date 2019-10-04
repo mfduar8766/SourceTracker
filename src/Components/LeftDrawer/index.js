@@ -39,8 +39,6 @@ const LeftDrawer = ({ history }) => {
   const [isSideDrawerOpen, setIsSideDrawerOpen] = useState(false);
   const [selectedValue, setSelectedValues] = useState('');
   const [globalSearchResults, setGlobalSearchResults] = useState(null);
-  const [queryString, setQueryString] = useState('');
-  const [errorMessage, setErrorMessage] = useState(null);
   const sideDrawerIcons = [
     {
       id: 0,
@@ -103,17 +101,23 @@ const LeftDrawer = ({ history }) => {
     history.push(link);
   };
 
-  const navigateToSelectedResult = (event, result) => {};
+  const navigateToSelectedResult = (event, result) => {
+    event.preventDefault();
+    console.log(result);
+  };
 
   const handleChange = event => setSelectedValues(event.target.value);
 
   const getSearchValue = event => {
+    if (event.target.value === '') {
+      return setGlobalSearchResults(null);
+    }
     const searchResults = handleGlobalSearch(
       selectedValue,
       agenciesArray,
       event.target.value
     );
-    setGlobalSearchResults(searchResults);
+    return setGlobalSearchResults(searchResults);
   };
   return (
     <div className={classes.root}>
@@ -124,14 +128,7 @@ const LeftDrawer = ({ history }) => {
           [classes.appBarShift]: isSideDrawerOpen
         })}
       >
-        <Toolbar
-          style={{
-            display: 'flex',
-            justifyContent: 'space-evenly',
-            alignItems: 'center',
-            width: '100%'
-          }}
-        >
+        <Toolbar className={classes.toolBar}>
           <IconButton
             onClick={toggleDrawer}
             color="inherit"
@@ -143,9 +140,9 @@ const LeftDrawer = ({ history }) => {
           >
             <MenuIcon />
           </IconButton>
-          <div style={{ width: '10%' }}>
+          <div className={classes.titleWidth}>
             <Typography
-              style={{ cursor: 'pointer' }}
+              className={classes.title}
               onClick={() => history.push('/')}
               variant="h6"
               noWrap
@@ -153,31 +150,23 @@ const LeftDrawer = ({ history }) => {
               Source Tracker
             </Typography>
           </div>
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              width: '100%',
-              height: '100%'
-            }}
-          >
-            <SearchSelection
-              dropDownValues={dropDownValues}
-              selectedValue={selectedValue}
-              handleChange={handleChange}
-            />
+          <SearchSelection
+            dropDownValues={dropDownValues}
+            selectedValue={selectedValue}
+            handleChange={handleChange}
+          />
 
-            <SearchComponent
-              isDisabled={selectedValue === '' ? true : false}
-              borderBottom="none"
-              height="100%"
-              width="50%"
-              backgroundColor="#4C4C4C"
-              handleSearch={getSearchValue}
-              listValues={globalSearchResults}
-              showResultsList={true}
-            />
-          </div>
+          <SearchComponent
+            isDisabled={selectedValue === '' ? true : false}
+            borderBottom="none"
+            maxHeight="50%"
+            width="20%"
+            backgroundColor="#4C4C4C"
+            handleSearch={getSearchValue}
+            listValues={globalSearchResults}
+            showResultsList={true}
+            navigateToSelectedResult={navigateToSelectedResult}
+          />
         </Toolbar>
       </AppBar>
       <Drawer
