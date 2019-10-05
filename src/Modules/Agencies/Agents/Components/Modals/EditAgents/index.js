@@ -7,7 +7,7 @@ import Modal from '@material-ui/core/Modal';
 import TextField from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/core/styles';
 
-import { GlobalModalStyles, setModalStyle } from '../../../../../Components/GlobalStyles/index';
+import { GlobalModalStyles, setModalStyle } from '../../../../../../Components/GlobalStyles/index';
 
 const EditAgentsModal = ({
   isEditOn,

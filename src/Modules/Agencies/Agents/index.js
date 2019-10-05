@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { withRouter } from 'react-router-dom';
-import axios from 'axios';
 
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
@@ -16,16 +15,17 @@ import { agentsTableStyles } from './Utils/Styles';
 
 import AgentSearch from './Components/AgentSearch/index';
 import EditAgentsModal from './Components/Modals/EditAgents/index';
-import BreadCrumbComponent from '../../Components/BreadCrumbs/index';
-import TableComponent from '../../Components/Tables/index';
-import WarningModal from '../../Components/Modals/WarningModal';
-import LoadingIcon from '../../Components/LoadingIcon/index';
-import { commonSearch } from '../../Utils/index';
+import BreadCrumbComponent from '../../../Components/BreadCrumbs/index';
+import TableComponent from '../../../Components/Tables/index';
+import WarningModal from '../../../Components/Modals/WarningModal';
+import LoadingIcon from '../../../Components/LoadingIcon/index';
+import { commonSearch } from '../../../Utils/index';
+import { GlobalStateContext } from '../../../Components/GlobalStateContext/index';
 
 const modalWidth = 600;
 const modalHeight = 100;
 
-const AgentsTable = ({ classes, history }) => {
+const AgentsTable = ({ classes, history, location }) => {
   const [agentsArray, setAgentsArray] = useState(null);
   const [queryString, setQueryString] = useState('');
   const [selectedAgency, setSelectedAgency] = useState('');
@@ -34,22 +34,12 @@ const AgentsTable = ({ classes, history }) => {
   const [errorMessage, setErrorMessage] = useState(null);
   const [isDeleteModalOn, setIsDeleteModalOn] = useState(false);
   const [agentToDelete, setAgentToDelete] = useState(null);
-  const [allAgencies, setAllAgencies] = useState(null);
+  const { agenciesArray } = useContext(GlobalStateContext);
 
-  const fetchAgencies = async () => {
-    try {
-      const agenciesArray = axios.get('agencies.json');
-      const response = await agenciesArray;
-      const agentsArray = response.data;
-      setAllAgencies(agentsArray);
-      return setAgentsArray(getAgencyAndAgents({ agentsArray }));
-    } catch (error) {
-      return error;
-    }
-  };
+  const checkIncomingData = () => setAgentsArray(location.state);
 
   useEffect(() => {
-    fetchAgencies();
+    checkIncomingData();
   }, []);
 
   if (!agentsArray) {
@@ -59,8 +49,7 @@ const AgentsTable = ({ classes, history }) => {
   const handleAgencySelection = event => {
     const agencyId = parseInt(event.target.value);
     setSelectedAgency(agencyId);
-    const agentsArray = allAgencies;
-    setAgentsArray(getAgencyAndAgents({ agentsArray, agencyId }));
+    setAgentsArray(getAgencyAndAgents(agenciesArray, agencyId));
   };
 
   const handleEdit = (event, agent) => {

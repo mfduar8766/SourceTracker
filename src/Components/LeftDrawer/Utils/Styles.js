@@ -17,7 +17,8 @@ export const drawerStyles = makeStyles(theme => ({
     display: 'flex',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    height: '100%'
+    height: '50%',
+    width: '100%'
   },
   titleWidth: {
     width: '10%'
@@ -85,10 +86,10 @@ export const drawerStyles = makeStyles(theme => ({
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing(3)
   },
   iconColor: {
-    color: 'black'
+    color: 'black',
+    cursor: 'pointer'
   },
   listItem: {
     display: 'flex',
@@ -100,5 +101,10 @@ export const drawerStyles = makeStyles(theme => ({
   },
   chevronLeft: {
     color: 'white'
+  },
+  settings: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    width: '5%'
   }
 }));

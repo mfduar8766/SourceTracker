@@ -23,7 +23,9 @@ import {
   faUserCircle,
   faHome,
   faUsers,
-  faChartBar
+  faChartBar,
+  faCog,
+  faBell
 } from '@fortawesome/free-solid-svg-icons';
 
 import SearchComponent from '../Search/index';
@@ -87,10 +89,21 @@ const LeftDrawer = ({ history }) => {
         />
       ),
       link: '/reports'
+    },
+    {
+      id: 4,
+      name: 'Settings',
+      icon: (
+        <FontAwesomeIcon
+          className={classes.iconColor}
+          onClick={event => openSettings(event)}
+          icon={faCog}
+          size="2x"
+        />
+      )
     }
   ];
-
-  useEffect(() => {}, [history]);
+  useEffect(() => {}, []);
 
   const toggleDrawer = () => {
     setIsSideDrawerOpen(isSideDrawerOpen => !isSideDrawerOpen);
@@ -102,8 +115,15 @@ const LeftDrawer = ({ history }) => {
   };
 
   const navigateToSelectedResult = (event, result) => {
-    event.preventDefault();
     console.log(result);
+    event.preventDefault();
+    if (result.agencyId) {
+    } else if (result.agentId) {
+    }
+  };
+
+  const openSettings = event => {
+    event.preventDefault();
   };
 
   const handleChange = event => setSelectedValues(event.target.value);
@@ -119,6 +139,11 @@ const LeftDrawer = ({ history }) => {
     );
     return setGlobalSearchResults(searchResults);
   };
+
+  const openNotifications = event => {
+    event.preventDefault();
+  };
+
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -166,6 +191,21 @@ const LeftDrawer = ({ history }) => {
             showResultsList={true}
             navigateToSelectedResult={navigateToSelectedResult}
           />
+          <div style={{ flex: 1 }} />
+          <div className={classes.settings}>
+            <FontAwesomeIcon
+              className={classes.iconColor}
+              onClick={event => openNotifications(event)}
+              icon={faBell}
+              size="2x"
+            />
+            <FontAwesomeIcon
+              className={classes.iconColor}
+              onClick={event => openSettings(event)}
+              icon={faCog}
+              size="2x"
+            />
+          </div>
         </Toolbar>
       </AppBar>
       <Drawer

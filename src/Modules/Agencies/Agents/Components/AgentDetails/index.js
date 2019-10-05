@@ -12,7 +12,7 @@ import ToolBar from '@material-ui/core/Toolbar';
 import { withStyles } from '@material-ui/core/styles';
 
 import { agentDetails } from './Utils/Styles';
-import BarGraphs from '../../../../Components/Graphs/BarGraphs';
+import BarGraphs from '../../../../../Components/Graphs/BarGraphs';
 
 const createCardHeader = ({ classes, agent, dataType }) => (
   <AppBar position="static">
