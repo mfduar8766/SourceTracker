@@ -17,7 +17,7 @@ export const agencySelectionValues = [
   { value: '600', label: 'Sample Agency V' }
 ];
 
-export const getAgencyAndAgents = ({ agentsArray, agencyId }) => {
+export const getAgencyAndAgents = (agentsArray, agencyId) => {
   if (Array.isArray(agentsArray)) {
     if (!agencyId) {
       return agentsArray

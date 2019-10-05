@@ -12,7 +12,7 @@ export const searchStyles = theme => ({
   toolBar: {
     display: 'flex',
     justifyContent: 'flex-start',
-    flexDirection: 'column',
+    flexDirection: ({ flexDirection }) => flexDirection || 'column',
     alignItems: 'center',
     width: '100%',
     maxHeight: '50%',

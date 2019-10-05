@@ -47,7 +47,10 @@ const AgenciesView = ({ classes, history }) => {
 
   const handleRowClick = (event, data) => {
     event.preventDefault();
-    history.push(`/agencies/agency/:${data.agencyId}/agents`, data.agents);
+    history.push(
+      `/agencies/${data.agencyName}/${data.agencyId}/agents`,
+      data.agents
+    );
   };
 
   const handleSearch = event => {
@@ -86,7 +89,7 @@ const AgenciesView = ({ classes, history }) => {
           />
         </div>
         <Paper className={classes.root}>
-          <SearchComponent handleSearch={handleSearch} />
+          <SearchComponent flexDirection="row" handleSearch={handleSearch} />
           {errorMessage ? (
             <div style={setModalStyle()}>
               <Typography style={{ color: 'black' }}>{errorMessage}</Typography>
