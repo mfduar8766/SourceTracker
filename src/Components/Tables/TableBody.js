@@ -14,6 +14,8 @@ const RenderTableRows = ({
   handleEdit,
   handleDelete,
   handleRowClick,
+  showEditButton,
+  showDeleteButton
 }) => (
   <TableRow className={classes.tableRow} key={index}>
     {tableHeaders.map(header => (
@@ -22,16 +24,20 @@ const RenderTableRows = ({
       </TableCell>
     ))}
     <TableCell>
-      <FontAwesomeIcon
+      {showEditButton && (
+        <FontAwesomeIcon
         className={classes.editButton}
         icon={faEdit}
         onClick={event => handleEdit(event, data)}
       />
-      <FontAwesomeIcon
+      )}
+      {showDeleteButton && (
+        <FontAwesomeIcon
         className={classes.deleteButton}
         icon={faTrashAlt}
         onClick={event => handleDelete(event, data)}
       />
+      )}
     </TableCell>
   </TableRow>
 );
@@ -43,6 +49,8 @@ export const RenderTableBody = ({
   handleDelete,
   handleEdit,
   handleRowClick,
+  showEditButton,
+  showDeleteButton
 }) => (
   <>
     {tableDataArray.map((data, index) => (
@@ -55,6 +63,8 @@ export const RenderTableBody = ({
           handleDelete={handleDelete}
           handleEdit={handleEdit}
           handleRowClick={handleRowClick}
+          showEditButton={showEditButton}
+          showDeleteButton={showDeleteButton}
         />
       </React.Fragment>
     ))}

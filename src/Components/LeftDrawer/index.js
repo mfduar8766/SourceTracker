@@ -42,6 +42,7 @@ const LeftDrawer = ({ history }) => {
   const [selectedValue, setSelectedValues] = useState('');
   const [globalSearchResults, setGlobalSearchResults] = useState(null);
   const [showResultsList, setShowResultsList] = useState('');
+  const [errorMessage, setErrorMessage] = useState(null);
   const sideDrawerIcons = [
     {
       id: 0,
@@ -149,12 +150,16 @@ const LeftDrawer = ({ history }) => {
       setShowResultsList(false);
       return setGlobalSearchResults(null);
     }
+    setErrorMessage(null);
     setShowResultsList(true);
     const searchResults = handleGlobalSearch(
       selectedValue,
       agenciesArray,
       event.target.value
     );
+    if (searchResults === null || undefined) {
+      return setErrorMessage('No records found.');
+    }
     return setGlobalSearchResults(searchResults);
   };
 
@@ -208,6 +213,7 @@ const LeftDrawer = ({ history }) => {
             listValues={globalSearchResults}
             showResultsList={showResultsList}
             navigateToSelectedResult={navigateToSelectedResult}
+            errorMessage={errorMessage}
           />
           <div style={{ flex: 1 }} />
           <div className={classes.settings}>

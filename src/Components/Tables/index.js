@@ -56,7 +56,9 @@ const TableComponent = ({
   handleEdit,
   handleRowClick,
   tableRowsPerPage,
-  rowsPerPageOptions
+  rowsPerPageOptions,
+  showEditButton,
+  showDeleteButton
 }) => {
   const [sortDirection, setSortDirection] = useState('asc');
   const [selectedHeader, setSelectedHeader] = useState(null);
@@ -126,6 +128,8 @@ const TableComponent = ({
             handleDelete={handleDelete}
             tableDataArray={orderBy(handleSort())}
             handleRowClick={handleRowClick}
+            showEditButton={showEditButton}
+            showDeleteButton={showDeleteButton}
           />
         )}
         {emptyRows > 0 && (

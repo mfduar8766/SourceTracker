@@ -101,6 +101,8 @@ const AgenciesView = ({ classes, history }) => {
               handleRowClick={handleRowClick}
               tableRowsPerPage={5}
               rowsPerPageOptions={[5, 10, 15]}
+              showEditButton={true}
+              showDeleteButton={true}
             />
           )}
         </Paper>
