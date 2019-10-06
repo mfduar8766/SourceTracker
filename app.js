@@ -9,7 +9,7 @@ const app = express();
 app.use(cors());
 
 //Connect to DB
-mongoose.connect(mongoURI, {
+mongoose.connect(mongoURI.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
