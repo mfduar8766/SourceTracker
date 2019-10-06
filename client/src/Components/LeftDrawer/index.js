@@ -216,7 +216,7 @@ const LeftDrawer = ({ history }) => {
             </Typography>
           </div>
           <SearchSelection
-            dropDownValues={dropDownValues}
+            dropDownValues={dropDownValues || []}
             selectedValue={selectedValue}
             handleChange={handleChange}
           />
