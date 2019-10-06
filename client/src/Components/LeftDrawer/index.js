@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { withRouter } from 'react-router-dom';
+import axios from 'axios';
 
 import clsx from 'clsx';
 import { useTheme } from '@material-ui/core/styles';
@@ -30,7 +31,7 @@ import {
 
 import SearchComponent from '../Search/index';
 import { drawerStyles } from './Utils/Styles';
-import { dropDownValues, handleGlobalSearch } from './Utils/index';
+import { handleGlobalSearch } from './Utils/index';
 import SearchSelection from './SearchSelection';
 import { GlobalStateContext } from '../GlobalStateContext/index';
 
@@ -43,6 +44,7 @@ const LeftDrawer = ({ history }) => {
   const [globalSearchResults, setGlobalSearchResults] = useState(null);
   const [showResultsList, setShowResultsList] = useState('');
   const [errorMessage, setErrorMessage] = useState(null);
+  const [dropDownValues, setDropDownValues] = useState(null);
   const sideDrawerIcons = [
     {
       id: 0,
@@ -105,7 +107,22 @@ const LeftDrawer = ({ history }) => {
       )
     }
   ];
-  useEffect(() => {}, []);
+
+  const getGlobalDropDownValues = async () => {
+    try {
+      const dropdownValues = axios.get('/api/v1/dropdown-values');
+      const response = await dropdownValues;
+      const dropDownObject = response.data;
+      const { globalSearchOptions } = dropDownObject;
+      return setDropDownValues(globalSearchOptions);
+    } catch (error) {
+      return error;
+    }
+  };
+
+  useEffect(() => {
+    getGlobalDropDownValues();
+  }, []);
 
   const toggleDrawer = () => {
     setIsSideDrawerOpen(isSideDrawerOpen => !isSideDrawerOpen);
