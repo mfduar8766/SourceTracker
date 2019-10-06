@@ -3,11 +3,11 @@ import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
 import axios from 'axios';
 import App from './App';
 import AgentsTable from './Modules/Agencies/Agents/index';
-import AgentDetails from './Modules/Agencies/Agents/Components/AgentDetails/index';
 import PageNotFound from './Components/PageNotFound';
 import AgenciesView from './Modules/Agencies/index';
 import { GlobalStateContext } from './Components/GlobalStateContext/index';
 import LeftDrawer from './Components/LeftDrawer/index';
+import DisplaySearchResults from './Components/DisplaySearchResults/index';
 
 const AppRouter = () => {
   const [agenciesArray, setAgenciesArray] = useState(null);
@@ -39,8 +39,16 @@ const AppRouter = () => {
             path="/agencies/:agencyName/:agencyId/agents"
             component={AgentsTable}
           />
-          <Route exact path="/agents" component={AgentsTable} />
-          <Route exact path="/agent/:id" component={AgentDetails} />
+          <Route
+            exact
+            path="/search-results/:searchedParam/:id"
+            component={DisplaySearchResults}
+          />
+          <Route
+            exact
+            path="/agent-details/agent/:agentId"
+            component={DisplaySearchResults}
+          />
           <Route exact path="*" component={PageNotFound} />
         </Switch>
       </Router>

@@ -15,7 +15,7 @@ const SearchComponent = ({
   isDisabled,
   showResultsList,
   listValues,
-  navigateToSelectedResult
+  navigateToSelectedResult,
 }) => (
   <div className={classes.appBar}>
     <Toolbar className={classes.toolBar}>

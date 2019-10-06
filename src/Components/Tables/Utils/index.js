@@ -6,8 +6,7 @@ export const TableCell = Cells;
 export const ASC = 'asc';
 export const DESC = 'desc';
 
-export const handleAscSort = ({ tableData, selectedHeader }) => {
-  return tableData.sort((a, b) => {
+export const handleAscSort = ({ tableData, selectedHeader }) => tableData.sort((a, b) => {
     if (
       typeof a[selectedHeader] === 'number' ||
       typeof b[selectedHeader] === 'number'
@@ -20,7 +19,6 @@ export const handleAscSort = ({ tableData, selectedHeader }) => {
       return a[selectedHeader].localeCompare(b[selectedHeader]);
     }
   });
-};
 
 export const handleDescSort = ({ tableData, selectedHeader }) => {
   return tableData.sort((a, b) => {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import orderBy from 'lodash/orderBy';
 
 import Table from '@material-ui/core/Table';
