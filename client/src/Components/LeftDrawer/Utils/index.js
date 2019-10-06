@@ -1,6 +1,4 @@
 import { commonSearch } from '../../../Utils/index';
-
-export const dropDownValues = ['', 'Agencies', 'Members', 'Agents'];
 const selectionValues = {
   EMPTY: '',
   AGENCIES: 'Agencies',

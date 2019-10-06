@@ -73,7 +73,7 @@ const DisplaySearchResults = ({ classes, location }) => {
   const errorMessage = 'No records found.';
   const getHeaders = async () => {
     try {
-      const dropdownValues = axios.get('/dropDownValues.json');
+      const dropdownValues = axios.get('/api/v1/dropdown-values');
       const response = await dropdownValues;
       const dropDownObject = response.data;
       const { repHeaders, agentHeaders, agencyHeaders } = dropDownObject;

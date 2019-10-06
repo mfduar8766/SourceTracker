@@ -5,7 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 import {
   GlobalModalStyles,
   setModalStyle
-} from '../../Components/GlobalStyles/index';
+} from '../GlobalStyles/index';
 import Button from '../Buttons/index';
 
 const padding = '0.5rem';
