@@ -15,7 +15,6 @@ import { agentsTableStyles } from './Utils/Styles';
 
 import AgentSearch from './Components/AgentSearch/index';
 import EditAgentsModal from './Components/Modals/EditAgents/index';
-import BreadCrumbComponent from '../../../Components/BreadCrumbs/index';
 import TableComponent from '../../../Components/Tables/index';
 import WarningModal from '../../../Components/Modals/WarningModal';
 import LoadingIcon from '../../../Components/LoadingIcon/index';
@@ -80,9 +79,12 @@ const AgentsTable = ({ classes, history, location }) => {
     setAgentsArray(filteredAgents);
   };
 
-  const showAgentDetails = (event, agent) => {
+  const handleRowClick = (event, agent) => {
     event.preventDefault();
-    history.push(`/agent/:${agent.agentId}`, agent);
+    history.push(`/agent-details/agent/${agent.agentId}`, {
+      key: 'Agent',
+      data: [agent]
+    });
   };
 
   const getEditAgentFormValues = values => {
@@ -113,59 +115,48 @@ const AgentsTable = ({ classes, history, location }) => {
     return searchResults;
   };
   return (
-    <>
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'flex-start',
-          marginLeft: '5rem'
-        }}
-      >
-        <BreadCrumbComponent location={history.location.pathname} />
-      </div>
-      <Grid container spacing={3} justify="center" alignItems="center">
-        <Grid item xs={11}>
-          {isDeleteModalOn && (
-            <WarningModal
-              modalWidth={modalWidth}
-              modalHeight={modalHeight}
-              isDeleteModalOn={isDeleteModalOn}
-              toggleDeleteModal={toggleDeleteModal}
-              deleteAgent={deleteAgent}
+    <Grid container spacing={3} justify="center" alignItems="center">
+      <Grid item xs={11}>
+        {isDeleteModalOn && (
+          <WarningModal
+            modalWidth={modalWidth}
+            modalHeight={modalHeight}
+            isDeleteModalOn={isDeleteModalOn}
+            toggleDeleteModal={toggleDeleteModal}
+            deleteAgent={deleteAgent}
+          />
+        )}
+        {isEditOn && agentToEdit && (
+          <EditAgentsModal
+            agentToEdit={agentToEdit}
+            isEditOn={isEditOn}
+            getEditAgentFormValues={getEditAgentFormValues}
+            closeModal={closeModal}
+          />
+        )}
+        <Paper className={classes.root}>
+          <AgentSearch
+            handleSearch={handleSearch}
+            agencyDropDownValues={agencySelectionValues}
+            handleAgencySelection={handleAgencySelection}
+            selectedAgency={selectedAgency}
+          />
+          {errorMessage ? (
+            <div className={classes.errorMessage}>{errorMessage}</div>
+          ) : (
+            <TableComponent
+              tableHeaders={tableHeaders}
+              tableData={orderBy(getSearchedAgent())}
+              handleDelete={handleDelete}
+              handleEdit={handleEdit}
+              handleRowClick={handleRowClick}
+              tableRowsPerPage={5}
+              rowsPerPageOptions={[5, 10, 15]}
             />
           )}
-          {isEditOn && agentToEdit && (
-            <EditAgentsModal
-              agentToEdit={agentToEdit}
-              isEditOn={isEditOn}
-              getEditAgentFormValues={getEditAgentFormValues}
-              closeModal={closeModal}
-            />
-          )}
-          <Paper className={classes.root}>
-            <AgentSearch
-              handleSearch={handleSearch}
-              agencyDropDownValues={agencySelectionValues}
-              handleAgencySelection={handleAgencySelection}
-              selectedAgency={selectedAgency}
-            />
-            {errorMessage ? (
-              <div className={classes.errorMessage}>{errorMessage}</div>
-            ) : (
-              <TableComponent
-                tableHeaders={tableHeaders}
-                tableData={orderBy(getSearchedAgent())}
-                handleDelete={handleDelete}
-                handleEdit={handleEdit}
-                handleRowClick={showAgentDetails}
-                tableRowsPerPage={5}
-                rowsPerPageOptions={[5, 10, 15]}
-              />
-            )}
-          </Paper>
-        </Grid>
+        </Paper>
       </Grid>
-    </>
+    </Grid>
   );
 };
 export default withRouter(withStyles(agentsTableStyles)(AgentsTable));

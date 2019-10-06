@@ -23,7 +23,9 @@ const GlobalSearchResults = ({
             key={value.agencyId || value.agentId || value.id}
           >
             <ListItemText>
-              {`${value.firstName} ${value.lastName}` || value.agencyName}
+              {value.agencyName
+                ? value.agencyName
+                : `${value.firstName} ${value.lastName}`}
             </ListItemText>
           </ListItem>
         ))}

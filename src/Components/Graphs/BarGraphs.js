@@ -14,8 +14,12 @@ const renderBars = ({ barProps }) =>
     <Bar key={data.id} dataKey={data.dataKey} fill={data.fill} />
   ));
 
-const BarGraphs = ({ data, barProps }) => (
-  <BarChart width={730} height={250} data={data}>
+const BarGraphs = ({ data, barProps, barGraphWidth, barGraphHeight }) => (
+  <BarChart
+    width={barGraphWidth || 600}
+    height={barGraphHeight || 250}
+    data={data}
+  >
     <CartesianGrid strokeDasharray="3 3" />
     <XAxis type="category" dataKey="name" />
     <YAxis type="number" />

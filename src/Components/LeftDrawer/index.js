@@ -41,6 +41,7 @@ const LeftDrawer = ({ history }) => {
   const [isSideDrawerOpen, setIsSideDrawerOpen] = useState(false);
   const [selectedValue, setSelectedValues] = useState('');
   const [globalSearchResults, setGlobalSearchResults] = useState(null);
+  const [showResultsList, setShowResultsList] = useState('');
   const sideDrawerIcons = [
     {
       id: 0,
@@ -115,10 +116,25 @@ const LeftDrawer = ({ history }) => {
   };
 
   const navigateToSelectedResult = (event, result) => {
-    console.log(result);
     event.preventDefault();
     if (result.agencyId) {
+      history.push(`/search-results/${result.agencyName}/${result.agencyId}`, {
+        key: 'Agency',
+        data: [result]
+      });
+      setShowResultsList(false);
     } else if (result.agentId) {
+      history.push(
+        `/search-results/${result.firstName}-${result.lastName}/${result.agentId}`,
+        { key: 'Agent', data: [result] }
+      );
+      setShowResultsList(false);
+    } else if (result.id) {
+      history.push(
+        `/search-results/${result.firstName}-${result.lastName}/${result.id}`,
+        { key: 'Member', data: [result] }
+      );
+      setShowResultsList(false);
     }
   };
 
@@ -130,8 +146,10 @@ const LeftDrawer = ({ history }) => {
 
   const getSearchValue = event => {
     if (event.target.value === '') {
+      setShowResultsList(false);
       return setGlobalSearchResults(null);
     }
+    setShowResultsList(true);
     const searchResults = handleGlobalSearch(
       selectedValue,
       agenciesArray,
@@ -188,7 +206,7 @@ const LeftDrawer = ({ history }) => {
             backgroundColor="#4C4C4C"
             handleSearch={getSearchValue}
             listValues={globalSearchResults}
-            showResultsList={true}
+            showResultsList={showResultsList}
             navigateToSelectedResult={navigateToSelectedResult}
           />
           <div style={{ flex: 1 }} />

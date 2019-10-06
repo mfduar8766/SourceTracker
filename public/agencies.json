@@ -20,6 +20,7 @@
         "reps": [
           {
             "id": "201-011",
+            "correspondingAgency": "Sample Agency I",
             "firstName": "Andrew",
             "lastName": "Kelly",
             "startDate": "09/12/2019",
@@ -27,6 +28,7 @@
           },
           {
             "id": "202-012",
+            "correspondingAgency": "Sample Agency I",
             "firstName": "Mike",
             "lastName": "Patel",
             "startDate": "09/12/2019",
@@ -62,6 +64,7 @@
         "reps": [
           {
             "id": "202-022",
+            "correspondingAgency": "Sample Agency I",
             "firstName": "Kelly",
             "lastName": "Ferguson",
             "startDate": "09/12/2019",
@@ -69,6 +72,7 @@
           },
           {
             "id": "202-023",
+            "correspondingAgency": "Sample Agency I",
             "firstName": "Lizzy",
             "lastName": "Cook",
             "startDate": "09/12/2019",
@@ -104,6 +108,7 @@
         "reps": [
           {
             "id": "203-033",
+            "correspondingAgency": "Sample Agency I",
             "firstName": "Ash",
             "lastName": "Ketchem",
             "startDate": "09/12/2019",
@@ -111,6 +116,7 @@
           },
           {
             "id": "203-034",
+            "correspondingAgency": "Sample Agency I",
             "firstName": "Nathan",
             "lastName": "Tarongoy",
             "startDate": "09/12/2019",
@@ -146,6 +152,7 @@
         "reps": [
           {
             "id": "204-044",
+            "correspondingAgency": "Sample Agency I",
             "firstName": "Will",
             "lastName": "Frady",
             "startDate": "09/12/2019",
@@ -153,6 +160,7 @@
           },
           {
             "id": "204-045",
+            "correspondingAgency": "Sample Agency I",
             "firstName": "Diana",
             "lastName": "Jachman",
             "startDate": "09/12/2019",
@@ -188,6 +196,7 @@
         "reps": [
           {
             "id": "205-055",
+            "correspondingAgency": "Sample Agency I",
             "firstName": "Marry",
             "lastName": "Dupont",
             "startDate": "09/12/2019",
@@ -195,6 +204,7 @@
           },
           {
             "id": "205-056",
+            "correspondingAgency": "Sample Agency I",
             "firstName": "Prasad",
             "lastName": "Kuri",
             "startDate": "09/12/2019",
@@ -241,6 +251,7 @@
         "reps": [
           {
             "id": "301-033",
+            "correspondingAgency": "Sample Agency II",
             "firstName": "Tanya",
             "lastName": "Harding",
             "startDate": "09/12/2019",
@@ -303,6 +314,7 @@
         "reps": [
           {
             "id": "303-031",
+            "correspondingAgency": "Sample Agency II",
             "firstName": "Katelyn",
             "lastName": "Bower",
             "startDate": "09/12/2019",
@@ -338,6 +350,7 @@
         "reps": [
           {
             "id": "304-034",
+            "correspondingAgency": "Sample Agency II",
             "firstName": "Tony",
             "lastName": "Hawk",
             "startDate": "09/12/2019",
@@ -408,6 +421,7 @@
         "members": 2300,
         "startDate": "09/12/2019",
         "endDate": "09/23/2020",
+        "reps": [],
         "membersList": [
           {
             "name": "Group A",
@@ -434,6 +448,7 @@
         "members": 2100,
         "startDate": "08/02/2019",
         "endDate": "08/02/2020",
+        "reps": [],
         "membersList": [
           {
             "name": "Group A",
@@ -460,6 +475,7 @@
         "members": 2000,
         "startDate": "07/12/2019",
         "endDate": "07/12/2020",
+        "reps": [],
         "membersList": [
           {
             "name": "Group A",
@@ -486,6 +502,7 @@
         "members": 2212,
         "startDate": "03/08/2019",
         "endDate": "03/08/2020",
+        "reps": [],
         "membersList": [
           {
             "name": "Group A",
@@ -512,6 +529,7 @@
         "members": 2400,
         "startDate": "02/15/2019",
         "endDate": "02/15/2020",
+        "reps": [],
         "membersList": [
           {
             "name": "Group A",
@@ -549,6 +567,7 @@
         "members": 2300,
         "startDate": "09/21/2019",
         "endDate": "09/21/2020",
+        "reps": [],
         "membersList": [
           {
             "name": "Group A",
@@ -575,6 +594,7 @@
         "members": 2100,
         "startDate": "08/02/2019",
         "endDate": "08/02/2020",
+        "reps": [],
         "membersList": [
           {
             "name": "Group A",
@@ -601,6 +621,7 @@
         "members": 2000,
         "startDate": "07/12/2019",
         "endDate": "07/12/2020",
+        "reps": [],
         "membersList": [
           {
             "name": "Group A",
@@ -627,6 +648,7 @@
         "members": 2212,
         "startDate": "03/08/2019",
         "endDate": "03/08/2020",
+        "reps": [],
         "membersList": [
           {
             "name": "Group A",
@@ -653,6 +675,7 @@
         "members": 2400,
         "startDate": "02/15/2019",
         "endDate": "02/15/2020",
+        "reps": [],
         "membersList": [
           {
             "name": "Group A",
@@ -690,6 +713,7 @@
         "members": 1300,
         "startDate": "02/15/2019",
         "endDate": "02/15/2020",
+        "reps":[],
         "membersList": [
           {
             "name": "Group A",
@@ -716,6 +740,7 @@
         "members": 1100,
         "startDate": "03/12/2019",
         "endDate": "03/12/2020",
+        "reps":[],
         "membersList": [
           {
             "name": "Group A",
@@ -742,6 +767,7 @@
         "members": 2000,
         "startDate": "01/01/2019",
         "endDate": "01/01/2020",
+        "reps":[],
         "membersList": [
           {
             "name": "Group A",
@@ -768,6 +794,7 @@
         "members": 1212,
         "startDate": "11/11/2019",
         "endDate": "11/11/2020",
+        "reps":[],
         "membersList": [
           {
             "name": "Group A",
@@ -794,6 +821,7 @@
         "members": 2450,
         "startDate": "03/22/2019",
         "endDate": "03/23/2020",
+        "reps":[],
         "membersList": [
           {
             "name": "Group A",
