@@ -16,6 +16,7 @@ const SearchComponent = ({
   showResultsList,
   listValues,
   navigateToSelectedResult,
+  errorMessage
 }) => (
   <div className={classes.appBar}>
     <Toolbar className={classes.toolBar}>
@@ -39,10 +40,24 @@ const SearchComponent = ({
         />
       </div>
       {showResultsList && (
-        <GlobalSearchResults
-          navigateToSelectedResult={navigateToSelectedResult}
-          listValues={listValues}
-        />
+        <>
+          {errorMessage ? (
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                color: 'white'
+              }}
+            >
+              {errorMessage}
+            </div>
+          ) : (
+            <GlobalSearchResults
+              navigateToSelectedResult={navigateToSelectedResult}
+              listValues={listValues}
+            />
+          )}
+        </>
       )}
     </Toolbar>
   </div>

@@ -152,6 +152,8 @@ const AgentsTable = ({ classes, history, location }) => {
               handleRowClick={handleRowClick}
               tableRowsPerPage={5}
               rowsPerPageOptions={[5, 10, 15]}
+              showEditButton={true}
+              showDeleteButton={true}
             />
           )}
         </Paper>
