@@ -1,4 +1,5 @@
 const express = require("express");
+require('dotenv').config();
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
@@ -9,7 +10,7 @@ const app = express();
 app.use(cors());
 
 //Connect to DB
-mongoose.connect(mongoURI.MONGO_URI, {
+mongoose.connect(process.env.MONGODB_URI || mongoURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
