@@ -77,7 +77,12 @@ export const globalSearchResults = () => ({
     cursor: 'pointer',
     '&:hover': {
       backgroundColor: 'white',
-      color: 'black',
+      color: 'black'
     }
+  },
+  errorMessage: {
+    display: 'flex',
+    color: 'white',
+    justifyContent: 'center'
   }
 });

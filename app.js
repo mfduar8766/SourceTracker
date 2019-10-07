@@ -22,11 +22,11 @@ mongoose.connection.once("open", () => {
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-//Routes
 const dropDownValues = require("./routes/api/dropdownValues");
+const Agencies = require('./routes/api/agencies');
 
-//API
 app.use("/api/v1", dropDownValues);
+app.use('/api/v1', Agencies);
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));

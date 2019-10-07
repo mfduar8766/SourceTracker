@@ -39,7 +39,7 @@ const AgentsTable = ({ classes, history, location }) => {
 
   useEffect(() => {
     checkIncomingData();
-  }, []);
+  });
 
   if (!agentsArray) {
     return <LoadingIcon color="primary" />;
@@ -87,7 +87,11 @@ const AgentsTable = ({ classes, history, location }) => {
     });
   };
 
-  const getEditAgentFormValues = values => {
+  const getEditAgentFormValues = agent => {
+    const pathName = history.location.pathname;
+    const splitURL = pathName.split('/');
+    const agencyId = splitURL[3];
+    const agentId = agent.agentId;
     // TODO: Create service for editing agents.
   };
 
