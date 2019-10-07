@@ -14,7 +14,7 @@ const AppRouter = () => {
 
   const fetchData = async () => {
     try {
-      const agencyData = axios.get('agencies.json');
+      const agencyData = axios.get('/api/v1/agencies');
       const response = await agencyData;
       const agenciesArray = response.data;
       return setAgenciesArray(agenciesArray);

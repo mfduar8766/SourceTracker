@@ -2,7 +2,7 @@ export const commonSearch = (dataArray, queryString) => {
   const lowerCaseQueryString = queryString.toLowerCase().trim();
   const filteredAgents = [];
   let errorMessage;
-  dataArray.some(data => {
+  dataArray.forEach(data => {
     Object.values(data)
       .flatMap(value =>
         value
@@ -18,6 +18,7 @@ export const commonSearch = (dataArray, queryString) => {
           filteredAgents.push(data);
           return true;
         }
+        return false;
       });
   });
   return filteredAgents && filteredAgents.length

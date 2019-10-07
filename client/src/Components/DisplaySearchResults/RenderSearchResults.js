@@ -9,6 +9,9 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import TableComponent from '../Tables/index';
 import BarGraph from '../Graphs/BarGraphs';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
+
 const RenderSearchResults = ({ resultsArray, classes, headers, barProps }) =>
   resultsArray.data &&
   resultsArray.data.length &&
@@ -25,9 +28,11 @@ const RenderSearchResults = ({ resultsArray, classes, headers, barProps }) =>
       >
         <div className={classes.flexRow}>
           {result.agentId && result.photo && (
-            <img
-              style={{ width: '2%', marginRight: '1rem' }}
-              src={result.photo}
+            <FontAwesomeIcon
+              size="2x"
+              color="orange"
+              style={{ marginRight: '0.5rem' }}
+              icon={faUserCircle}
             />
           )}
           <Typography style={{ marginRight: '0.5rem' }}>

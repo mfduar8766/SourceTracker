@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { withRouter } from 'react-router-dom';
 import orderBy from 'lodash/orderBy';
 
@@ -34,8 +34,6 @@ const AgenciesView = ({ classes, history }) => {
   const [queryString, setQueryString] = useState('');
   const [errorMessage, setErrorMessage] = useState(null);
   const { agenciesArray } = useContext(GlobalStateContext);
-
-  useEffect(() => {}, []);
 
   if (!agenciesArray) {
     return <LoadingIcon color="primary" />;
