@@ -1,14 +1,45 @@
 const express = require("express");
-const routes = express.Router();
+const router = express.Router();
 const AgenciesModel = require("../../Models/Agencies");
+const Agents = require("../../Models/Agents");
+const { successMessage, errorMessage } = require("../utils/index");
 
-routes.get("/agencies", (req, res) => {
-  AgenciesModel.find((err, agencies) => {
-    if (err) {
-      res.status(500).json({ msg: err });
+router.get("/agencies", (req, res) => {
+  AgenciesModel.aggregate([
+    {
+      $lookup: {
+        from: Agents.collection.name,
+        localField: "agencyId", //The field _id of the current table uniques
+        foreignField: "agencyId", //The foreign column containing a matching value
+        as: "agents"
+      }
     }
-    res.json(agencies[0].agencies);
+  ])
+    .then(data => {
+      successMessage(res, data, 200);
+    })
+    .catch(error => errorMessage(res, error));
+});
+
+router.post("/agencies/add-agency", (req, res) => {
+  const postBody = req.body;
+  const newAgency = new AgenciesModel({
+    agencyName: postBody.agencyName,
+    agencyId: postBody.agencyId,
+    city: postBody.city,
+    state: postBody.state,
+    address: postBody.address,
+    zipCode: postBody.zipCode,
+    totalAgents: postBody.totalAgents
+  });
+  newAgency.save((err, agency) => {
+    if (err) {
+      errorMessage(res, err);
+    }
+    res.status(201).json(agency);
   });
 });
 
-module.exports = routes;
+router.patch("/agencies/:agencyId/:agentId/agent", (req, res) => {});
+
+module.exports = router;
