@@ -1,13 +1,15 @@
 const express = require("express");
-require('dotenv').config();
+require("dotenv").config();
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const mongoURI = require("./config");
 const port = process.env.PORT || 5000;
-const path = require('path');
+const path = require("path");
 const app = express();
 app.use(cors());
+
+const API_VERSION = "/api/v1";
 
 //Connect to DB
 mongoose.connect(process.env.MONGODB_URI || mongoURI, {
@@ -23,10 +25,16 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 const dropDownValues = require("./routes/api/dropdownValues");
-const Agencies = require('./routes/api/agencies');
+const Agencies = require("./routes/api/agencies");
+const Agents = require("./routes/api/agents");
+const MembersList = require("./routes/api/memberList");
+const Reps = require("./routes/api/reps");
 
-app.use("/api/v1", dropDownValues);
-app.use('/api/v1', Agencies);
+app.use(API_VERSION, dropDownValues);
+app.use(API_VERSION, Agencies);
+app.use(API_VERSION, Agents);
+app.use(API_VERSION, MembersList);
+app.use(API_VERSION, Reps);
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));

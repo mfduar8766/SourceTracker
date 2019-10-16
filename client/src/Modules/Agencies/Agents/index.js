@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { withRouter } from 'react-router-dom';
+import axios from 'axios';
+import moment from 'moment';
 
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
@@ -92,7 +94,18 @@ const AgentsTable = ({ classes, history, location }) => {
     const splitURL = pathName.split('/');
     const agencyId = splitURL[3];
     const agentId = agent.agentId;
-    // TODO: Create service for editing agents.
+    const formatedAgentData = {
+      ...agent,
+      startDate: moment(agent.startDate).format('MM/DD/YYYY'),
+      endDate: moment(agent.endDate).format('MM/DD/YYYY')
+    };
+    return axios
+      .patch(`/api/v1/agencies/${agencyId}/${agentId}/agent`, {
+        data: formatedAgentData,
+        agencyId
+      })
+      .then(res => console.log(res))
+      .catch(error => console.log(error));
   };
 
   const handleSearch = event => {
