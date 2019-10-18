@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
+import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 import moment from 'moment';
@@ -166,10 +167,6 @@ const AgentsTable = ({ classes, history, location }) => {
               handleDelete={handleDelete}
               handleEdit={handleEdit}
               handleRowClick={handleRowClick}
-              tableRowsPerPage={5}
-              rowsPerPageOptions={[5, 10, 15]}
-              showEditButton={true}
-              showDeleteButton={true}
             />
           )}
         </Paper>
@@ -177,4 +174,11 @@ const AgentsTable = ({ classes, history, location }) => {
     </Grid>
   );
 };
+
+AgentsTable.propTypes = {
+  classes: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired
+};
+
 export default withRouter(withStyles(agentsTableStyles)(AgentsTable));

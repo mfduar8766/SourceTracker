@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { withFormik, Field } from 'formik';
 import moment from 'moment';
 
@@ -7,7 +8,10 @@ import Modal from '@material-ui/core/Modal';
 import TextField from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/core/styles';
 
-import { GlobalModalStyles, setModalStyle } from '../../../../../../Components/GlobalStyles/index';
+import {
+  GlobalModalStyles,
+  setModalStyle
+} from '../../../../../../Components/GlobalStyles/index';
 
 const EditAgentsModal = ({
   isEditOn,
@@ -170,6 +174,19 @@ const mapPropsToValues = ({ agentToEdit }) => {
     endDate: formatDate(endDate),
     agentId
   };
+};
+
+EditAgentsModal.propTypes = {
+  isEditOn: PropTypes.bool,
+  classes: PropTypes.object.isRequired,
+  agentToEdit: PropTypes.object,
+  touched: PropTypes.bool,
+  errors: PropTypes.object,
+  handleBlur: PropTypes.func,
+  handleChange: PropTypes.func,
+  handleSubmit: PropTypes.func,
+  isSubmitting: PropTypes.bool,
+  closeModal: PropTypes.func
 };
 
 export default withFormik({

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowDown } from '@fortawesome/free-solid-svg-icons';
@@ -56,3 +57,21 @@ export const RenderHeader = ({
     </TableRow>
   </TableHead>
 );
+
+RenderHeader.defaultProps = {
+  selectedHeader: null
+};
+
+RenderHeader.propTypes = {
+  classes: PropTypes.object.isRequired,
+  tableHeaders: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      name: PropTypes.string,
+      prop: PropTypes.string
+    })
+  ).isRequired,
+  sortDirection: PropTypes.string.isRequired,
+  toggleSortDirection: PropTypes.func.isRequired,
+  selectedHeader: PropTypes.string
+};

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
   BarChart,
   YAxis,
@@ -15,11 +16,7 @@ const renderBars = ({ barProps }) =>
   ));
 
 const BarGraphs = ({ data, barProps, barGraphWidth, barGraphHeight }) => (
-  <BarChart
-    width={barGraphWidth || 600}
-    height={barGraphHeight || 250}
-    data={data}
-  >
+  <BarChart width={barGraphWidth} height={barGraphHeight} data={data}>
     <CartesianGrid strokeDasharray="3 3" />
     <XAxis type="category" dataKey="name" />
     <YAxis type="number" />
@@ -28,4 +25,23 @@ const BarGraphs = ({ data, barProps, barGraphWidth, barGraphHeight }) => (
     {renderBars({ barProps })}
   </BarChart>
 );
+
+BarGraphs.defaultProps = {
+  barGraphWidth: 600,
+  barGraphHeight: 250
+};
+
+BarGraphs.propTypes = {
+  data: PropTypes.array,
+  barProps: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      dataKey: PropTypes.string,
+      fill: PropTypes.string
+    })
+  ),
+  barGraphWidth: PropTypes.number,
+  barGraphHeight: PropTypes.number
+};
+
 export default BarGraphs;

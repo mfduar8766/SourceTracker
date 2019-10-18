@@ -20,7 +20,7 @@ const buttonStyles = () => ({
     alignItems: 'center'
   },
   iconStyles: {
-    marginLeft: '0.2rem'
+    marginLeft: '0.3rem'
   }
 });
 
@@ -32,10 +32,12 @@ const Button = ({
   iconSize,
   handleClick,
   showText,
-  buttonType
+  buttonType,
+  isDisabled
 }) => (
   <button
-    type={buttonType || 'button'}
+    disabled={isDisabled}
+    type={buttonType}
     onClick={handleClick}
     className={classes.button}
   >
@@ -44,8 +46,8 @@ const Button = ({
       {showIcon && (
         <FontAwesomeIcon
           className={classes.iconStyles}
-          icon={buttonIcon || faPlus}
-          size={iconSize || '1x'}
+          icon={buttonIcon}
+          size={iconSize}
         />
       )}
     </div>
@@ -55,15 +57,22 @@ const Button = ({
 Button.defaultProps = {
   showIcon: true,
   showText: true,
+  isDisabled: false,
   iconSize: '1x',
-  buttonIcon: faPlus
+  buttonIcon: faPlus,
+  buttonType: 'button'
 };
 
 Button.propTypes = {
-  classes: PropTypes.string.isRequired,
+  classes: PropTypes.object.isRequired,
   text: PropTypes.string.isRequired,
-  buttonType: PropTypes.string.isRequired,
-  handleClick: PropTypes.func.isRequired
+  buttonType: PropTypes.string,
+  handleClick: PropTypes.func.isRequired,
+  showIcon: PropTypes.bool,
+  showText: PropTypes.bool,
+  isDisabled: PropTypes.bool,
+  iconSize: PropTypes.string,
+  buttonIcon: PropTypes.object
 };
 
 export default withStyles(buttonStyles)(Button);

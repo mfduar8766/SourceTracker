@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -32,6 +33,16 @@ const GlobalSearchResults = ({
       ))}
     </List>
   );
+};
+
+GlobalSearchResults.defaultProps = {
+  listValues: []
+};
+
+GlobalSearchResults.propTypes = {
+  classes: PropTypes.object.isRequired,
+  listValues: PropTypes.array,
+  navigateToSelectedResult: PropTypes.func
 };
 
 export default withStyles(globalSearchResults)(GlobalSearchResults);

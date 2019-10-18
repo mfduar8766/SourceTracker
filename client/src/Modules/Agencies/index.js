@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import orderBy from 'lodash/orderBy';
 
@@ -79,10 +80,7 @@ const AgenciesView = ({ classes, history }) => {
     <Grid container spacing={3} justify="center" alignItems="center">
       <Grid item xs={11}>
         <div className={classes.buttonContainer}>
-          <Button
-            handleClick={addAgency}
-            text="Add Agencies"
-          />
+          <Button handleClick={addAgency} text="Add Agencies" />
         </div>
         <Paper className={classes.root}>
           <SearchComponent flexDirection="row" handleSearch={handleSearch} />
@@ -95,16 +93,17 @@ const AgenciesView = ({ classes, history }) => {
               tableHeaders={agencyHeaders}
               tableData={orderBy(getSearchedAgency())}
               handleRowClick={handleRowClick}
-              tableRowsPerPage={5}
-              rowsPerPageOptions={[5, 10, 15]}
-              showEditButton={true}
-              showDeleteButton={true}
             />
           )}
         </Paper>
       </Grid>
     </Grid>
   );
+};
+
+AgenciesView.propTypes = {
+  classes: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired
 };
 
 export default withRouter(withStyles(agenciesTableStyles)(AgenciesView));
