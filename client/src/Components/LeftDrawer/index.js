@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
+import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 
@@ -43,7 +44,7 @@ const LeftDrawer = ({ history }) => {
   const [isSideDrawerOpen, setIsSideDrawerOpen] = useState(false);
   const [selectedValue, setSelectedValues] = useState('');
   const [globalSearchResults, setGlobalSearchResults] = useState(null);
-  const [showResultsList, setShowResultsList] = useState('');
+  const [showResultsList, setShowResultsList] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
   const [dropDownValues, setDropDownValues] = useState(null);
   const sideDrawerIcons = [
@@ -290,6 +291,10 @@ const LeftDrawer = ({ history }) => {
       </Drawer>
     </div>
   );
+};
+
+LeftDrawer.popTypes = {
+  history: PropTypes.object.isRequired
 };
 
 export default withRouter(LeftDrawer);

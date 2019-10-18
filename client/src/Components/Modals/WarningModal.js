@@ -1,11 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Modal from '@material-ui/core/Modal';
 import { withStyles } from '@material-ui/core/styles';
 
-import {
-  GlobalModalStyles,
-  setModalStyle
-} from '../GlobalStyles/index';
+import { GlobalModalStyles, setModalStyle } from '../GlobalStyles/index';
 import Button from '../Buttons/index';
 
 const padding = '0.5rem';
@@ -48,5 +46,16 @@ const WarningModal = ({
     </div>
   </Modal>
 );
+
+WarningModal.defaultProps = {
+  isDeleteModalOn: false
+};
+
+WarningModal.propTypes = {
+  classes: PropTypes.object.isRequired,
+  isDeleteModalOn: PropTypes.bool,
+  toggleDeleteModal: PropTypes.func.isRequired,
+  deleteAgent: PropTypes.func
+};
 
 export default withStyles(GlobalModalStyles)(WarningModal);

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import IconButton from '@material-ui/core/IconButton';
 import FirstPageIcon from '@material-ui/icons/FirstPage';
@@ -80,4 +81,11 @@ export const TablePaginationActions = ({
       </IconButton>
     </div>
   );
+};
+
+TablePaginationActions.prototypes = {
+  count: PropTypes.number.isRequired,
+  page: PropTypes.number.isRequired,
+  rowsPerPage: PropTypes.arrayOf(PropTypes.number).isRequired,
+  onChangePage: PropTypes.func.isRequired
 };

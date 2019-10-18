@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 
 import Grid from '@material-ui/core/Grid';
@@ -9,6 +10,7 @@ import LoadingIcon from '../LoadingIcon/index';
 import { setModalStyle } from '../GlobalStyles/index';
 import { displaySearchResultsStyles } from './Styles';
 import RenderSearchResults from './RenderSearchResults';
+import { GET_DROPDOWN_VALUES } from '../../Utils/index';
 
 const barProps = [
   {
@@ -73,7 +75,7 @@ const DisplaySearchResults = ({ classes, location }) => {
   const errorMessage = 'No records found.';
   const getHeaders = async () => {
     try {
-      const dropdownValues = axios.get('/api/v1/dropdown-values');
+      const dropdownValues = axios.get(GET_DROPDOWN_VALUES);
       const response = await dropdownValues;
       const dropDownObject = response.data;
       const { repHeaders, agentHeaders, agencyHeaders } = dropDownObject;
@@ -115,6 +117,11 @@ const DisplaySearchResults = ({ classes, location }) => {
       </Grid>
     </Grid>
   );
+};
+
+DisplaySearchResults.propTypes = {
+  classes: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired
 };
 
 export default withStyles(displaySearchResultsStyles)(DisplaySearchResults);

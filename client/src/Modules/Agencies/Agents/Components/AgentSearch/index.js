@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Toolbar from '@material-ui/core/Toolbar';
 import InputBase from '@material-ui/core/InputBase';
@@ -51,5 +52,13 @@ const AgentSearch = ({
     </div>
   </div>
 );
+
+AgentSearch.propTypes = {
+  classes: PropTypes.object.isRequired,
+  handleSearch: PropTypes.func,
+  agencyDropDownValues: PropTypes.array,
+  handleAgencySelection: PropTypes.func,
+  selectedAgency: PropTypes.string
+};
 
 export default withStyles(agentSearch)(AgentSearch);

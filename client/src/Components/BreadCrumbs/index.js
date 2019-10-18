@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -23,7 +24,7 @@ const handleClick = event => {
   alert('You clicked a breadcrumb.');
 };
 
-const BreadCrumbComponent = ({ ...location }) => {
+const BreadCrumbComponent = ({ location }) => {
   const classes = useStyles();
   const [currentLocation, setCurrentLocation] = useState([]);
   // const removeForwardSlash = location.split('/').join('');
@@ -45,6 +46,10 @@ const BreadCrumbComponent = ({ ...location }) => {
       </Paper>
     </div>
   );
+};
+
+BreadCrumbComponent.propTypes = {
+  location: PropTypes.object.isRequired
 };
 
 export default BreadCrumbComponent;

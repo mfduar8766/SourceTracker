@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
@@ -26,17 +27,17 @@ const RenderTableRows = ({
     <TableCell>
       {showEditButton && (
         <FontAwesomeIcon
-        className={classes.editButton}
-        icon={faEdit}
-        onClick={event => handleEdit(event, data)}
-      />
+          className={classes.editButton}
+          icon={faEdit}
+          onClick={event => handleEdit(event, data)}
+        />
       )}
       {showDeleteButton && (
         <FontAwesomeIcon
-        className={classes.deleteButton}
-        icon={faTrashAlt}
-        onClick={event => handleDelete(event, data)}
-      />
+          className={classes.deleteButton}
+          icon={faTrashAlt}
+          onClick={event => handleDelete(event, data)}
+        />
       )}
     </TableCell>
   </TableRow>
@@ -70,3 +71,52 @@ export const RenderTableBody = ({
     ))}
   </>
 );
+
+RenderTableBody.defaultProps = {
+  handleDelete: () => {},
+  handleEdit: () => {},
+  showEditButton: true,
+  showDeleteButton: true
+};
+
+RenderTableBody.propTypes = {
+  classes: PropTypes.object.isRequired,
+  tableHeaders: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      name: PropTypes.string,
+      prop: PropTypes.string
+    })
+  ).isRequired,
+  tableDataArray: PropTypes.arrayOf(PropTypes.object).isRequired,
+  showEditButton: PropTypes.bool,
+  showDeleteButton: PropTypes.bool,
+  handleDelete: PropTypes.func,
+  handleEdit: PropTypes.func,
+  handleRowClick: PropTypes.func.isRequired
+};
+
+RenderTableRows.defaultProps = {
+  handleDelete: () => {},
+  handleEdit: () => {},
+  showEditButton: true,
+  showDeleteButton: true
+};
+
+RenderTableRows.propTypes = {
+  classes: PropTypes.object.isRequired,
+  index: PropTypes.number.isRequired,
+  tableHeaders: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      name: PropTypes.string,
+      prop: PropTypes.string
+    })
+  ).isRequired,
+  data: PropTypes.object.isRequired,
+  showEditButton: PropTypes.bool,
+  showDeleteButton: PropTypes.bool,
+  handleDelete: PropTypes.func,
+  handleEdit: PropTypes.func,
+  handleRowClick: PropTypes.func.isRequired
+};

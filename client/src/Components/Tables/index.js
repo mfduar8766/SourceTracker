@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import orderBy from 'lodash/orderBy';
+import PropTypes from 'prop-types';
 
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -17,41 +18,7 @@ import { RenderHeader } from './TableHeader';
 import { RenderTableBody } from './TableBody';
 import { TableFooterComponent } from './TableFooter';
 import LoadingIcon from '../LoadingIcon/index';
-
-const tableStyles = () => ({
-  table: {
-    width: '100%',
-    height: '100%'
-  },
-  editButton: {
-    color: 'blue',
-    cursor: 'pointer'
-  },
-  deleteButton: {
-    color: 'red',
-    cursor: 'pointer',
-    marginLeft: '1rem'
-  },
-  tableRow: {
-    cursor: 'pointer',
-    width: '100%',
-    height: '100%'
-  },
-  cursorStyle: {
-    cursor: 'pointer',
-    marginLeft: '0.5rem'
-  },
-  addButton: {
-    color: 'green',
-    cursor: 'pointer',
-    marginLeft: '1rem'
-  },
-  errorMessage: {
-    display: 'flex',
-    justifyContent: 'center',
-    color: 'black'
-  }
-});
+import { tableStyles } from './Utils/Styles';
 
 const TableComponent = ({
   classes,
@@ -109,7 +76,7 @@ const TableComponent = ({
   }
 
   if (tableData.length === 0) {
-    return <div className={classes.errorMessage}>No records found.</div>
+    return <div className={classes.errorMessage}>No records found.</div>;
   }
 
   const emptyRows =
@@ -144,15 +111,43 @@ const TableComponent = ({
         )}
       </TableBody>
       <TableFooterComponent
-        rowsPerPageOptions={rowsPerPageOptions}
+        rowsperpageoptions={rowsPerPageOptions}
         tableDataArray={tableData}
-        rowsPerPage={rowsPerPage}
+        rowsperpage={rowsPerPage}
         page={page}
         handleChangePage={handleChangePage}
         handleChangeRowsPerPage={handleChangeRowsPerPage}
       />
     </Table>
   );
+};
+
+TableComponent.defaultProps = {
+  handleDelete: () => {},
+  handleEdit: () => {},
+  tableRowsPerPage: 5,
+  rowsPerPageOptions: [5, 10, 15],
+  showEditButton: true,
+  showDeleteButton: true
+};
+
+TableComponent.propTypes = {
+  classes: PropTypes.object.isRequired,
+  tableHeaders: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      name: PropTypes.string,
+      prop: PropTypes.string
+    })
+  ).isRequired,
+  tableRowsPerPage: PropTypes.number,
+  rowsPerPageOptions: PropTypes.arrayOf(PropTypes.number),
+  showEditButton: PropTypes.bool,
+  showDeleteButton: PropTypes.bool,
+  handleDelete: PropTypes.func,
+  handleEdit: PropTypes.func,
+  tableData: PropTypes.arrayOf(PropTypes.object).isRequired,
+  handleRowClick: PropTypes.func.isRequired
 };
 
 export default withStyles(tableStyles)(TableComponent);

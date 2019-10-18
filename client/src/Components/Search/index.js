@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Toolbar from '@material-ui/core/Toolbar';
 import InputBase from '@material-ui/core/InputBase';
@@ -6,7 +7,10 @@ import { withStyles } from '@material-ui/core/styles';
 import { searchStyles } from './Utils/Styles';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBan, faSearch } from '@fortawesome/free-solid-svg-icons';
+import {
+  faBan,
+  faSearch,
+} from '@fortawesome/free-solid-svg-icons';
 import GlobalSearchResults from './GlobalSearchResults';
 
 const SearchComponent = ({
@@ -62,5 +66,21 @@ const SearchComponent = ({
     </Toolbar>
   </div>
 );
+
+SearchComponent.defaultProps = {
+  isDisabled: false,
+  showResultsList: false,
+  listValues: null,
+};
+
+SearchComponent.propTypes = {
+  classes: PropTypes.object.isRequired,
+  handleSearch: PropTypes.func.isRequired,
+  isDisabled: PropTypes.bool,
+  showResultsList: PropTypes.bool,
+  listValues: PropTypes.array,
+  navigateToSelectedResult: PropTypes.func,
+  errorMessage: PropTypes.string
+};
 
 export default withStyles(searchStyles)(SearchComponent);

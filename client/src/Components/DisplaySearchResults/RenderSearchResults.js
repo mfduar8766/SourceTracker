@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
@@ -83,5 +84,24 @@ const RenderSearchResults = ({ resultsArray, classes, headers, barProps }) =>
       </ExpansionPanelDetails>
     </ExpansionPanel>
   ));
+
+RenderSearchResults.defaultProps = {
+  barProps: [],
+  resultsArray: [],
+  headers: []
+};
+
+RenderSearchResults.propTypes = {
+  barProps: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      dataKey: PropTypes.string,
+      fill: PropTypes.string
+    })
+  ),
+  classes: PropTypes.object.isRequired,
+  resultsArray: PropTypes.array,
+  headers: PropTypes.array
+};
 
 export default RenderSearchResults;
