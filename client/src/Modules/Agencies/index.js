@@ -81,8 +81,6 @@ const AgenciesView = ({ classes, history }) => {
         <div className={classes.buttonContainer}>
           <Button
             handleClick={addAgency}
-            showText={true}
-            showIcon={true}
             text="Add Agencies"
           />
         </div>

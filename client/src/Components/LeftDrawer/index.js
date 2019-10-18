@@ -34,6 +34,7 @@ import { drawerStyles } from './Utils/Styles';
 import { handleGlobalSearch } from './Utils/index';
 import SearchSelection from './SearchSelection';
 import { GlobalStateContext } from '../GlobalStateContext/index';
+import { GET_DROPDOWN_VALUES } from '../../Utils/index';
 
 const LeftDrawer = ({ history }) => {
   const { agenciesArray } = useContext(GlobalStateContext);
@@ -110,7 +111,7 @@ const LeftDrawer = ({ history }) => {
 
   const getGlobalDropDownValues = async () => {
     try {
-      const dropdownValues = axios.get('/api/v1/dropdown-values');
+      const dropdownValues = axios.get(GET_DROPDOWN_VALUES);
       const response = await dropdownValues;
       const dropDownObject = response.data;
       const { globalSearchOptions } = dropDownObject;

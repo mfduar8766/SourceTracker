@@ -8,15 +8,16 @@ import AgenciesView from './Modules/Agencies/index';
 import { GlobalStateContext } from './Components/GlobalStateContext/index';
 import LeftDrawer from './Components/LeftDrawer/index';
 import DisplaySearchResults from './Components/DisplaySearchResults/index';
+import { GET_AGENCIES } from "./Utils/index";
 
 const AppRouter = () => {
   const [agenciesArray, setAgenciesArray] = useState(null);
 
   const fetchData = async () => {
     try {
-      const agencyData = axios.get('/api/v1/agencies');
+      const agencyData = axios.get(GET_AGENCIES);
       const response = await agencyData;
-      const agenciesArray = response.data;
+      const agenciesArray = response.data.data;
       return setAgenciesArray(agenciesArray);
     } catch (error) {
       return error;

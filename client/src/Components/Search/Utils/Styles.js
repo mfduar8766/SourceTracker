@@ -66,9 +66,15 @@ export const searchStyles = theme => ({
 
 export const globalSearchResults = () => ({
   list: {
-    zIndex: 999,
-    height: '100%',
-    width: '100%'
+    position: 'fixed',
+    display: 'flex',
+    justifyContent: 'center',
+    flexDirection: 'column',
+    backgroundColor: '#4C4C4C',
+    color: 'white',
+    marginTop: '2.5rem',
+    height: 'auto',
+    width: '20%'
   },
   listItem: {
     display: 'flex',

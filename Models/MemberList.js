@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const MemberListSchema = new Schema({
   _id: Schema.Types.ObjectId,
   name: String,
-  agencyId: Number,
+  agentId: Number,
   Ancillary: Number,
   Group: Number,
   Under65: Number,

@@ -1,0 +1,6 @@
+ "name": "Group B",
+ "agentId":305,
+"Ancillary": 500,
+            "Group": 400,
+            "Under65": 300,
+            "Over65": 200

@@ -9,15 +9,13 @@ router.get("/agencies", (req, res) => {
     {
       $lookup: {
         from: Agents.collection.name,
-        localField: "agencyId", //The field _id of the current table uniques
-        foreignField: "agencyId", //The foreign column containing a matching value
+        localField: "agencyId",
+        foreignField: "agencyId",
         as: "agents"
       }
     }
   ])
-    .then(data => {
-      successMessage(res, data, 200);
-    })
+    .then(data => successMessage(res, data, 200))
     .catch(error => errorMessage(res, error));
 });
 
@@ -39,7 +37,5 @@ router.post("/agencies/add-agency", (req, res) => {
     res.status(201).json(agency);
   });
 });
-
-router.patch("/agencies/:agencyId/:agentId/agent", (req, res) => {});
 
 module.exports = router;

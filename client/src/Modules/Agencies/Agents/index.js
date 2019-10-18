@@ -22,6 +22,7 @@ import WarningModal from '../../../Components/Modals/WarningModal';
 import LoadingIcon from '../../../Components/LoadingIcon/index';
 import { commonSearch } from '../../../Utils/index';
 import { GlobalStateContext } from '../../../Components/GlobalStateContext/index';
+import { EDIT_AGENT } from '../../../Utils/index';
 
 const modalWidth = 600;
 const modalHeight = 100;
@@ -89,23 +90,21 @@ const AgentsTable = ({ classes, history, location }) => {
     });
   };
 
-  const getEditAgentFormValues = agent => {
-    const pathName = history.location.pathname;
-    const splitURL = pathName.split('/');
-    const agencyId = splitURL[3];
+  const getEditAgentFormValues = async agent => {
     const agentId = agent.agentId;
     const formatedAgentData = {
       ...agent,
       startDate: moment(agent.startDate).format('MM/DD/YYYY'),
       endDate: moment(agent.endDate).format('MM/DD/YYYY')
     };
-    return axios
-      .patch(`/api/v1/agencies/${agencyId}/${agentId}/agent`, {
-        data: formatedAgentData,
-        agencyId
-      })
-      .then(res => console.log(res))
-      .catch(error => console.log(error));
+    try {
+      const res = await axios.patch(EDIT_AGENT(agentId), {
+        data: formatedAgentData
+      });
+      return console.log(res);
+    } catch (error) {
+      return console.log(error);
+    }
   };
 
   const handleSearch = event => {
