@@ -45,6 +45,11 @@ const tableStyles = () => ({
     color: 'green',
     cursor: 'pointer',
     marginLeft: '1rem'
+  },
+  errorMessage: {
+    display: 'flex',
+    justifyContent: 'center',
+    color: 'black'
   }
 });
 
@@ -104,7 +109,7 @@ const TableComponent = ({
   }
 
   if (tableData.length === 0) {
-    return <div />;
+    return <div className={classes.errorMessage}>No records found.</div>
   }
 
   const emptyRows =

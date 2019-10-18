@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
@@ -50,5 +51,19 @@ const Button = ({
     </div>
   </button>
 );
+
+Button.defaultProps = {
+  showIcon: true,
+  showText: true,
+  iconSize: '1x',
+  buttonIcon: faPlus
+};
+
+Button.propTypes = {
+  classes: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired,
+  buttonType: PropTypes.string.isRequired,
+  handleClick: PropTypes.func.isRequired
+};
 
 export default withStyles(buttonStyles)(Button);

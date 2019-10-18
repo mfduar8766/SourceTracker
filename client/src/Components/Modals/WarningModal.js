@@ -28,7 +28,7 @@ const WarningModal = ({
         <div>
           <Button
             handleClick={toggleDeleteModal}
-            showText={true}
+            showIcon={false}
             text="No"
             border="'1px solid #ffcccb'"
             padding={padding}
@@ -37,7 +37,7 @@ const WarningModal = ({
           <span style={{ marginLeft: '1rem' }} />
           <Button
             handleClick={deleteAgent}
-            showText={true}
+            showIcon={true}
             text="Yes"
             border="1px solid #ADD8E6"
             padding={padding}

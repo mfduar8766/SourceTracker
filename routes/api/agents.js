@@ -1,11 +1,31 @@
 const express = require("express");
 const router = express.Router();
 const AgentModel = require("../../Models/Agents");
+const RepsModel = require("../../Models/Reps");
+const MembersListModel = require("../../Models/MemberList");
+const { errorMessage, successMessage } = require("../utils/index");
 
 router.get("/agents", (req, res) => {
-  AgentModel.find()
-    .then(data => res.status(200).json({ data, status: 200 }))
-    .catch(error => res.status(500).json({ error, status: 500 }));
+  AgentModel.aggregate([
+    {
+      $lookup: {
+        from: RepsModel.collection.name,
+        localField: "agentId", 
+        foreignField: "agentId",
+        as: "reps"
+      }
+    },
+    {
+      $lookup: {
+        from: MembersListModel.collection.name,
+        localField: "agentId", 
+        foreignField: "agentId",
+        as: "membersList"
+      }
+    }
+  ])
+    .then(data => successMessage(res, data, 200))
+    .catch(error => errorMessage(error, 500));
 });
 
 router.post("/agent/add-agent", (req, res) => {
@@ -22,17 +42,27 @@ router.post("/agent/add-agent", (req, res) => {
   });
   newAgent.save((err, agent) => {
     if (err) {
-      res.status(500).json({ err, status: 500 });
+      errorMessage(err, 500);
     }
     res.status(201).json(agent);
   });
 });
 
-router.patch("/agencies/:agencyId/:agentId/agent", (req, res) => {
-  const agencyName = req.params.agencyName;
+router.patch("/agent/:agentId", (req, res) => {
   const agentId = parseInt(req.params.agentId);
   const agentData = req.body.data;
-  const agencyId = parseInt(req.body.agencyId);
+  AgentModel.findOne({ agentId: agentId })
+    .then(agent => {
+      agent.startDate = agentData.startDate;
+      agent.endDate = agentData.endDate;
+      agent.save((error, data) => {
+        if (error) {
+          errorMessage(error, 500);
+        }
+        res.status(201).json(data);
+      });
+    })
+    .catch(error => errorMessage(error, 500));
 });
 
 module.exports = router;
