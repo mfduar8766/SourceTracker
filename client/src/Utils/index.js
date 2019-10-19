@@ -1,6 +1,7 @@
 export const GET_AGENCIES = '/api/v1/agencies';
 export const GET_DROPDOWN_VALUES = '/api/v1/dropdown-values';
 export const EDIT_AGENT = agentId => `/api/v1/agent/${agentId}`;
+export const GET_AGENTS = '/api/v1/agents';
 
 export const commonSearch = (dataArray, queryString) => {
   const lowerCaseQueryString = queryString.toLowerCase().trim();
