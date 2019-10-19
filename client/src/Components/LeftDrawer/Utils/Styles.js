@@ -85,7 +85,7 @@ export const drawerStyles = makeStyles(theme => ({
     ...theme.mixins.toolbar
   },
   content: {
-    flexGrow: 1,
+    flexGrow: 1
   },
   iconColor: {
     color: 'black',
@@ -106,5 +106,12 @@ export const drawerStyles = makeStyles(theme => ({
     display: 'flex',
     justifyContent: 'space-between',
     width: '5%'
+  },
+  settingsNotifications: {
+    cursor: 'pointer',
+    color: 'black',
+    '&:hover': {
+      color: 'white'
+    }
   }
 }));
