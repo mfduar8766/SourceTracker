@@ -16,6 +16,8 @@ import SearchComponent from '../../Components/Search/index';
 import { setModalStyle } from '../../Components/GlobalStyles';
 import { commonSearch } from '../../Utils/index';
 import { GlobalStateContext } from '../../Components/GlobalStateContext/index';
+import CommonModal from '../../Components/Modals/index';
+import AddAgenciesForm from './Components/AddAgenciesForm';
 
 const agenciesTableStyles = theme => ({
   root: {
@@ -35,14 +37,13 @@ const AgenciesView = ({ classes, history }) => {
   const [queryString, setQueryString] = useState('');
   const [errorMessage, setErrorMessage] = useState(null);
   const { agenciesArray } = useContext(GlobalStateContext);
+  const [isOpen, setIsOpen] = useState(false);
 
   if (!agenciesArray) {
     return <LoadingIcon color="primary" />;
   }
 
-  const addAgency = () => {
-    // TODO: CREATE SERVICE FOR ADDING AGENCIES.
-  };
+  const toggleOpenModal = () => setIsOpen(isOpen => !isOpen);
 
   const handleRowClick = (event, data) => {
     event.preventDefault();
@@ -78,9 +79,16 @@ const AgenciesView = ({ classes, history }) => {
   };
   return (
     <Grid container spacing={3} justify="center" alignItems="center">
+      {isOpen && (
+        <CommonModal
+          isOpen={isOpen}
+          toggleOpenModal={toggleOpenModal}
+          children={<AddAgenciesForm />}
+        />
+      )}
       <Grid item xs={11}>
         <div className={classes.buttonContainer}>
-          <Button handleClick={addAgency} text="Add Agencies" />
+          <Button handleClick={toggleOpenModal} text="Add Agencies" />
         </div>
         <Paper className={classes.root}>
           <SearchComponent flexDirection="row" handleSearch={handleSearch} />

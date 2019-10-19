@@ -13,7 +13,7 @@ import MainComponent from './Components/LeftDrawer/index';
 const AppRouter = () => {
   const [agenciesArray, setAgenciesArray] = useState(null);
 
-  const fetchData = async () => {
+  const fetchAgencies = async () => {
     try {
       const agencyData = axios.get(GET_AGENCIES);
       const response = await agencyData;
@@ -25,7 +25,7 @@ const AppRouter = () => {
   };
 
   useEffect(() => {
-    fetchData();
+    fetchAgencies();
   }, []);
 
   return (
