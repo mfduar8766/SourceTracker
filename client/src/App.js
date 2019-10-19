@@ -1,10 +1,30 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import openOffice from './assets/openOffice.jpg';
+import { withStyles } from '@material-ui/core/styles';
 
-const App = () => (
-  <main style={{ flexGrow: 1 }}>
-    <img src={openOffice} alt="homepage" style={{ width: '100%', height: '100%' }} />
+const appStyles = () => ({
+  mainTag: {
+    position: 'fixed',
+    height: '100%',
+    width: '100%',
+    padding: 0,
+    margin: 0
+  },
+  image: {
+    width: '100%',
+    height: '100%'
+  }
+});
+
+const App = ({ classes }) => (
+  <main className={classes.mainTag}>
+    <img className={classes.image} src={openOffice} alt="homepage" />
   </main>
 );
 
-export default App;
+App.propTypes = {
+  classes: PropTypes.object.isRequired
+};
+
+export default withStyles(appStyles)(App);

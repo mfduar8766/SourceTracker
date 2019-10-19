@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
@@ -34,7 +35,11 @@ const SearchSelection = ({
     <InputLabel className={classes.placeHolder} htmlFor="select-multiple">
       Select Values
     </InputLabel>
-    <Select className={classes.selectionColor} value={selectedValue} onChange={handleChange}>
+    <Select
+      className={classes.selectionColor}
+      value={selectedValue}
+      onChange={handleChange}
+    >
       {dropDownValues.map(data => (
         <MenuItem key={data} value={data}>
           {data}
@@ -43,5 +48,12 @@ const SearchSelection = ({
     </Select>
   </FormControl>
 );
+
+SearchSelection.propTypes = {
+  classes: PropTypes.object.isRequired,
+  dropDownValues: PropTypes.array,
+  handleChange: PropTypes.func,
+  selectedValue: PropTypes.string
+};
 
 export default withStyles(searchSelectionStyles)(SearchSelection);

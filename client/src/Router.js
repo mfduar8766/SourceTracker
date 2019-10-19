@@ -6,9 +6,9 @@ import AgentsTable from './Modules/Agencies/Agents/index';
 import PageNotFound from './Components/PageNotFound';
 import AgenciesView from './Modules/Agencies/index';
 import { GlobalStateContext } from './Components/GlobalStateContext/index';
-import LeftDrawer from './Components/LeftDrawer/index';
 import DisplaySearchResults from './Components/DisplaySearchResults/index';
-import { GET_AGENCIES } from "./Utils/index";
+import { GET_AGENCIES } from './Utils/index';
+import MainComponent from './Components/LeftDrawer/index';
 
 const AppRouter = () => {
   const [agenciesArray, setAgenciesArray] = useState(null);
@@ -31,7 +31,7 @@ const AppRouter = () => {
   return (
     <GlobalStateContext.Provider value={{ agenciesArray }}>
       <Router>
-        <LeftDrawer />
+        <MainComponent />
         <Switch>
           <Route exact path="/" component={App} />
           <Route exact path="/agencies" component={AgenciesView} />
