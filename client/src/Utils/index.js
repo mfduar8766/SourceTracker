@@ -1,3 +1,7 @@
+import moment from 'moment';
+
+export const formatDate = date => moment(date).format('MM/DD/YYYY');
+
 export const GET_AGENCIES = '/api/v1/agencies';
 export const GET_DROPDOWN_VALUES = '/api/v1/dropdown-values';
 export const EDIT_AGENT = agentId => `/api/v1/agent/${agentId}`;

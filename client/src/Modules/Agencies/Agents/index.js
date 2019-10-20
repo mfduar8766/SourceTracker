@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
-import moment from 'moment';
 
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
@@ -11,7 +10,8 @@ import { withStyles } from '@material-ui/core/styles';
 import {
   getAgencyAndAgents,
   tableHeaders,
-  agencySelectionValues
+  agencySelectionValues,
+  editAgent
 } from './Utils/index';
 import orderBy from 'lodash/orderBy';
 import { agentsTableStyles } from './Utils/Styles';
@@ -21,8 +21,8 @@ import TableComponent from '../../../Components/Tables/index';
 import WarningModal from '../../../Components/Modals/WarningModal';
 import LoadingIcon from '../../../Components/LoadingIcon/index';
 import CommonModal from '../../../Components/Modals/index';
-import { commonSearch } from '../../../Utils/index';
 import { EDIT_AGENT } from '../../../Utils/index';
+import { commonSearch, formatDate } from '../../../Utils/index';
 import { StateContext } from '../../../Store/index';
 import EditAgentForm from './Components/EditAgentForm';
 
@@ -41,11 +41,9 @@ const AgentsTable = ({ classes, history, location }) => {
   const [agentToDelete, setAgentToDelete] = useState(null);
   const agenciesArray = store.agenciesArray;
 
-  const checkIncomingData = () => setAgentsArray(location.state);
-
   useEffect(() => {
-    checkIncomingData();
-  });
+    setAgentsArray(location.state);
+  }, []);
 
   if (!agentsArray) {
     return <LoadingIcon color="primary" />;
@@ -93,21 +91,22 @@ const AgentsTable = ({ classes, history, location }) => {
     });
   };
 
-  const getEditAgentFormValues = async agent => {
+  const getEditAgentFormValues = agent => {
     const agentId = agent.agentId;
-    const formatedAgentData = {
-      ...agent,
-      startDate: moment(agent.startDate).format('MM/DD/YYYY'),
-      endDate: moment(agent.endDate).format('MM/DD/YYYY')
-    };
-    try {
-      const res = await axios.patch(EDIT_AGENT(agentId), {
-        data: formatedAgentData
-      });
-      return console.log(res);
-    } catch (error) {
-      return console.log(error);
-    }
+    const updatedAgents = agentsArray.map(data => {
+      if (data.agentId === agentId) {
+        const startDate = agent.startDate;
+        const endDate = agent.endDate;
+        return {
+          ...data,
+          startDate: formatDate(startDate),
+          endDate: formatDate(endDate)
+        };
+      }
+      return data;
+    });
+    setAgentsArray(updatedAgents);
+    return editAgent({ EDIT_AGENT, agent });
   };
 
   const handleSearch = event => {

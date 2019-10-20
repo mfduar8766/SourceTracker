@@ -10,7 +10,7 @@ router.get("/agents", (req, res) => {
     {
       $lookup: {
         from: RepsModel.collection.name,
-        localField: "agentId", 
+        localField: "agentId",
         foreignField: "agentId",
         as: "reps"
       }
@@ -18,7 +18,7 @@ router.get("/agents", (req, res) => {
     {
       $lookup: {
         from: MembersListModel.collection.name,
-        localField: "agentId", 
+        localField: "agentId",
         foreignField: "agentId",
         as: "membersList"
       }
@@ -59,7 +59,7 @@ router.patch("/agent/:agentId", (req, res) => {
         if (error) {
           errorMessage(error, 500);
         }
-        res.status(201).json(data);
+        res.status(201).json({ data, status: 201 });
       });
     })
     .catch(error => errorMessage(error, 500));
