@@ -11,7 +11,6 @@ app.use(cors());
 
 const API_VERSION = "/api/v1";
 
-//Connect to DB
 mongoose.connect(process.env.MONGODB_URI || mongoURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true

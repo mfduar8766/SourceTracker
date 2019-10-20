@@ -22,13 +22,14 @@ import TableComponent from '../../../Components/Tables/index';
 import WarningModal from '../../../Components/Modals/WarningModal';
 import LoadingIcon from '../../../Components/LoadingIcon/index';
 import { commonSearch } from '../../../Utils/index';
-import { GlobalStateContext } from '../../../Components/GlobalStateContext/index';
 import { EDIT_AGENT } from '../../../Utils/index';
+import { StateContext } from '../../../Store/index';
 
 const modalWidth = 600;
 const modalHeight = 100;
 
 const AgentsTable = ({ classes, history, location }) => {
+  const { store, dispatch } = useContext(StateContext);
   const [agentsArray, setAgentsArray] = useState(null);
   const [queryString, setQueryString] = useState('');
   const [selectedAgency, setSelectedAgency] = useState('');
@@ -37,7 +38,7 @@ const AgentsTable = ({ classes, history, location }) => {
   const [errorMessage, setErrorMessage] = useState(null);
   const [isDeleteModalOn, setIsDeleteModalOn] = useState(false);
   const [agentToDelete, setAgentToDelete] = useState(null);
-  const { agenciesArray } = useContext(GlobalStateContext);
+  const agenciesArray = store.agenciesArray;
 
   const checkIncomingData = () => setAgentsArray(location.state);
 

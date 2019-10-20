@@ -14,7 +14,7 @@ import SearchComponent from '../../Search/index';
 import SearchSelection from './SearchSelection';
 import { GET_DROPDOWN_VALUES } from '../../../Utils/index';
 import { handleGlobalSearch } from '../Utils/index';
-import { GlobalStateContext } from '../../GlobalStateContext/index';
+import { StateContext } from '../../../Store/index';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCog, faBell } from '@fortawesome/free-solid-svg-icons';
@@ -26,12 +26,13 @@ const AppBarComponent = ({
   toggleDrawer,
   openSettings
 }) => {
-  const { agenciesArray } = useContext(GlobalStateContext);
+  const { store, dispatch } = useContext(StateContext);
   const [selectedValue, setSelectedValues] = useState('');
   const [globalSearchResults, setGlobalSearchResults] = useState(null);
   const [showResultsList, setShowResultsList] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
   const [dropDownValues, setDropDownValues] = useState(null);
+  const agenciesArray = store.agenciesArray;
 
   const getGlobalDropDownValues = async () => {
     try {
@@ -93,7 +94,7 @@ const AppBarComponent = ({
   const handleChange = event => setSelectedValues(event.target.value);
 
   const openNotifications = event => {};
-  
+
   return (
     <AppBar
       position="fixed"
