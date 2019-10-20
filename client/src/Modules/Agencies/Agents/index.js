@@ -17,13 +17,14 @@ import orderBy from 'lodash/orderBy';
 import { agentsTableStyles } from './Utils/Styles';
 
 import AgentSearch from './Components/AgentSearch/index';
-import EditAgentsModal from './Components/Modals/EditAgents/index';
 import TableComponent from '../../../Components/Tables/index';
 import WarningModal from '../../../Components/Modals/WarningModal';
 import LoadingIcon from '../../../Components/LoadingIcon/index';
+import CommonModal from '../../../Components/Modals/index';
 import { commonSearch } from '../../../Utils/index';
 import { EDIT_AGENT } from '../../../Utils/index';
 import { StateContext } from '../../../Store/index';
+import EditAgentForm from './Components/EditAgentForm';
 
 const modalWidth = 600;
 const modalHeight = 100;
@@ -145,11 +146,16 @@ const AgentsTable = ({ classes, history, location }) => {
           />
         )}
         {isEditOn && agentToEdit && (
-          <EditAgentsModal
-            agentToEdit={agentToEdit}
-            isEditOn={isEditOn}
-            getEditAgentFormValues={getEditAgentFormValues}
-            closeModal={closeModal}
+          <CommonModal
+            isOpen={isEditOn}
+            toggleOpenModal={closeModal}
+            children={
+              <EditAgentForm
+                agentToEdit={agentToEdit}
+                getEditAgentFormValues={getEditAgentFormValues}
+                closeModal={closeModal}
+              />
+            }
           />
         )}
         <Paper className={classes.root}>

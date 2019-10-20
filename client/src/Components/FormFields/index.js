@@ -11,7 +11,8 @@ const FormField = ({
   placeholder,
   errors,
   touched,
-  fieldType
+  fieldType,
+  isDisabled,
 }) => (
   <Field
     onBlur={handleBlur}
@@ -21,6 +22,7 @@ const FormField = ({
       <TextField
         type={fieldType}
         label={label}
+        disabled={isDisabled}
         {...field}
         placeholder={placeholder}
         error={errors[name] && touched[name] ? true : false}
@@ -42,7 +44,8 @@ FormField.propTypes = {
   label: PropTypes.string,
   placeholder: PropTypes.string,
   errors: PropTypes.object,
-  touched: PropTypes.object
+  touched: PropTypes.object,
+  isDisabled: PropTypes.bool,
 };
 
 export default FormField;
