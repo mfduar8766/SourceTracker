@@ -34,7 +34,7 @@ const agenciesTableStyles = theme => ({
 });
 
 const AgenciesView = ({ classes, history }) => {
-  const { store, dispatch } = useContext(StateContext);
+  const { store } = useContext(StateContext);
   const [queryString, setQueryString] = useState('');
   const [errorMessage, setErrorMessage] = useState(null);
   const [isOpen, setIsOpen] = useState(false);

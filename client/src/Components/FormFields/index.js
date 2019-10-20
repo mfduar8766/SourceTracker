@@ -42,7 +42,7 @@ FormField.propTypes = {
   label: PropTypes.string,
   placeholder: PropTypes.string,
   errors: PropTypes.object,
-  touched: PropTypes.bool
+  touched: PropTypes.object
 };
 
 export default FormField;

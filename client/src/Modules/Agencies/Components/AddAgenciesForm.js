@@ -142,6 +142,6 @@ export default withFormik({
   validate: values => validateAgenciesFrom(values),
   handleSubmit: (values, formikBag) => {
     formikBag.setSubmitting(true);
-    // formikBag.props.closeModal(); formikBag.props.getEditAgentFormValues(values);
+    formikBag.props.toggleOpenModal(false);
   }
 })(withStyles(addAgenciesStyles)(AddAgenciesForm));
