@@ -32,12 +32,13 @@ export const GlobalModalStyles = theme => ({
   }
 });
 
-export const setModalStyle = () => {
+export const setModalStyle = (backgroundColor) => {
   const top = 50;
   const left = 50;
   return {
     top: `${top}%`,
     left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`
+    transform: `translate(-${top}%, -${left}%)`,
+    backgroundColor: backgroundColor || 'white'
   };
 };

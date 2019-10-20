@@ -15,10 +15,10 @@ import Button from '../../Components/Buttons/index';
 import SearchComponent from '../../Components/Search/index';
 import { setModalStyle } from '../../Components/GlobalStyles';
 import { commonSearch } from '../../Utils/index';
-import { GlobalStateContext } from '../../Components/GlobalStateContext/index';
 import CommonModal from '../../Components/Modals/index';
 import AddAgenciesForm from './Components/AddAgenciesForm';
-
+import { StateContext } from '../../Store/index';
+ 
 const agenciesTableStyles = theme => ({
   root: {
     width: '100%',
@@ -34,10 +34,11 @@ const agenciesTableStyles = theme => ({
 });
 
 const AgenciesView = ({ classes, history }) => {
+  const { store, dispatch } = useContext(StateContext);
   const [queryString, setQueryString] = useState('');
   const [errorMessage, setErrorMessage] = useState(null);
-  const { agenciesArray } = useContext(GlobalStateContext);
   const [isOpen, setIsOpen] = useState(false);
+  const agenciesArray = store.agenciesArray;
 
   if (!agenciesArray) {
     return <LoadingIcon color="primary" />;
@@ -72,7 +73,7 @@ const AgenciesView = ({ classes, history }) => {
 
   const getSearchedAgency = () => {
     if (queryString.length === 0) {
-      return agenciesArray;
+      return store.agenciesArray;
     }
     const searchResults = getFilteredAgents();
     return searchResults;
@@ -83,7 +84,7 @@ const AgenciesView = ({ classes, history }) => {
         <CommonModal
           isOpen={isOpen}
           toggleOpenModal={toggleOpenModal}
-          children={<AddAgenciesForm />}
+          children={<AddAgenciesForm toggleOpenModal={toggleOpenModal} />}
         />
       )}
       <Grid item xs={11}>

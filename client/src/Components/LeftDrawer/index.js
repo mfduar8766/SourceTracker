@@ -8,11 +8,14 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBarComponent from './Components/AppBar';
 import LeftDrawer from './Components/LeftDrawer';
 import { drawerStyles } from './Utils/Styles';
+import CommonModal from '../Modals/index';
+import Settings from '../Settings/index';
 
 const MainComponent = ({ history }) => {
   const classes = drawerStyles();
   const theme = useTheme();
   const [isSideDrawerOpen, setIsSideDrawerOpen] = useState(false);
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
   useEffect(() => {}, []);
 
@@ -27,11 +30,20 @@ const MainComponent = ({ history }) => {
 
   const openSettings = event => {
     event.preventDefault();
+    setIsSettingsOpen(isSettingsOpen => !isSettingsOpen);
   };
 
   return (
     <div className={classes.root}>
       <CssBaseline />
+      {isSettingsOpen && (
+        <CommonModal
+          backgroundColor="#4C4C4C"
+          isOpen={isSettingsOpen}
+          toggleOpenModal={openSettings}
+          children={<Settings />}
+        />
+      )}
       <AppBarComponent
         classes={classes}
         isSideDrawerOpen={isSideDrawerOpen}

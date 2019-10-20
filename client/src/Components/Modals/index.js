@@ -5,9 +5,9 @@ import { withStyles } from '@material-ui/core/styles';
 
 import { GlobalModalStyles, setModalStyle } from '../GlobalStyles/index';
 
-const CommonModal = ({ classes, isOpen, toggleOpenModal, children }) => (
+const CommonModal = ({ backgroundColor, classes, isOpen, toggleOpenModal, children }) => (
   <Modal open={isOpen} onClose={toggleOpenModal}>
-    <div style={setModalStyle()} className={classes.paper}>
+    <div style={setModalStyle(backgroundColor)} className={classes.paper}>
       {children}
     </div>
   </Modal>
