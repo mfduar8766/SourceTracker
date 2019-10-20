@@ -26,7 +26,7 @@ const AppBarComponent = ({
   toggleDrawer,
   openSettings
 }) => {
-  const { store, dispatch } = useContext(StateContext);
+  const { store } = useContext(StateContext);
   const [selectedValue, setSelectedValues] = useState('');
   const [globalSearchResults, setGlobalSearchResults] = useState(null);
   const [showResultsList, setShowResultsList] = useState(false);

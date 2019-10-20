@@ -21,7 +21,7 @@ export const validateAgenciesFrom = values => {
     errors.address = 'Invalid address.';
   } else if (values.zipCode === '') {
     errors.zipCode = 'Invalid zipCode.';
-  } else if (values.zipCode.length > 4) {
+  } else if (values.zipCode.length > 5) {
     errors.zipCode = 'Invalid zipCode.';
   }
   return errors;

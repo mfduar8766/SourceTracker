@@ -29,7 +29,7 @@ const modalWidth = 600;
 const modalHeight = 100;
 
 const AgentsTable = ({ classes, history, location }) => {
-  const { store, dispatch } = useContext(StateContext);
+  const { store } = useContext(StateContext);
   const [agentsArray, setAgentsArray] = useState(null);
   const [queryString, setQueryString] = useState('');
   const [selectedAgency, setSelectedAgency] = useState('');
