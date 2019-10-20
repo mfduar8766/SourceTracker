@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 export const tableHeaders = [
   { id: 0, name: 'Agent ID', prop: 'agentId' },
   { id: 1, name: 'First Name', prop: 'firstName' },
@@ -29,4 +31,18 @@ export const getAgencyAndAgents = (agentsArray, agencyId) => {
       .flatMap(agent => agent.agents);
   }
   return [];
+};
+
+export const validateEditAgent = values => {
+  const errors = {};
+  if (values.startDate === '') {
+    errors.startDate = 'Invalid date';
+  } else if (values.endDate === '') {
+    errors.endDate = 'Invalid';
+  } else if (moment(values.startDate).isSameOrAfter(values.endDate)) {
+    errors.startDate = 'Invalid date.';
+  } else if (moment(values.endDate).isSameOrBefore(values.startDate)) {
+    errors.endDate = 'Invalid date.';
+  }
+  return errors;
 };
