@@ -120,6 +120,7 @@ const AgenciesView = ({ classes, history }) => {
               tableHeaders={agencyHeaders}
               tableData={orderBy(getSearchedAgency())}
               handleRowClick={handleRowClick}
+              showDeleteButton={false}
             />
           )}
         </Paper>
