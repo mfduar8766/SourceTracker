@@ -25,7 +25,7 @@ router.get("/agents", (req, res) => {
     }
   ])
     .then(data => successMessage(res, data, 200))
-    .catch(error => errorMessage(error, 500));
+    .catch(error => errorMessage(res, error, 500));
 });
 
 router.post("/agent/add-agent", (req, res) => {
@@ -42,7 +42,7 @@ router.post("/agent/add-agent", (req, res) => {
   });
   newAgent.save((err, agent) => {
     if (err) {
-      errorMessage(err, 500);
+      errorMessage(res, err, 500);
     }
     res.status(201).json(agent);
   });
@@ -62,7 +62,7 @@ router.patch("/agent/:agentId", (req, res) => {
         res.status(201).json({ data, status: 201 });
       });
     })
-    .catch(error => errorMessage(error, 500));
+    .catch(error => errorMessage(res, error, 500));
 });
 
 module.exports = router;

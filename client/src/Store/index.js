@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import { ADD_AGENGIES, ADD_USER, ADD_HISTORY } from './Types';
+import { ADD_AGENGIES, ADD_USER, ADD_HISTORY, ADD_NEW_AGENCY } from './Types';
 
 export const initialState = {
   agenciesArray: null,
@@ -8,12 +8,17 @@ export const initialState = {
 };
 
 export const reducer = (state, action) => {
-  const { type, newUser, agenciesArray, history } = action;
+  const { type, newUser, agenciesArray, history, newAgency } = action;
   switch (type) {
     case ADD_AGENGIES:
       return {
         ...state,
         agenciesArray: agenciesArray
+      };
+    case ADD_NEW_AGENCY:
+      return {
+        ...state,
+        agenciesArray: [...state.agenciesArray, newAgency]
       };
     case ADD_USER:
       return {

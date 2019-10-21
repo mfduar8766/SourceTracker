@@ -8,6 +8,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Button from '../../../Components/Buttons/index';
 import FormTextField from '../../../Components/FormFields/index';
 import { validateAgenciesFrom } from '../Utils';
+import { addNewAgency } from '../Services/index';
 
 const addAgenciesStyles = () => ({
   flexContainer: {
@@ -32,9 +33,11 @@ const AddAgenciesForm = ({
   handleChange,
   handleSubmit,
   isSubmitting,
-  toggleOpenModal
+  toggleOpenModal,
+  errorMessage
 }) => (
   <Grid container spacing={3} alignItems="center" justify="space-between">
+    {errorMessage && errorMessage}
     <Grid item xs={12}>
       <form className={classes.form} onSubmit={handleSubmit}>
         <Grid
@@ -45,15 +48,27 @@ const AddAgenciesForm = ({
           alignItems="center"
         >
           <Grid item xs={12}>
-            <FormTextField
-              handleBlur={handleBlur}
-              handleChange={handleChange}
-              name="agencyName"
-              label="agencyName"
-              placeholder="Agency Name"
-              errors={errors}
-              touched={touched}
-            />
+            <div className={classes.flexContainer}>
+              <FormTextField
+                handleBlur={handleBlur}
+                handleChange={handleChange}
+                name="agencyId"
+                label="Agency Id"
+                placeholder="Agency Id"
+                errors={errors}
+                touched={touched}
+              />
+              <div className={classes.margin} />
+              <FormTextField
+                handleBlur={handleBlur}
+                handleChange={handleChange}
+                name="agencyName"
+                label="Agency Name"
+                placeholder="Agency Name"
+                errors={errors}
+                touched={touched}
+              />
+            </div>
           </Grid>
           <Grid item xs={12}>
             <div className={classes.flexContainer}>
@@ -61,7 +76,7 @@ const AddAgenciesForm = ({
                 handleBlur={handleBlur}
                 handleChange={handleChange}
                 name="city"
-                label="city"
+                label="City"
                 placeholder="City"
                 errors={errors}
                 touched={touched}
@@ -71,7 +86,7 @@ const AddAgenciesForm = ({
                 handleBlur={handleBlur}
                 handleChange={handleChange}
                 name="state"
-                label="state"
+                label="State"
                 placeholder="State"
                 errors={errors}
                 touched={touched}
@@ -84,7 +99,7 @@ const AddAgenciesForm = ({
                 handleBlur={handleBlur}
                 handleChange={handleChange}
                 name="address"
-                label="address"
+                label="Address"
                 placeholder="Address"
                 errors={errors}
                 touched={touched}
@@ -94,7 +109,7 @@ const AddAgenciesForm = ({
                 handleBlur={handleBlur}
                 handleChange={handleChange}
                 name="zipCode"
-                label="zipCode"
+                label="Zip Code"
                 placeholder="Zip Code"
                 errors={errors}
                 touched={touched}
@@ -134,14 +149,33 @@ AddAgenciesForm.propTypes = {
   handleChange: PropTypes.func,
   handleSubmit: PropTypes.func,
   isSubmitting: PropTypes.bool,
-  toggleOpenModal: PropTypes.func
+  toggleOpenModal: PropTypes.func,
+  getNewAgency: PropTypes.func
 };
 
 export default withFormik({
   enableReinitialize: true,
   validate: values => validateAgenciesFrom(values),
   handleSubmit: (values, formikBag) => {
-    formikBag.setSubmitting(true);
-    formikBag.props.toggleOpenModal(false);
+    const newAgency = {
+      ...values,
+      agencyId: parseInt(values.agencyId),
+      totalAgents: 0,
+      agents: []
+    };
+    addNewAgency(newAgency)
+      .then(res => {
+        if (res.data.status === 201) {
+          const agency = res.data.agency;
+          formikBag.setSubmitting(true);
+          formikBag.props.toggleOpenModal(false);
+          formikBag.props.getNewAgency(agency);
+        }
+      })
+      .catch(error => {
+        formikBag.setSubmitting(false);
+        console.log(error);
+        formikBag.props.setErrorMessage('Agency already exists.');
+      });
   }
 })(withStyles(addAgenciesStyles)(AddAgenciesForm));

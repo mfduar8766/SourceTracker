@@ -5,8 +5,8 @@ import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import { withStyles } from '@material-ui/core/styles';
-import { ADD_USER } from '../../Store/Types';
 import { StateContext } from '../../Store/index';
+import { addUser } from '../../Store/actions';
 
 const settingsStyle = () => ({
   selectionField: {
@@ -42,7 +42,7 @@ const Settings = ({ classes }) => {
 
   const handleChange = event => {
     const newUser = event.target.value;
-    dispatch({ type: ADD_USER, newUser });
+    dispatch(addUser({ newUser }));
   };
 
   return (
