@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import axios from 'axios';
 
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
@@ -11,10 +10,10 @@ import {
   getAgencyAndAgents,
   tableHeaders,
   agencySelectionValues,
-  editAgent
 } from './Utils/index';
 import orderBy from 'lodash/orderBy';
 import { agentsTableStyles } from './Utils/Styles';
+import { editAgentById } from './Services/index';
 
 import AgentSearch from './Components/AgentSearch/index';
 import TableComponent from '../../../Components/Tables/index';
@@ -43,7 +42,7 @@ const AgentsTable = ({ classes, history, location }) => {
 
   useEffect(() => {
     setAgentsArray(location.state);
-  }, []);
+  }, [location.state]);
 
   if (!agentsArray) {
     return <LoadingIcon color="primary" />;
@@ -106,7 +105,7 @@ const AgentsTable = ({ classes, history, location }) => {
       return data;
     });
     setAgentsArray(updatedAgents);
-    return editAgent({ EDIT_AGENT, agent });
+    return editAgentById({ EDIT_AGENT, agent });
   };
 
   const handleSearch = event => {

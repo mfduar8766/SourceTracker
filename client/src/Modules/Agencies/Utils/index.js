@@ -11,7 +11,9 @@ export const agencyHeaders = [
 
 export const validateAgenciesFrom = values => {
   const errors = {};
-  if (values.agencyName === '') {
+  if (values.agencyId === '') {
+    errors.agencyId = 'Invalid id';
+  } else if (values.agencyName === '') {
     errors.agencyName = 'Invalid name.';
   } else if (values.city === '') {
     errors.city = 'Invalid city.';
@@ -19,9 +21,7 @@ export const validateAgenciesFrom = values => {
     errors.state = 'Invalid state.';
   } else if (values.address === '') {
     errors.address = 'Invalid address.';
-  } else if (values.zipCode === '') {
-    errors.zipCode = 'Invalid zipCode.';
-  } else if (values.zipCode.length > 5) {
+  } else if (values.zipCode === '' || values.zipCode.length > 5) {
     errors.zipCode = 'Invalid zipCode.';
   }
   return errors;

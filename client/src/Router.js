@@ -6,11 +6,10 @@ import AgentsTable from './Modules/Agencies/Agents/index';
 import PageNotFound from './Components/PageNotFound';
 import AgenciesView from './Modules/Agencies/index';
 import DisplaySearchResults from './Components/DisplaySearchResults/index';
-import { GET_AGENCIES } from './Utils/index';
 import MainComponent from './Components/LeftDrawer/index';
-import { ADD_AGENGIES, ADD_USER } from './Store/Types';
-
 import { initialState, StateContext, reducer } from './Store/index';
+import { addUser, getAgencies } from './Store/actions';
+import { GET_AGENCIES } from './Utils/index';
 
 const AppRouter = () => {
   const [store, dispatch] = useReducer(reducer, initialState);
@@ -19,7 +18,7 @@ const AppRouter = () => {
       const agencyData = axios.get(GET_AGENCIES);
       const response = await agencyData;
       const agenciesArray = response.data.data;
-      dispatch({ type: ADD_AGENGIES, agenciesArray });
+      dispatch(getAgencies({ agenciesArray }));
     } catch (error) {
       return error;
     }
@@ -27,7 +26,8 @@ const AppRouter = () => {
 
   useEffect(() => {
     fetchAgencies();
-    dispatch({ type: ADD_USER, newUser: 'agencyOwner' });
+    const newUser = 'agencyOwner';
+    dispatch(addUser({ newUser }));
   }, []);
 
   return (

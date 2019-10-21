@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import orderBy from 'lodash/orderBy';
@@ -18,7 +18,8 @@ import { commonSearch } from '../../Utils/index';
 import CommonModal from '../../Components/Modals/index';
 import AddAgenciesForm from './Components/AddAgenciesForm';
 import { StateContext } from '../../Store/index';
- 
+import { addNewAgencyAction } from '../../Store/actions';
+
 const agenciesTableStyles = theme => ({
   root: {
     width: '100%',
@@ -34,11 +35,15 @@ const agenciesTableStyles = theme => ({
 });
 
 const AgenciesView = ({ classes, history }) => {
-  const { store } = useContext(StateContext);
+  const { store, dispatch } = useContext(StateContext);
+  const [agenciesArray, setAgenciesArray] = useState(null);
   const [queryString, setQueryString] = useState('');
   const [errorMessage, setErrorMessage] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
-  const agenciesArray = store.agenciesArray;
+
+  useEffect(() => {
+    setAgenciesArray(store.agenciesArray);
+  }, [store.agenciesArray]);
 
   if (!agenciesArray) {
     return <LoadingIcon color="primary" />;
@@ -78,13 +83,26 @@ const AgenciesView = ({ classes, history }) => {
     const searchResults = getFilteredAgents();
     return searchResults;
   };
+
+  const getNewAgency = agency => {
+    const newAgency = agency;
+    dispatch(addNewAgencyAction({ newAgency }));
+  };
+
   return (
     <Grid container spacing={3} justify="center" alignItems="center">
       {isOpen && (
         <CommonModal
           isOpen={isOpen}
           toggleOpenModal={toggleOpenModal}
-          children={<AddAgenciesForm toggleOpenModal={toggleOpenModal} />}
+          children={
+            <AddAgenciesForm
+              errorMessage={errorMessage}
+              setErrorMessage={setErrorMessage}
+              getNewAgency={getNewAgency}
+              toggleOpenModal={toggleOpenModal}
+            />
+          }
         />
       )}
       <Grid item xs={11}>

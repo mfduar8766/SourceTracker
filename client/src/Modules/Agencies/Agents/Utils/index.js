@@ -1,22 +1,4 @@
-import axios from 'axios';
 import moment from 'moment';
-
-export const editAgent = async ({ EDIT_AGENT, agent }) => {
-  const agentId = agent.agentId;
-  const formatedAgentData = {
-    ...agent,
-    startDate: moment(agent.startDate).format('MM/DD/YYYY'),
-    endDate: moment(agent.endDate).format('MM/DD/YYYY')
-  };
-  try {
-    const res = await axios.patch(EDIT_AGENT(agentId), {
-      data: formatedAgentData
-    });
-    return console.log(res);
-  } catch (error) {
-    return console.log(error);
-  }
-};
 
 export const tableHeaders = [
   { id: 0, name: 'Agent ID', prop: 'agentId' },
